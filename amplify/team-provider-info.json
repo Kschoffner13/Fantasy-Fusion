@@ -1,0 +1,15 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-fantasyfusion-staging-200824-authRole",
+      "UnauthRoleArn": "arn:aws:iam::609660491960:role/amplify-fantasyfusion-staging-200824-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::609660491960:role/amplify-fantasyfusion-staging-200824-authRole",
+      "Region": "ca-central-1",
+      "DeploymentBucketName": "amplify-fantasyfusion-staging-200824-deployment",
+      "UnauthRoleName": "amplify-fantasyfusion-staging-200824-unauthRole",
+      "StackName": "amplify-fantasyfusion-staging-200824",
+      "StackId": "arn:aws:cloudformation:ca-central-1:609660491960:stack/amplify-fantasyfusion-staging-200824/7c0ce6f0-c52b-11ee-9ae5-060950aa6c26",
+      "AmplifyAppId": "d24r8ez9l8um4i"
+    }
+  }
+}
