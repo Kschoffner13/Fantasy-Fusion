@@ -19,11 +19,9 @@
         },
         "signupAttributes": [
           "EMAIL",
-          "NAME"
+          "PREFERRED_USERNAME"
         ],
-        "socialProviders": [
-          "GOOGLE"
-        ],
+        "socialProviders": [],
         "usernameAttributes": [
           "EMAIL"
         ],

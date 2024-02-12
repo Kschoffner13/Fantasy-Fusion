@@ -3,7 +3,7 @@
   "cognitoConfig": {
     "identityPoolName": "testAuthIdentityPool",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "fantasd736b5ae",
+    "resourceNameTruncated": "fantas558f1a4a",
     "userPoolName": "FantasyFusion",
     "autoVerifiedAttributes": [
       "email"
@@ -26,16 +26,16 @@
     ],
     "requiredAttributes": [
       "email",
-      "name"
+      "preferred_username"
     ],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "Fantasd736b5ae_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "Fantas558f1a4a_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "d736b5ae",
+    "sharedId": "558f1a4a",
     "resourceName": "FantasyFusion",
     "authSelections": "identityPoolAndUserPool",
     "serviceName": "Cognito",
@@ -48,13 +48,6 @@
     "adminQueries": false,
     "thirdPartyAuth": false,
     "authProviders": [],
-    "hostedUI": true,
-    "hostedUIDomainName": "viamk12i2nyo",
-    "authProvidersUserPool": [
-      "Google"
-    ],
-    "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"name\":\"name\",\"username\":\"sub\"}}]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://localhost:3000/\"],\"LogoutURLs\":[\"https://localhost:3000/\"]}",
     "usernameCaseSensitive": false,
     "useEnabledMfas": true
   }
