@@ -1,0 +1,32 @@
+type Team @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Name: String
+  UserID: String
+  TotalPointsFor: Int
+  TotalPointsAgainst: Int
+  MatchUpPoints: Int
+  Wins: Int
+  Losses: Int
+  Draws: Int
+  Roster: AWSJSON
+  fantasyleagueID: ID! @index(name: "byFantasyLeague")
+  PlayerList: AWSJSON
+  Lineup: AWSJSON
+}
+
+type FantasyLeague @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Name: String
+  OwnerID: String
+  Properties: AWSJSON
+  DraftDate: AWSDateTime
+  TradeDeadline: AWSDateTime
+  PlayoffStartDate: AWSDateTime
+  PlayoffTeams: Int
+  PlayoffMatchupLength: Int
+  WeeklyPickups: Int
+  VetoVoteEnabled: Boolean
+  Teams: [Team] @hasMany(indexName: "byFantasyLeague", fields: ["id"])
+  Schedule: AWSJSON
+}
+ 
