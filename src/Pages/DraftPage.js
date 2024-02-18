@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import "../Styles/draftPage.css";
 import logo from "../images/logo.png";
 import { useEffect, useState } from "react";
+import DraftBoard from "../Components/DraftBoard/DraftBoard";
 
 const DraftPage = () => {
     /*
@@ -18,6 +19,48 @@ const DraftPage = () => {
             - keep track of the active pick and timeleft to pick
             - keep track of whose been drafted at which draft position
     */
+    const rounds = 12;
+    const [teams, setTeams] = useState([
+        {
+            name: "The Alchemists",
+            logoUrl: "https://picsum.photos/id/12/200/200",
+        },
+        { name: "The Wizards", logoUrl: "https://picsum.photos/id/13/200/200" },
+        {
+            name: "The Highlanders",
+            logoUrl: "https://picsum.photos/id/14/200/200",
+        },
+        {
+            name: "The Pioneers",
+            logoUrl: "https://picsum.photos/id/15/200/200",
+        },
+        {
+            name: "The Gladiators",
+            logoUrl: "https://picsum.photos/id/16/200/200",
+        },
+        {
+            name: "The Conquerors",
+            logoUrl: "https://picsum.photos/id/17/200/200",
+        },
+        { name: "The Titans", logoUrl: "https://picsum.photos/id/18/200/200" },
+        { name: "The Dragons", logoUrl: "https://picsum.photos/id/19/200/200" },
+        {
+            name: "The Challengers",
+            logoUrl: "https://picsum.photos/id/20/200/200",
+        },
+        {
+            name: "The Avengers",
+            logoUrl: "https://picsum.photos/id/21/200/200",
+        },
+        {
+            name: "The Guardians",
+            logoUrl: "https://picsum.photos/id/22/200/200",
+        },
+        {
+            name: "The Warriors",
+            logoUrl: "https://picsum.photos/id/23/200/200",
+        },
+    ]);
 
     const [timeLeft, setTimeLeft] = useState(20);
 
@@ -79,7 +122,13 @@ const DraftPage = () => {
                 </div>
             </header>
             <div>
-                <h1 onClick={() => setTimeLeft(20)}>Draft Board</h1>
+                {teams.map((team, index) => (
+                    <div key={index}>
+                        <h2>{team.name}</h2>
+                        <img src={team.logoUrl} alt={team.name} />
+                    </div>
+                ))}
+                <DraftBoard rounds={rounds} teams={teams} />
             </div>
             <div>
                 <div>Draftable players</div>
