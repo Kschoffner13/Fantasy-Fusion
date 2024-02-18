@@ -42,23 +42,44 @@ const DraftPage = () => {
         <div className="draft-page">
             <header>
                 <img src={logo} id="logo-img" />
-                <div className="draft-clock">
-                    <h1>{hrs}</h1>
+                <div className="name-heading">
+                    <h2>Leauge Name</h2>
+                    <h3>Team Name</h3>
+                </div>
+                <div
+                    className="draft-clock"
+                    id={timeLeft < 15 ? "time-alert" : ""}
+                >
+                    <div className="time-section">
+                        <h1>{hrs}</h1>
+                        <p>Hours</p>
+                    </div>
                     <h1>:</h1>
-                    <h1>{mins}</h1>
+                    <div className="time-section">
+                        <h1>{mins}</h1>
+                        <p>Minutes</p>
+                    </div>
                     <h1>:</h1>
-                    <h1>{secs}</h1>
+                    <div className="time-section">
+                        <h1>{secs}</h1>
+                        <p>Seconds</p>
+                    </div>
+                </div>
+                <div className="pick-info">
+                    <h4>You're Up in 5 picks!</h4>
+                    <p>Current Pick: 1-1</p>
+                    <p>Your next pick: 1-5</p>
                 </div>
                 <div className="profile-icon">
                     <img src="https://picsum.photos/seed/picsum/75/75" />
-                    <div>
+                    <div className="profile-icon-info">
                         <p>Profile Name</p>
                         <NavLink>Account</NavLink>
                     </div>
                 </div>
             </header>
             <div>
-                <h1 onClick={() => setTimeLeft(3600)}>Draft Board</h1>
+                <h1 onClick={() => setTimeLeft(20)}>Draft Board</h1>
             </div>
             <div>
                 <div>Draftable players</div>
