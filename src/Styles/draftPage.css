@@ -1,0 +1,27 @@
+.draft-page header{
+    display: flex;
+    justify-content: space-between;
+    background-color: lightblue;
+    align-items: center;
+    padding: 0 10px;
+}
+
+#logo-img{
+    width: 75px;
+    height: 100%;
+}
+
+.profile-icon{
+    display: flex;
+}
+
+.profile-icon img{
+    width: 75px;
+    height: 75px;
+    border-radius: 100%;
+}
+
+.draft-clock{
+    display: flex;
+}
+
