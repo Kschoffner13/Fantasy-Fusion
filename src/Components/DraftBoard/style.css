@@ -18,5 +18,45 @@
     border-radius: 10px;
     font-size: 0.5em;
     text-align: left;
+    
+}
+
+.not-picked{
     vertical-align: top;
+}
+
+.picked{
+    display: flex;
+    justify-content: space-around;
+    text-align: left;
+    align-items: center;
+    height: 100%;
+}
+
+.picked img{
+    width: 3vw;
+    height: 3vw;    
+    background-color: red;
+    border-radius: 100%;
+}
+
+.pick-info{
+    margin-left: 5px;
+    font-size: 1.25em;
+}
+
+.pick-info h5{
+    margin: 2px 0;
+}
+
+.cur {
+    border-color: green;
+    box-shadow: 0 0 5px 1px rgba(0, 255, 0, 0.25);
+    z-index: -100;
+}
+
+.my-pick{
+    border-color: yellow;
+    box-shadow: 0 0 5px 1px rgba(255, 255, 0, 0.25);
+    z-index: -100;
 }
