@@ -1,0 +1,22 @@
+.pick-board{
+    height: 50vh;
+    margin-top: 5px;
+}
+
+.round-picks{
+    display: flex;
+
+}
+
+.pick{
+    min-width: 7.5%;
+    margin: 1px;
+    padding: 0 10px;
+    height: 10vh;
+    background-color: lightgray;
+    border: 1px solid gray;
+    border-radius: 10px;
+    font-size: 0.5em;
+    text-align: left;
+    vertical-align: top;
+}

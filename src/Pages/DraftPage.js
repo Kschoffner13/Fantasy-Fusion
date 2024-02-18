@@ -121,13 +121,15 @@ const DraftPage = () => {
                     </div>
                 </div>
             </header>
-            <div>
-                {teams.map((team, index) => (
-                    <div key={index}>
-                        <h2>{team.name}</h2>
-                        <img src={team.logoUrl} alt={team.name} />
-                    </div>
-                ))}
+            <div className="draft-board">
+                <div className="board-head">
+                    {teams.map((team, index) => (
+                        <div key={index} className="team-block">
+                            <img src={team.logoUrl} alt={team.name} />
+                            <h2>{team.name}</h2>
+                        </div>
+                    ))}
+                </div>
                 <DraftBoard rounds={rounds} teams={teams} />
             </div>
             <div>
