@@ -167,6 +167,8 @@
     bottom: 0;
     background-color: white;
     min-height: 20vh;
+    display: flex;
+    justify-content: space-between;
   }
   
   .resizeable-handle {

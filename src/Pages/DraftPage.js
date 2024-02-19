@@ -68,15 +68,15 @@ const DraftPage = () => {
     ]);
 
     const [rosterFormat, setRosterFormat] = useState({
-        G: 2,
-        F: 2,
+        GRD: 2,
+        FWD: 2,
         CB: 1,
         CH: 1,
-        W: 2,
-        D: 2,
-        G: 1,
-        U: 3,
-        B: 8,
+        WNG: 2,
+        DF: 2,
+        GL: 1,
+        UTL: 3,
+        BCH: 8,
     });
 
     const [timeLeft, setTimeLeft] = useState(20);
@@ -196,7 +196,7 @@ const DraftPage = () => {
                     onMouseDown={handleMouseDown}
                 ></div>
                 <DraftPane />
-                <TeamPane format={rosterFormat} />
+                <TeamPane format={rosterFormat} teams={teams} />
             </div>
         </div>
     );
