@@ -4,6 +4,8 @@ import logo from "../images/logo.png";
 import { useEffect, useState } from "react";
 import DraftBoard from "../Components/DraftBoard/DraftBoard";
 import { fetchUserAttributes } from "@aws-amplify/auth";
+import TeamPane from "../Components/TeamPane/TeamPane";
+import DraftPane from "../Components/DraftPane/DraftPane";
 
 const DraftPage = () => {
     /*
@@ -21,7 +23,7 @@ const DraftPage = () => {
             - keep track of whose been drafted at which draft position
     */
     const rounds = 12;
-    const [username, setUsername] = useState(null);
+    const [username, setUsername] = useState("NAME");
 
     const [teams, setTeams] = useState([
         {
@@ -65,6 +67,18 @@ const DraftPage = () => {
         },
     ]);
 
+    const [rosterFormat, setRosterFormat] = useState({
+        G: 2,
+        F: 2,
+        CB: 1,
+        CH: 1,
+        W: 2,
+        D: 2,
+        G: 1,
+        U: 3,
+        B: 8,
+    });
+
     const [timeLeft, setTimeLeft] = useState(20);
 
     const getUserName = async () => {
@@ -98,9 +112,29 @@ const DraftPage = () => {
         .padStart(2, "0");
     const secs = (timeLeft % 60).toString().padStart(2, "0");
 
+    const [height, setHeight] = useState(200); // Initial height of the resizable div
+    let pageHeight = document.documentElement.scrollHeight;
+    let headerheight = document.querySelector(".draft-header")?.offsetHeight; // replace '.draft-board' with the selector for your element
+
+    const handleMouseDown = (e) => {
+        const startY = e.clientY;
+
+        const handleMouseMove = (e) => {
+            const newHeight = height - (e.clientY - startY);
+            setHeight(newHeight);
+        };
+
+        const handleMouseUp = () => {
+            window.removeEventListener("mousemove", handleMouseMove);
+            window.removeEventListener("mouseup", handleMouseUp);
+        };
+
+        window.addEventListener("mousemove", handleMouseMove);
+        window.addEventListener("mouseup", handleMouseUp);
+    };
     return (
         <div className="draft-page">
-            <header>
+            <header className="draft-header">
                 <img src={logo} id="logo-img" />
                 <div className="name-heading">
                     <h2>Leauge Name</h2>
@@ -138,7 +172,10 @@ const DraftPage = () => {
                     </div>
                 </div>
             </header>
-            <div className="draft-board">
+            <div
+                className="draft-board"
+                style={{ height: `${pageHeight - height - headerheight}px` }}
+            >
                 <div className="board-head">
                     {teams.map((team, index) => (
                         <div key={index} className="team-block">
@@ -149,11 +186,17 @@ const DraftPage = () => {
                 </div>
                 <DraftBoard rounds={rounds} teams={teams} />
             </div>
-            <div className="temp">
-                <div style={{ width: "250%", marginRight: "10px" }}>
-                    Draftable players
-                </div>
-                <div>My Team</div>
+
+            <div
+                className="user-section resizeable"
+                style={{ height: `${height}px` }}
+            >
+                <div
+                    className="resizeable-handle"
+                    onMouseDown={handleMouseDown}
+                ></div>
+                <DraftPane />
+                <TeamPane format={rosterFormat} />
             </div>
         </div>
     );

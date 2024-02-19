@@ -5,6 +5,7 @@ const DraftBoard = ({ teams, rounds }) => {
     const picksPerRound = teams.length;
 
     const [cur, setCur] = useState([1, 2]);
+
     const myPickNum = 6;
 
     return (

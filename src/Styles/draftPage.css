@@ -129,6 +129,7 @@
 
 .draft-board{
     overflow-x: scroll;
+    overflow-y: visible;
 }
 
 .board-head{
@@ -157,13 +158,24 @@
 
 }
 
-.temp{
-    display: flex;
-    justify-content: space-between;
-}
-
-.temp div{
+.resizeable {
     width: 100%;
-    border: 1px solid black;
-    height: 120px;
-}
+    border: 1px solid #ccc;
+    overflow: hidden;
+    
+    position: fixed;
+    bottom: 0;
+    background-color: white;
+    min-height: 20vh;
+  }
+  
+  .resizeable-handle {
+    width: 100%;
+    height: 1px;
+    border-top: 3px double black;
+    
+    border-bottom: 3px double grey;
+    cursor: ns-resize; 
+    position: absolute;
+    top: 0;
+  }
