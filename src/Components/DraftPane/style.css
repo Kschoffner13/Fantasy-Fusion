@@ -1,0 +1,30 @@
+.draft-pane{
+    width: 75%;
+    margin: 0 20px;
+    overflow-y: scroll;
+}
+
+.draft-options{
+    display: flex;
+}
+
+.draft-options div{
+    margin-top: 10px;
+    border: 2px solid black;
+    border-bottom-color: #1AAF9F;
+    border-radius: 40px 10px 0 0;
+    padding: 10px 40px;
+}
+
+.player-box{
+    background-color: #1AAF9F;
+    border: 1px solid black;
+    overflow-y: scroll;
+}
+
+.player-draft-info{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
