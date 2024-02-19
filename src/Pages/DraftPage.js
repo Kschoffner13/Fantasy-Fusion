@@ -3,6 +3,7 @@ import "../Styles/draftPage.css";
 import logo from "../images/logo.png";
 import { useEffect, useState } from "react";
 import DraftBoard from "../Components/DraftBoard/DraftBoard";
+import { fetchUserAttributes } from "@aws-amplify/auth";
 
 const DraftPage = () => {
     /*
@@ -20,6 +21,8 @@ const DraftPage = () => {
             - keep track of whose been drafted at which draft position
     */
     const rounds = 12;
+    const [username, setUsername] = useState(null);
+
     const [teams, setTeams] = useState([
         {
             name: "The Alchemists",
@@ -63,6 +66,20 @@ const DraftPage = () => {
     ]);
 
     const [timeLeft, setTimeLeft] = useState(20);
+
+    const getUserName = async () => {
+        try {
+            const username = (await fetchUserAttributes()).preferred_username;
+            setUsername(username);
+            return <p>username</p>;
+        } catch (error) {
+            console.log("error getting user", error);
+        }
+    };
+
+    useEffect(() => {
+        getUserName();
+    }, []);
 
     useEffect(() => {
         if (timeLeft > 0) {
@@ -116,7 +133,7 @@ const DraftPage = () => {
                 <div className="profile-icon">
                     <img src="https://picsum.photos/seed/picsum/75/75" />
                     <div className="profile-icon-info">
-                        <p>Profile Name</p>
+                        <p>{username}</p>
                         <NavLink>Account</NavLink>
                     </div>
                 </div>
@@ -132,8 +149,10 @@ const DraftPage = () => {
                 </div>
                 <DraftBoard rounds={rounds} teams={teams} />
             </div>
-            <div>
-                <div>Draftable players</div>
+            <div className="temp">
+                <div style={{ width: "250%", marginRight: "10px" }}>
+                    Draftable players
+                </div>
                 <div>My Team</div>
             </div>
         </div>

@@ -156,3 +156,14 @@
     border-radius: 100%;
 
 }
+
+.temp{
+    display: flex;
+    justify-content: space-between;
+}
+
+.temp div{
+    width: 100%;
+    border: 1px solid black;
+    height: 120px;
+}

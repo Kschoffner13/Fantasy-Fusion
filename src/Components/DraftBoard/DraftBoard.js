@@ -20,6 +20,10 @@ const DraftBoard = ({ teams, rounds }) => {
                     ).map((pick) => (
                         <div
                             className={`pick ${
+                                i * 12 + pick < (cur[0] - 1) * 12 + cur[1]
+                                    ? "pick-made"
+                                    : ""
+                            } ${
                                 i == cur[0] - 1 && pick == cur[1] ? "cur" : ""
                             } ${
                                 ((i + 1) % 2 == 1 && pick == myPickNum) ||

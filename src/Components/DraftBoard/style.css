@@ -13,8 +13,7 @@
     margin: 1px;
     padding: 0 10px;
     height: 10vh;
-    background-color: lightgray;
-    border: 1px solid gray;
+    background: linear-gradient(to top, #999999 0%, #bbbbbb 1%, #dddddd 5%, #eeeeee 20%, #ffffff 50%, #dddddd 95%, #bbbbbb 99%);    border: 1px solid gray;
     border-radius: 10px;
     font-size: 0.5em;
     text-align: left;
@@ -23,6 +22,7 @@
 
 .not-picked{
     vertical-align: top;
+    
 }
 
 .picked{
@@ -36,7 +36,7 @@
 .picked img{
     width: 3vw;
     height: 3vw;    
-    background-color: red;
+    background-color:lightcyan;
     border-radius: 100%;
 }
 
@@ -59,4 +59,12 @@
     border-color: yellow;
     box-shadow: 0 0 5px 1px rgba(255, 255, 0, 0.25);
     z-index: -100;
+}
+
+.pick-made{
+    background: linear-gradient(to top, #1e3c72 0%,#2a5298 1%, #2a82ba 5%,#2ac3e6 20%, #a0ddff 50%, #2a82ba 95%,#2a5298 99%);
+    border: 1px solid rgba(0, 0, 255, 0);
+
+
+
 }
