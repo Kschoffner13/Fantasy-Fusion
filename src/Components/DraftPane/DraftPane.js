@@ -1,12 +1,43 @@
 import "./style.css";
+import { useEffect, useState } from "react";
 
 const DraftPane = ({ players }) => {
+    const [option, setOption] = useState("all");
+    const [filteredPlayers, setFilteredPlayers] = useState([]);
+
+    useEffect(() => {
+        if (option == "all") {
+            setFilteredPlayers(players);
+        } else {
+            const filtered = players.filter(
+                (player) => player.league.toLowerCase() === option
+            );
+
+            setFilteredPlayers(filtered);
+        }
+    }, [option]);
+
     return (
         <div className="draft-pane">
             <div className="draft-options">
-                <div className="active">All</div>
-                <div>NBA</div>
-                <div>NHL</div>
+                <div
+                    className={option == "all" ? "active" : ""}
+                    onClick={() => setOption("all")}
+                >
+                    All
+                </div>
+                <div
+                    className={option == "nba" ? "active" : ""}
+                    onClick={() => setOption("nba")}
+                >
+                    NBA
+                </div>
+                <div
+                    className={option == "nhl" ? "active" : ""}
+                    onClick={() => setOption("nhl")}
+                >
+                    NHL
+                </div>
                 <div></div>
             </div>
             <div className="player-box">
@@ -16,7 +47,7 @@ const DraftPane = ({ players }) => {
                     <p>Stats</p>
                     <p>FP&#9660;</p>
                 </div>
-                {players.map((player, index) => (
+                {filteredPlayers.map((player, index) => (
                     <div
                         key={index}
                         className={`player-draft-info ${
