@@ -6,7 +6,7 @@ const DraftPane = ({ players }) => {
     const [filteredPlayers, setFilteredPlayers] = useState([]);
 
     useEffect(() => {
-        if (option == "all") {
+        if (option == "all" || !players) {
             setFilteredPlayers(players);
         } else {
             const filtered = players.filter(
@@ -15,7 +15,7 @@ const DraftPane = ({ players }) => {
 
             setFilteredPlayers(filtered);
         }
-    }, [option]);
+    }, [option, players]);
 
     return (
         <div className="draft-pane">
