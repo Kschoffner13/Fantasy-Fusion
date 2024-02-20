@@ -33,6 +33,7 @@ export default function DraftCreateForm(props) {
     pickDeadline: "",
     curentPick: "",
     playersDrafted: "",
+    fantasyleagueID: "",
   };
   const [order, setOrder] = React.useState(initialValues.order);
   const [pickDeadline, setPickDeadline] = React.useState(
@@ -42,12 +43,16 @@ export default function DraftCreateForm(props) {
   const [playersDrafted, setPlayersDrafted] = React.useState(
     initialValues.playersDrafted
   );
+  const [fantasyleagueID, setFantasyleagueID] = React.useState(
+    initialValues.fantasyleagueID
+  );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setOrder(initialValues.order);
     setPickDeadline(initialValues.pickDeadline);
     setCurentPick(initialValues.curentPick);
     setPlayersDrafted(initialValues.playersDrafted);
+    setFantasyleagueID(initialValues.fantasyleagueID);
     setErrors({});
   };
   const validations = {
@@ -55,6 +60,7 @@ export default function DraftCreateForm(props) {
     pickDeadline: [],
     curentPick: [],
     playersDrafted: [{ type: "JSON" }],
+    fantasyleagueID: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -103,6 +109,7 @@ export default function DraftCreateForm(props) {
           pickDeadline,
           curentPick,
           playersDrafted,
+          fantasyleagueID,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -160,6 +167,7 @@ export default function DraftCreateForm(props) {
               pickDeadline,
               curentPick,
               playersDrafted,
+              fantasyleagueID,
             };
             const result = onChange(modelFields);
             value = result?.order ?? value;
@@ -189,6 +197,7 @@ export default function DraftCreateForm(props) {
               pickDeadline: value,
               curentPick,
               playersDrafted,
+              fantasyleagueID,
             };
             const result = onChange(modelFields);
             value = result?.pickDeadline ?? value;
@@ -220,6 +229,7 @@ export default function DraftCreateForm(props) {
               pickDeadline,
               curentPick: value,
               playersDrafted,
+              fantasyleagueID,
             };
             const result = onChange(modelFields);
             value = result?.curentPick ?? value;
@@ -246,6 +256,7 @@ export default function DraftCreateForm(props) {
               pickDeadline,
               curentPick,
               playersDrafted: value,
+              fantasyleagueID,
             };
             const result = onChange(modelFields);
             value = result?.playersDrafted ?? value;
@@ -260,6 +271,34 @@ export default function DraftCreateForm(props) {
         hasError={errors.playersDrafted?.hasError}
         {...getOverrideProps(overrides, "playersDrafted")}
       ></TextAreaField>
+      <TextField
+        label="Fantasyleague id"
+        isRequired={false}
+        isReadOnly={false}
+        value={fantasyleagueID}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              order,
+              pickDeadline,
+              curentPick,
+              playersDrafted,
+              fantasyleagueID: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.fantasyleagueID ?? value;
+          }
+          if (errors.fantasyleagueID?.hasError) {
+            runValidationTasks("fantasyleagueID", value);
+          }
+          setFantasyleagueID(value);
+        }}
+        onBlur={() => runValidationTasks("fantasyleagueID", fantasyleagueID)}
+        errorMessage={errors.fantasyleagueID?.errorMessage}
+        hasError={errors.fantasyleagueID?.hasError}
+        {...getOverrideProps(overrides, "fantasyleagueID")}
+      ></TextField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

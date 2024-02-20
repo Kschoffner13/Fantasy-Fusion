@@ -34,6 +34,7 @@ export default function DraftUpdateForm(props) {
     pickDeadline: "",
     curentPick: "",
     playersDrafted: "",
+    fantasyleagueID: "",
   };
   const [order, setOrder] = React.useState(initialValues.order);
   const [pickDeadline, setPickDeadline] = React.useState(
@@ -42,6 +43,9 @@ export default function DraftUpdateForm(props) {
   const [curentPick, setCurentPick] = React.useState(initialValues.curentPick);
   const [playersDrafted, setPlayersDrafted] = React.useState(
     initialValues.playersDrafted
+  );
+  const [fantasyleagueID, setFantasyleagueID] = React.useState(
+    initialValues.fantasyleagueID
   );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
@@ -60,6 +64,7 @@ export default function DraftUpdateForm(props) {
         ? cleanValues.playersDrafted
         : JSON.stringify(cleanValues.playersDrafted)
     );
+    setFantasyleagueID(cleanValues.fantasyleagueID);
     setErrors({});
   };
   const [draftRecord, setDraftRecord] = React.useState(draftModelProp);
@@ -78,6 +83,7 @@ export default function DraftUpdateForm(props) {
     pickDeadline: [],
     curentPick: [],
     playersDrafted: [{ type: "JSON" }],
+    fantasyleagueID: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -126,6 +132,7 @@ export default function DraftUpdateForm(props) {
           pickDeadline,
           curentPick,
           playersDrafted,
+          fantasyleagueID,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -185,6 +192,7 @@ export default function DraftUpdateForm(props) {
               pickDeadline,
               curentPick,
               playersDrafted,
+              fantasyleagueID,
             };
             const result = onChange(modelFields);
             value = result?.order ?? value;
@@ -214,6 +222,7 @@ export default function DraftUpdateForm(props) {
               pickDeadline: value,
               curentPick,
               playersDrafted,
+              fantasyleagueID,
             };
             const result = onChange(modelFields);
             value = result?.pickDeadline ?? value;
@@ -245,6 +254,7 @@ export default function DraftUpdateForm(props) {
               pickDeadline,
               curentPick: value,
               playersDrafted,
+              fantasyleagueID,
             };
             const result = onChange(modelFields);
             value = result?.curentPick ?? value;
@@ -272,6 +282,7 @@ export default function DraftUpdateForm(props) {
               pickDeadline,
               curentPick,
               playersDrafted: value,
+              fantasyleagueID,
             };
             const result = onChange(modelFields);
             value = result?.playersDrafted ?? value;
@@ -286,6 +297,34 @@ export default function DraftUpdateForm(props) {
         hasError={errors.playersDrafted?.hasError}
         {...getOverrideProps(overrides, "playersDrafted")}
       ></TextAreaField>
+      <TextField
+        label="Fantasyleague id"
+        isRequired={false}
+        isReadOnly={false}
+        value={fantasyleagueID}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              order,
+              pickDeadline,
+              curentPick,
+              playersDrafted,
+              fantasyleagueID: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.fantasyleagueID ?? value;
+          }
+          if (errors.fantasyleagueID?.hasError) {
+            runValidationTasks("fantasyleagueID", value);
+          }
+          setFantasyleagueID(value);
+        }}
+        onBlur={() => runValidationTasks("fantasyleagueID", fantasyleagueID)}
+        errorMessage={errors.fantasyleagueID?.errorMessage}
+        hasError={errors.fantasyleagueID?.hasError}
+        {...getOverrideProps(overrides, "fantasyleagueID")}
+      ></TextField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

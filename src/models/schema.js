@@ -38,6 +38,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "fantasyleagueID": {
+                    "name": "fantasyleagueID",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -399,5 +406,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "59ecfa1bf03696e1debddd2414391fb6"
+    "version": "8cd14a30f33cbc6c59e624f9f0fbab3e"
 };
