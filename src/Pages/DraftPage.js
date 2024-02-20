@@ -79,7 +79,7 @@ const DraftPage = () => {
         BCH: 8,
     });
 
-    const [timeLeft, setTimeLeft] = useState(20);
+    const [timeLeft, setTimeLeft] = useState(120);
 
     const getUserName = async () => {
         try {
@@ -162,7 +162,6 @@ const DraftPage = () => {
                 <div className="pick-info">
                     <h4>You're Up in 5 picks!</h4>
                     <p>Current Pick: 1-1</p>
-                    <p>Your next pick: 1-5</p>
                 </div>
                 <div className="profile-icon">
                     <img src="https://picsum.photos/seed/picsum/75/75" />

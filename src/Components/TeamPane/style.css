@@ -3,26 +3,28 @@
     text-align: left;
     width: 25%;
     padding: 10px;
-    border-left: 1px solid black;
+    border-left: 3px solid #2F2F2F;
 }
 
 .roster-spot{
     display: grid;
     grid-template-columns: 70px auto auto;
     align-items: center;
-    border-top: 1px solid black;
-    background-color: aliceblue;
+    border-top: 1px solid #4F4F4F;
+    /* background-color: aliceblue; */
 }
 
 .roster-spot button{
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     grid-column: 1;
     border-radius: 100%;
-    border: 1px solid blue;
-    background-color: lightblue;
+    border: 1px solid #0A901A;
+    background: radial-gradient(circle at center, #28A74522, #28A745AA);
+    color: #ffffff55;
     font-weight: bold;
     padding: auto;
+    margin-left: 5px;
 }
 
 .roster-spot div{
@@ -32,7 +34,7 @@
 }
 
 .roster-spot div img{
-    width: 50px;
+    width: 30px;
     
 }
 
@@ -69,18 +71,28 @@
 }
 
 .team-select{
+
     width: 100%;
     padding: 10px;
     font-size: 1em;
-    border-radius: 5px;
-    border: 1px solid black;
-    background-color: lightblue;
-    color: #333;
+    border: none;
+    background-color: #00000000;
+    color: white;
+    border-bottom: 1px solid #5f5f5f;
     margin: 5px 0;
 }
 
+.team-select option {
+    background-color: #161616;
+    color: white;
+    
+}
+
 .team-select:focus {
-    border-color: #6e9afc;
-    outline: none;
-    box-shadow: 0 0 10px #719ECE;
-  }
+outline: none;
+border-bottom: 2px solid #28A745;
+}
+
+.light-row{
+    background-color: #1F1F1F;
+}
