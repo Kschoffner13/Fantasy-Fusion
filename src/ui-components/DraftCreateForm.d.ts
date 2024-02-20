@@ -17,12 +17,14 @@ export declare type DraftCreateFormInputValues = {
     pickDeadline?: string;
     curentPick?: number;
     playersDrafted?: string;
+    fantasyleagueID?: string;
 };
 export declare type DraftCreateFormValidationValues = {
     order?: ValidationFunction<string>;
     pickDeadline?: ValidationFunction<string>;
     curentPick?: ValidationFunction<number>;
     playersDrafted?: ValidationFunction<string>;
+    fantasyleagueID?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type DraftCreateFormOverridesProps = {
@@ -31,6 +33,7 @@ export declare type DraftCreateFormOverridesProps = {
     pickDeadline?: PrimitiveOverrideProps<TextFieldProps>;
     curentPick?: PrimitiveOverrideProps<TextFieldProps>;
     playersDrafted?: PrimitiveOverrideProps<TextAreaFieldProps>;
+    fantasyleagueID?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type DraftCreateFormProps = React.PropsWithChildren<{
     overrides?: DraftCreateFormOverridesProps | undefined | null;

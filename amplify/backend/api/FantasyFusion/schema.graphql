@@ -4,6 +4,7 @@ type Draft @model @auth(rules: [{allow: public}]) {
   pickDeadline: AWSDateTime
   curentPick: Int
   playersDrafted: AWSJSON
+  fantasyleagueID: String
 }
 
 type Team @model @auth(rules: [{allow: public}]) {

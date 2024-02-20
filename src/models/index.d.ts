@@ -16,6 +16,7 @@ type EagerDraft = {
   readonly pickDeadline?: string | null;
   readonly curentPick?: number | null;
   readonly playersDrafted?: string | null;
+  readonly fantasyleagueID?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -30,6 +31,7 @@ type LazyDraft = {
   readonly pickDeadline?: string | null;
   readonly curentPick?: number | null;
   readonly playersDrafted?: string | null;
+  readonly fantasyleagueID?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
