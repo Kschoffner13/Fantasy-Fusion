@@ -79,6 +79,8 @@ const DraftPage = () => {
         BCH: 8,
     });
 
+    const [availablePlayers, setAvailablePlayers] = useState([]);
+
     const [timeLeft, setTimeLeft] = useState(120);
 
     const getUserName = async () => {
@@ -91,8 +93,27 @@ const DraftPage = () => {
         }
     };
 
+    const getPlayers = async () => {
+        try {
+            const response = await fetch(
+                "https://c77xo6r7ghtdvd57xdm5megfay0qfvsc.lambda-url.ca-central-1.on.aws/"
+            );
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log(data);
+            setAvailablePlayers(data);
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    };
+
     useEffect(() => {
         getUserName();
+        getPlayers();
     }, []);
 
     useEffect(() => {
@@ -194,7 +215,7 @@ const DraftPage = () => {
                     className="resizeable-handle"
                     onMouseDown={handleMouseDown}
                 ></div>
-                <DraftPane />
+                <DraftPane players={availablePlayers} />
                 <TeamPane format={rosterFormat} teams={teams} />
             </div>
         </div>
