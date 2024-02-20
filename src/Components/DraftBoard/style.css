@@ -1,0 +1,76 @@
+.pick-board{
+    height: 50vh;
+    margin-top: 5px;
+}
+
+.round-picks{
+    display: flex;
+
+}
+
+.pick{
+    min-width: 7.5%;
+    margin: 2px;
+    padding: 0 5px;
+    height: 10vh;
+    /* background: linear-gradient(to top, #999999 0%, #bbbbbb 1%, #dddddd 5%, #eeeeee 20%, #ffffff 50%, #dddddd 95%, #bbbbbb 99%);    border: 1px solid gray; */
+    background-color: #4f4f4f;
+    border-radius: 10px;
+    font-size: 0.5em;
+    text-align: left;
+    
+}
+
+.not-picked{
+    vertical-align: top;
+    
+}
+
+.picked{
+    display: flex;
+    justify-content: space-around;
+    text-align: left;
+    align-items: center;
+    height: 100%;
+}
+
+.picked img{
+    width: 3vw;
+    height: 3vw;    
+    background-color:#dfdfdf;
+    border-radius: 100%;
+}
+
+.pick-info{
+    margin-left: 5px;
+    font-size: 1.25em;
+}
+
+.pick-info h5{
+    margin: 2px 0;
+}
+
+.cur {
+    color: #28A745;
+    font-weight: bold;
+    box-shadow: 0 0 10px green, inset 0 -5px 10px rgba(0, 128, 0, 0.788);
+}
+
+.my-pick{
+    border-color: yellow;
+    box-shadow: 0 0 10px rgba(255, 255, 0, 0.2), inset 0 -5px 10px rgba(255, 255, 0, 0.25);
+    z-index: -100;
+}
+
+.pick-made{
+    background: #2857A7;
+    /* Some colors that could be used for players in specific leagues/positions
+    #2857A7
+    #7A28A7
+    #A72845
+    #A77A28
+    #A7A728
+    */
+
+
+}
