@@ -20,7 +20,7 @@ const Home = () => {
       </a>
 
       <Button onClick={getRosterSettings}>
-        Click me to geta fanstay league
+        Click me to get a fanstay league
       </Button>
     </header>
   );

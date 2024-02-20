@@ -1,10 +1,44 @@
 import { ModelInit, MutableModel, __modelMeta__, ManagedIdentifier } from "@aws-amplify/datastore";
 // @ts-ignore
-import { LazyLoading, LazyLoadingDisabled, AsyncCollection } from "@aws-amplify/datastore";
+import { LazyLoading, LazyLoadingDisabled, AsyncCollection, AsyncItem } from "@aws-amplify/datastore";
 
 
 
 
+
+type EagerDraft = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Draft, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly order?: string | null;
+  readonly pickDeadline?: string | null;
+  readonly curentPick?: number | null;
+  readonly playersDrafted?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyDraft = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Draft, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly order?: string | null;
+  readonly pickDeadline?: string | null;
+  readonly curentPick?: number | null;
+  readonly playersDrafted?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Draft = LazyLoading extends LazyLoadingDisabled ? EagerDraft : LazyDraft
+
+export declare const Draft: (new (init: ModelInit<Draft>) => Draft) & {
+  copyOf(source: Draft, mutator: (draft: MutableModel<Draft>) => MutableModel<Draft> | void): Draft;
+}
 
 type EagerTeam = {
   readonly [__modelMeta__]: {
@@ -74,8 +108,10 @@ type EagerFantasyLeague = {
   readonly VetoVoteEnabled?: boolean | null;
   readonly Teams?: (Team | null)[] | null;
   readonly Schedule?: string | null;
+  readonly Draft?: Draft | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
+  readonly fantasyLeagueDraftId?: string | null;
 }
 
 type LazyFantasyLeague = {
@@ -96,8 +132,10 @@ type LazyFantasyLeague = {
   readonly VetoVoteEnabled?: boolean | null;
   readonly Teams: AsyncCollection<Team>;
   readonly Schedule?: string | null;
+  readonly Draft: AsyncItem<Draft | undefined>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
+  readonly fantasyLeagueDraftId?: string | null;
 }
 
 export declare type FantasyLeague = LazyLoading extends LazyLoadingDisabled ? EagerFantasyLeague : LazyFantasyLeague

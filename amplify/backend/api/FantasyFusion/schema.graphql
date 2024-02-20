@@ -1,3 +1,11 @@
+type Draft @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  order: AWSJSON
+  pickDeadline: AWSDateTime
+  curentPick: Int
+  playersDrafted: AWSJSON
+}
+
 type Team @model @auth(rules: [{allow: public}]) {
   id: ID!
   Name: String
@@ -28,5 +36,6 @@ type FantasyLeague @model @auth(rules: [{allow: public}]) {
   VetoVoteEnabled: Boolean
   Teams: [Team] @hasMany(indexName: "byFantasyLeague", fields: ["id"])
   Schedule: AWSJSON
+  Draft: Draft @hasOne
 }
  

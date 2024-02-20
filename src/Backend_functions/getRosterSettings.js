@@ -1,32 +1,30 @@
 import { DataStore } from "@aws-amplify/datastore";
 import { FantasyLeague } from "../models";
 
+// this file serves as a template for querying and saving to the database.
+
 // pass in the league id
 async function getRosterSettings() {
-  const message = DataStore.save(
-    new FantasyLeague({
-      Name: "Test Name",
-      UserID: "TestUserID",
-      TotalPointsFor: 100,
-      TotalPointsAgainst: 50,
-      MatchUpPoints: 75,
-      Wins: 10,
-      Losses: 5,
-      Draws: 2,
-      Roster: JSON.stringify({
-        player1: "Player Name 1",
-        player2: "Player Name 2",
-      }),
-      PlayerList: JSON.stringify({
-        player1: "Player Name 1",
-        player2: "Player Name 2",
-      }),
-      Lineup: JSON.stringify({
-        player1: "Player Name 1",
-        player2: "Player Name 2",
-      }),
-    })
-  );
+  const testData = {
+    OwnerID: "TestOwnerID2",
+    Name: "Test League2",
+    Properties: JSON.stringify({
+      property1: "Property Value 1",
+      property2: "Property Value 2",
+    }),
+    DraftDate: new Date().toISOString(),
+    TradeDeadline: new Date().toISOString(),
+    PlayoffStartDate: new Date().toISOString(),
+    PlayoffTeams: 8,
+    PlayoffMatchupLength: 2,
+    WeeklyPickups: 5,
+    VetoVoteEnabled: true,
+    Schedule: JSON.stringify({
+      week1: "Schedule for Week 1",
+      week2: "Schedule for Week 2",
+    }),
+  };
+  const message = DataStore.save(new FantasyLeague(testData));
 
   const response = await DataStore.query(FantasyLeague);
   console.log(response);

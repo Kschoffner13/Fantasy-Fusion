@@ -4,9 +4,10 @@ import { schema } from './schema';
 
 
 
-const { Team, FantasyLeague } = initSchema(schema);
+const { Draft, Team, FantasyLeague } = initSchema(schema);
 
 export {
+  Draft,
   Team,
   FantasyLeague
 };
