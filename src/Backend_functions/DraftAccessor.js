@@ -65,6 +65,8 @@ class DraftAccessor {
     const original = await DataStore.query(Draft, (c) =>
       c.fantasyleagueID.eq(this.FLID)
     );
+
+    // array to be used for the new playersDrafted object
     let newdata = null;
 
     // create the new player drafted object that gets appened to the playersDrafted list
@@ -74,18 +76,20 @@ class DraftAccessor {
       league: irlLeague,
     };
 
+    // retive the old playersdrafted
     const oldPlayersDrafted = original[0].playersDrafted["picks"];
 
+    // if its null, submit new data
     if (oldPlayersDrafted.length === 0) {
       newdata = {
         picks: [newPlayerDrafted],
       };
     } else {
+      // if its not null, add new data
       newdata = oldPlayersDrafted.concat(newPlayerDrafted);
     }
 
-    console.log(newdata);
-
+    // update the draft model
     const response = await DataStore.save(
       Draft.copyOf(original[0], (updated) => {
         updated["curentPick"] = updated["curentPick"] + 1;
@@ -95,7 +99,6 @@ class DraftAccessor {
   }
 }
 
-// notes for of where i left off: need to be ablke to
-//append data to end the of the picks sectrion in the awsjson object
+ect;
 // also need to accout for when we need to increment the pickdealine
 export default DraftAccessor;
