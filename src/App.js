@@ -3,7 +3,7 @@ import { withAuthenticator } from "@aws-amplify/ui-react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import DraftPage from "./Pages/DraftPage";
-import LeaguePage from "./Pages/LeaguePage";
+import TeamPage from "./Pages/TeamPage";
 
 function App() {
     return (
@@ -14,7 +14,7 @@ function App() {
                     <Route path="/:leagueName/draft" element={<DraftPage />} />
                     <Route
                         path="/:leagueName/:teamName"
-                        element={<LeaguePage />}
+                        element={<TeamPage />}
                     />
                 </Routes>
             </HashRouter>

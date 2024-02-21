@@ -1,12 +1,12 @@
 import { Route, Routes } from "react-router";
-import ProfileHeaderSection from "../Components/ProfileHeaderSection/ProfileHeaderSection";
-import "../Styles/leaguePage.css";
+import ProfileHeaderSection from "../Components/ProfileHeaderSection/ProfileHeaderSection.js";
+import "../Styles/teamPage.css";
 import logo from "../images/logo.png";
-import Home from "../Pages/Home.js";
+import Home from "./Home.js";
 import { HashRouter, NavLink } from "react-router-dom";
 import { useState } from "react";
 
-const LeaguePage = () => {
+const TeamPage = () => {
     const teamName = "myTeam";
     const leagueName = "myLeague";
 
@@ -42,4 +42,4 @@ const LeaguePage = () => {
     );
 };
 
-export default LeaguePage;
+export default TeamPage;
