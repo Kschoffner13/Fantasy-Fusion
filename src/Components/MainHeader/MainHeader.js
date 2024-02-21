@@ -22,7 +22,9 @@ const MainHeader = () => {
             </div>
             <div className="header-bot">
                 <h5>League Name</h5>
-                <NavLink to={`/${leagueName}/${teamName}`}>My Team</NavLink>
+                <NavLink to={`/${leagueName}/${teamName}`} className="active">
+                    My Team
+                </NavLink>
                 <NavLink to={`/${leagueName}/${teamName}/matchup`}>
                     Matchup
                 </NavLink>
