@@ -10,17 +10,19 @@ const TeamPage = () => {
         <div className="league-page">
             <MainHeader />
             <div className="team-info-section">
-                <img src={logo}></img>
-                <div>
-                    <h1>Team</h1>
-                    <div>
-                        <h2>2nd Place</h2>
-                        <h3>
-                            Record: <span>12</span>-<span>3</span>-
-                            <span>1</span>
-                        </h3>
+                <div className="team-info-block">
+                    <img src={logo}></img>
+                    <div className="team-info-text">
+                        <h1>Team</h1>
+                        <div className="team-record-info">
+                            <h2>2nd Place</h2>
+                            <h3>
+                                Record: <span>12</span> - <span>3</span> -
+                                <span> 1</span>
+                            </h3>
+                        </div>
+                        <p>Owner: Username</p>
                     </div>
-                    <p>Owner: Username</p>
                 </div>
                 <MatchupSnapshot />
             </div>
