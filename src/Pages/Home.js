@@ -17,8 +17,9 @@ const Home = () => {
 
   // function for testing the FLAccessor
   const testDraft = async () => {
-    const response = await D.getDraftDate();
-    console.log(response);
+    const response = await D.makePick("messi", "La Liga");
+    const i = await D.getDraft();
+    console.log(i);
   };
 
   return (
