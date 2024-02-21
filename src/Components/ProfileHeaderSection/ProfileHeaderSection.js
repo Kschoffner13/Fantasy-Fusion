@@ -25,7 +25,7 @@ const ProfileHeaderSection = () => {
             <img src="https://picsum.photos/seed/picsum/75/75" />
             <div className="profile-icon-info">
                 <p>{username}</p>
-                <NavLink>Account</NavLink>
+                <NavLink to="/account">Account</NavLink>
             </div>
         </div>
     );
