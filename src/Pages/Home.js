@@ -1,4 +1,5 @@
 import logo from "../images/logo.png";
+
 const Home = () => {
     return (
         <header className="App-header">
