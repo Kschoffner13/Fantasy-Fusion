@@ -32,7 +32,7 @@ const DraftPage = () => {
     });
   }
 
-  let intervalId = setInterval(sub, 3000);
+  sub();
 
   const rounds = 12;
   const [username, setUsername] = useState("NAME");
