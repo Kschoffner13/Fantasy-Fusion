@@ -382,13 +382,15 @@ const RosterSection = () => {
                     )
                     .map((key, index) => (
                         <div key={index} className="row">
-                            <div className="cell">{key}</div>
-                            <div className="cell">{rosterPlacement[key]}</div>
+                            {rosterPlacement[key] ? null : <p>-</p>}
+                            <button className="roster-btn">
+                                {key.replace(/\d+/g, "")}
+                            </button>
                         </div>
                     ))}
             </div>
             <div className="util-table">
-                <div className="header">
+                <div className="header-util">
                     {colsU.map((col, index) => (
                         <div key={index}>{col}</div>
                     ))}
@@ -396,9 +398,11 @@ const RosterSection = () => {
                 {Object.keys(rosterPlacement)
                     .filter((key) => key.includes("UTL"))
                     .map((key, index) => (
-                        <div key={index} className="row">
-                            <div className="cell">{key}</div>
-                            <div className="cell">{rosterPlacement[key]}</div>
+                        <div key={index} className="row-util">
+                            {rosterPlacement[key] ? null : <p>-</p>}
+                            <button className="roster-btn">
+                                {key.replace(/\d+/g, "")}
+                            </button>
                         </div>
                     ))}
             </div>
@@ -418,8 +422,10 @@ const RosterSection = () => {
                     )
                     .map((key, index) => (
                         <div key={index} className="row">
-                            <div className="cell">{key}</div>
-                            <div className="cell">{rosterPlacement[key]}</div>
+                            {rosterPlacement[key] ? null : <p>-</p>}
+                            <button className="roster-btn">
+                                {key.replace(/\d+/g, "")}
+                            </button>
                         </div>
                     ))}
             </div>

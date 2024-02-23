@@ -1,6 +1,7 @@
 .active-section{
     display: flex;
     justify-content: space-between;
+    align-items: end;
 }
 
 .table1 {
@@ -22,9 +23,51 @@
     justify-content: space-between;
     padding: 10px;
     border-bottom: 1px solid #ddd;
+    align-items: center;
 }
 
 .cell {
     flex: 1;
     text-align: center;
+}
+
+.util-table{
+    display: flex;
+    flex-direction: column;
+}
+
+.header-util{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 10px;
+    background-color: #f0f0f0;
+    font-weight: bold;
+    color: black;
+}
+
+.row-util{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    align-items: center;
+}
+
+.roster-btn{
+    width: 40px;
+    height: 40px;
+    grid-column: 1;
+    border-radius: 100%;
+    border: 1px solid #0A901A;
+    background: radial-gradient(circle at center, #28A74522, #28A745AA);
+    color: #ffffff55;
+    font-weight: bold;
+    padding: auto;
+    margin-left: 5px;
+}
+
+.roster-btn:hover {
+    background: radial-gradient(circle at center, #28A745AA, #28A74522);
+    border: 1px solid #28A74522;
+    cursor: pointer;
 }
