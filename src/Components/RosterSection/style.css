@@ -1,0 +1,30 @@
+.active-section{
+    display: flex;
+    justify-content: space-between;
+}
+
+.table1 {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    padding: 10px;
+    background-color: #f0f0f0;
+    font-weight: bold;
+    color: black;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.cell {
+    flex: 1;
+    text-align: center;
+}
