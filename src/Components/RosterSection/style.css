@@ -4,16 +4,6 @@
     align-items: end;
 }
 
-.main-table {
-    width: 35%;
-}
-
-.util-table{
-    display: flex;
-    flex-direction: column;
-    width: 20%;
-}
-
 .bench-section{
     width: 100%;
     margin: 20px 0;

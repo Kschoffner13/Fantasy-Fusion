@@ -1,3 +1,15 @@
+.table{
+    text-align: left;
+}
+
+.league-table{
+    width: 35%;
+}
+
+.utl-table{
+    width: 25%;
+}
+
 .header {
     display: grid;
     padding: 10px;

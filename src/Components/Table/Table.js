@@ -12,7 +12,11 @@ const Table = ({
     const gridTemplateColumns = `2fr ${"1fr ".repeat(columnCount - 1)}`;
 
     return (
-        <div className="table">
+        <div
+            className={`table ${columnCount <= 3 ? "utl-table" : ""} ${
+                columnCount > 3 && columnCount < 12 ? "league-table" : ""
+            }`}
+        >
             <div
                 className="header"
                 style={{ gridTemplateColumns: gridTemplateColumns }}
