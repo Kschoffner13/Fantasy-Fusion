@@ -1,15 +1,31 @@
+import { useEffect, useState } from "react";
 import "./style.css";
+import RosterPopup from "../RosterPopup/RosterPopup";
 
 const Table = ({
     headers,
     roster,
     rosterPlacement,
+    setRosterPlacement,
     filterKeys,
-    buttonLabel,
     glStats,
 }) => {
     const columnCount = headers.length + 1; // Determine column count based on headers size + 1
     const gridTemplateColumns = `2fr ${"1fr ".repeat(columnCount - 1)}`;
+    const [toSwap, setToSwap] = useState({ id: null, slot: null });
+
+    const swap = (playerId, pos) => {
+        setToSwap({ id: playerId, slot: pos });
+        setIsOpen(true);
+        console.log(playerId, pos);
+        // setRosterPlacement((prevState) => ({
+        //     ...prevState,
+        //     GRD1: 19,
+        //     BCH5: 10,
+        // }));
+    };
+
+    const [isOpen, setIsOpen] = useState(false);
 
     return (
         <div
@@ -17,6 +33,16 @@ const Table = ({
                 columnCount > 3 && columnCount < 12 ? "league-table" : ""
             }`}
         >
+            {isOpen ? (
+                <RosterPopup
+                    roster={roster}
+                    rosterPlacement={rosterPlacement}
+                    setRosterPlacement={setRosterPlacement}
+                    isOpen={isOpen}
+                    setIsOpen={setIsOpen}
+                    toSwap={toSwap}
+                />
+            ) : null}
             <div
                 className="header"
                 style={{ gridTemplateColumns: gridTemplateColumns }}
@@ -62,8 +88,13 @@ const Table = ({
                                 ) : (
                                     <p>-</p>
                                 )}
-                                <button className="roster-btn">
-                                    {key.replace(/\d+/g, buttonLabel)}
+                                <button
+                                    className="roster-btn"
+                                    onClick={() =>
+                                        swap(player.id, key.replace(/\d+/g, ""))
+                                    }
+                                >
+                                    {key.replace(/\d+/g, "")}
                                 </button>
                             </div>
                         </>

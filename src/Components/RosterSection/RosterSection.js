@@ -324,6 +324,22 @@ const RosterSection = () => {
                 { dayTime: "2022-10-03T20:00:00", opp: "Team G" },
             ],
         },
+        {
+            id: 20,
+            name: "Player 11",
+            team: "Team V",
+            league: "NBA",
+            position: "FWD",
+            PPG: 12,
+            APG: 10,
+            RPG: 8,
+            GP: 68,
+            games: [
+                { dayTime: "2022-10-01T20:00:00", opp: "Team E" },
+                { dayTime: "2022-10-02T20:00:00", opp: "Team F" },
+                { dayTime: "2022-10-03T20:00:00", opp: "Team G" },
+            ],
+        },
     ];
 
     const rosterFormat = {
@@ -360,7 +376,7 @@ const RosterSection = () => {
         BCH3: 17,
         BCH4: 18,
         BCH5: 19,
-        BCH6: null,
+        BCH6: 20,
         BCH7: null,
         BCH8: null,
     });
@@ -371,10 +387,6 @@ const RosterSection = () => {
     const glStats = ["name", "GP", "W", "L", "SV", "FPPG"];
     const combined = [...new Set([...colsB, ...colsH, ...glStats])];
 
-    const spotsB = 5;
-    const spotsH = 6;
-    const spotsU = 3;
-
     return (
         <div className="roster-section">
             <div className="active-section">
@@ -383,7 +395,7 @@ const RosterSection = () => {
                     roster={roster}
                     rosterPlacement={rosterPlacement}
                     filterKeys={["GRD", "FWD", "CB", "SM"]}
-                    buttonLabel=""
+                    setRosterPlacement={setRosterPlacement}
                     glStats={null}
                 />
 
@@ -392,7 +404,7 @@ const RosterSection = () => {
                     roster={roster}
                     rosterPlacement={rosterPlacement}
                     filterKeys={["UTL"]}
-                    buttonLabel={""}
+                    setRosterPlacement={setRosterPlacement}
                     glStats={null}
                 />
 
@@ -401,7 +413,7 @@ const RosterSection = () => {
                     roster={roster}
                     rosterPlacement={rosterPlacement}
                     filterKeys={["CH", "WNG", "DEF", "GL"]}
-                    buttonLabel=""
+                    setRosterPlacement={setRosterPlacement}
                     glStats={glStats}
                 />
             </div>
@@ -411,7 +423,7 @@ const RosterSection = () => {
                     roster={roster}
                     rosterPlacement={rosterPlacement}
                     filterKeys={["BCH"]}
-                    buttonLabel=""
+                    setRosterPlacement={setRosterPlacement}
                     glStats={null}
                 />
             </div>
