@@ -1,0 +1,61 @@
+.header {
+    display: grid;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 10px 10px 0 0;
+    font-weight: bold;
+    color: black;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    border-bottom: 1px solid #ddd;
+    align-items: center;
+}
+
+.cell {
+    flex: 1;
+    text-align: center;
+}
+
+.header-util{
+    display: grid;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 10px 10px 0 0;
+    font-weight: bold;
+    color: black;
+}
+
+.roster-btn{
+    width: 30px;
+    height: 30px;
+    font-size: 0.6em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 1;
+    border-radius: 100%;
+    border: 1px solid #0A901A;
+    background: radial-gradient(circle at center, #28A74522, #28A745AA);
+    color: #ffffff99;
+    font-weight: bold;
+    padding: auto;
+    margin-left: 5px;
+}
+
+.roster-btn:hover {
+    background: radial-gradient(circle at center, #28A745AA, #28A74522);
+    border: 1px solid #28A74522;
+    cursor: pointer;
+}
+
+.gl-header{
+    padding: 5px 0;
+    border-radius: 0;
+    font-size: 0.8em;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}

@@ -1,5 +1,6 @@
 import "./style.css";
 import { useState } from "react";
+import Table from "../Table/Table.js";
 
 const RosterSection = () => {
     const roster = [
@@ -353,9 +354,9 @@ const RosterSection = () => {
         GL: 4,
         UTL1: 5,
         UTL2: 6,
-        UTL3: 7,
+        UTL3: 16,
         BCH1: 9,
-        BCH2: 16,
+        BCH2: 7,
         BCH3: 17,
         BCH4: 18,
         BCH5: 19,
@@ -377,167 +378,42 @@ const RosterSection = () => {
     return (
         <div className="roster-section">
             <div className="active-section">
-                <div className="main-table" style={{ alignSelf: "center" }}>
-                    <div className="header">
-                        {colsB.map((col, index) => (
-                            <div key={index}>{col}</div>
-                        ))}
-                    </div>
-                    {Object.keys(rosterPlacement)
-                        .filter(
-                            (key) =>
-                                key.includes("CB") ||
-                                key.includes("FWD") ||
-                                key.includes("GRD") ||
-                                key.includes("SM")
-                        )
-                        .map((key, index) => {
-                            const player = roster.find(
-                                (player) => player.id === rosterPlacement[key]
-                            );
-                            return (
-                                <div key={index} className="row">
-                                    {player ? (
-                                        colsB.map((col, index) => (
-                                            <div
-                                                key={index}
-                                                style={{ color: "white" }}
-                                            >
-                                                {player[col]}
-                                                {console.log(
-                                                    player,
-                                                    col,
-                                                    player[col]
-                                                )}
-                                            </div>
-                                        ))
-                                    ) : (
-                                        <p>-</p>
-                                    )}
-                                    <button className="roster-btn">
-                                        {key.replace(/\d+/g, "")}
-                                    </button>
-                                </div>
-                            );
-                        })}
-                </div>
-                <div className="util-table">
-                    <div className="header-util">
-                        {colsU.map((col, index) => (
-                            <div key={index}>{col}</div>
-                        ))}
-                    </div>
-                    {Object.keys(rosterPlacement)
-                        .filter((key) => key.includes("UTL"))
-                        .map((key, index) => {
-                            const player = roster.find(
-                                (player) => player.id === rosterPlacement[key]
-                            );
-                            return (
-                                <div key={index} className="row">
-                                    {player ? (
-                                        colsU.map((col, index) => (
-                                            <div key={index}>{player[col]}</div>
-                                        ))
-                                    ) : (
-                                        <p>-</p>
-                                    )}
-                                    <button className="roster-btn">
-                                        {key.replace(/\d+/g, "")}
-                                    </button>
-                                </div>
-                            );
-                        })}
-                </div>
-                <div className="main-table">
-                    <div className="header">
-                        {colsH.map((col, index) => (
-                            <div key={index}>{col}</div>
-                        ))}
-                    </div>
-                    {Object.keys(rosterPlacement)
-                        .filter(
-                            (key) =>
-                                (key.includes("CH") && !key.includes("BCH")) ||
-                                key.includes("WNG") ||
-                                key.includes("DEF") ||
-                                key.includes("GL")
-                        )
-                        .map((key, index) => {
-                            const player = roster.find(
-                                (player) => player.id === rosterPlacement[key]
-                            );
-                            const headers = key.includes("GL")
-                                ? glStats
-                                : colsH;
-                            return (
-                                <>
-                                    {key.includes("GL") && (
-                                        <div className="header gl-header">
-                                            {glStats.map((stat, index) => (
-                                                <div key={index}>{stat}</div>
-                                            ))}
-                                        </div>
-                                    )}
-                                    <div key={index} className="row">
-                                        {player ? (
-                                            headers.map((col, index) => (
-                                                <div key={index}>
-                                                    {player[col]}
-                                                </div>
-                                            ))
-                                        ) : (
-                                            <p>-</p>
-                                        )}
-                                        <button className="roster-btn">
-                                            {key.replace(/\d+/g, "")}
-                                        </button>
-                                    </div>
-                                </>
-                            );
-                        })}
-                </div>
+                <Table
+                    headers={colsB}
+                    roster={roster}
+                    rosterPlacement={rosterPlacement}
+                    filterKeys={["GRD", "FWD", "CB", "SM"]}
+                    buttonLabel=""
+                    glStats={null}
+                />
+
+                <Table
+                    headers={colsU}
+                    roster={roster}
+                    rosterPlacement={rosterPlacement}
+                    filterKeys={["UTL"]}
+                    buttonLabel={""}
+                    glStats={null}
+                />
+
+                <Table
+                    headers={colsH}
+                    roster={roster}
+                    rosterPlacement={rosterPlacement}
+                    filterKeys={["CH", "WNG", "DEF", "GL"]}
+                    buttonLabel=""
+                    glStats={glStats}
+                />
             </div>
             <div className="bench-section">
-                <div className="main-table combined-table">
-                    <div className="header combined">
-                        {combined.map((col, index) => (
-                            <div key={index}>{col}</div>
-                        ))}
-                    </div>
-                    {Object.keys(rosterPlacement)
-                        .filter((key) => key.includes("BCH"))
-                        .map((key, index) => {
-                            const player = roster.find(
-                                (player) => player.id === rosterPlacement[key]
-                            );
-                            return (
-                                <>
-                                    {key.includes("GL") && (
-                                        <div className="header gl-header">
-                                            {glStats.map((stat, index) => (
-                                                <div key={index}>{stat}</div>
-                                            ))}
-                                        </div>
-                                    )}
-                                    <div key={index} className="row">
-                                        {player ? (
-                                            combined.map((col, index) => (
-                                                <div key={index}>
-                                                    {player[col] || "-"}
-                                                </div>
-                                            ))
-                                        ) : (
-                                            <p>-</p>
-                                        )}
-                                        <button className="roster-btn">
-                                            {key.replace(/\d+/g, "")}
-                                        </button>
-                                    </div>
-                                </>
-                            );
-                        })}
-                </div>
+                <Table
+                    headers={combined}
+                    roster={roster}
+                    rosterPlacement={rosterPlacement}
+                    filterKeys={["BCH"]}
+                    buttonLabel=""
+                    glStats={null}
+                />
             </div>
         </div>
     );
