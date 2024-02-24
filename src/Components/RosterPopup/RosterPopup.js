@@ -21,13 +21,22 @@ const RosterPopup = ({
         .filter(([key]) => key.startsWith("BCH"))
         .map(([, id]) => id);
 
-    // Find the BCH items in the roster
+    let matchingPlayers = [];
+
     const bchPlayers = roster.filter((player) => bchIds.includes(player.id));
 
-    // Get the BCH items that match toSwap.slot
-    const matchingPlayers = bchPlayers.filter(
-        (player) => player.position === toSwap.slot
-    );
+    if (toSwap.slot == "SM") {
+        matchingPlayers = bchPlayers.filter(
+            (player) => player.league === "NBA"
+        );
+    } else if (toSwap.slot == "UTL") {
+        matchingPlayers = bchPlayers;
+    } else {
+        matchingPlayers = bchPlayers.filter(
+            (player) => player.position === toSwap.slot
+        );
+    }
+
     console.log("OPEN", matchingPlayers, outPlayer);
 
     const swapPlayers = (inPlayerId) => {
