@@ -4,16 +4,16 @@
     align-items: end;
 }
 
-.table1 {
-    display: flex;
-    flex-direction: column;
+.main-table {
+    width: 35%;
 }
 
 .header {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 0.5fr 1fr 1fr 1fr 1fr 1fr;
     padding: 10px;
     background-color: #f0f0f0;
+    border-radius: 10px 10px 0 0;
     font-weight: bold;
     color: black;
 }
@@ -21,7 +21,7 @@
 .row {
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    padding: 5px 10px;
     border-bottom: 1px solid #ddd;
     align-items: center;
 }
@@ -34,33 +34,31 @@
 .util-table{
     display: flex;
     flex-direction: column;
+    width: 20%;
 }
 
 .header-util{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     padding: 10px;
     background-color: #f0f0f0;
+    border-radius: 10px 10px 0 0;
     font-weight: bold;
     color: black;
 }
 
-.row-util{
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    align-items: center;
-}
-
 .roster-btn{
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
+    font-size: 0.6em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     grid-column: 1;
     border-radius: 100%;
     border: 1px solid #0A901A;
     background: radial-gradient(circle at center, #28A74522, #28A745AA);
-    color: #ffffff55;
+    color: #ffffff99;
     font-weight: bold;
     padding: auto;
     margin-left: 5px;
@@ -70,4 +68,20 @@
     background: radial-gradient(circle at center, #28A745AA, #28A74522);
     border: 1px solid #28A74522;
     cursor: pointer;
+}
+
+.gl-header{
+    padding: 5px 0;
+    border-radius: 0;
+    font-size: 0.8em;
+}
+
+.combined-table{
+    width: 100%;
+    margin: 20px 0;
+}
+
+.combined{
+    
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }

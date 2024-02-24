@@ -339,95 +339,205 @@ const RosterSection = () => {
     };
 
     const [rosterPlacement, setRosterPlacement] = useState({
-        GRD1: null,
-        GRD2: null,
-        FWD1: null,
-        FWD2: null,
-        CB: null,
-        SM: null,
-        CH: null,
-        WNG1: null,
-        WNG2: null,
-        DEF1: null,
-        DEF2: null,
-        GL: null,
-        UTL1: null,
-        UTL2: null,
-        UTL3: null,
+        GRD1: 10,
+        GRD2: 11,
+        FWD1: 12,
+        FWD2: 13,
+        CB: 14,
+        SM: 15,
+        CH: 0,
+        WNG1: 1,
+        WNG2: 2,
+        DEF1: 3,
+        DEF2: 8,
+        GL: 4,
+        UTL1: 5,
+        UTL2: 6,
+        UTL3: 7,
+        BCH1: 9,
+        BCH2: 16,
+        BCH3: 17,
+        BCH4: 18,
+        BCH5: 19,
+        BCH6: null,
+        BCH7: null,
+        BCH8: null,
     });
 
-    const colsB = ["Player", "GP", "PPG", "APG", "RPG", "FPPG"];
-    const colsH = ["Player", "GP", "P", "G", "A", "FPPG"];
-    const colsU = ["Player", "GP", "FPPG"];
+    const colsB = ["name", "GP", "PPG", "APG", "RPG", "FPPG"];
+    const colsH = ["name", "GP", "P", "G", "A", "FPPG"];
+    const colsU = ["name", "FPPG"];
+    const glStats = ["name", "GP", "W", "L", "SV", "FPPG"];
+    const combined = [...new Set([...colsB, ...colsH, ...glStats])];
 
     const spotsB = 5;
     const spotsH = 6;
     const spotsU = 3;
 
     return (
-        <div className="active-section">
-            <div className="table1">
-                <div className="header">
-                    {colsB.map((col, index) => (
-                        <div key={index}>{col}</div>
-                    ))}
+        <div className="roster-section">
+            <div className="active-section">
+                <div className="main-table" style={{ alignSelf: "center" }}>
+                    <div className="header">
+                        {colsB.map((col, index) => (
+                            <div key={index}>{col}</div>
+                        ))}
+                    </div>
+                    {Object.keys(rosterPlacement)
+                        .filter(
+                            (key) =>
+                                key.includes("CB") ||
+                                key.includes("FWD") ||
+                                key.includes("GRD") ||
+                                key.includes("SM")
+                        )
+                        .map((key, index) => {
+                            const player = roster.find(
+                                (player) => player.id === rosterPlacement[key]
+                            );
+                            return (
+                                <div key={index} className="row">
+                                    {player ? (
+                                        colsB.map((col, index) => (
+                                            <div
+                                                key={index}
+                                                style={{ color: "white" }}
+                                            >
+                                                {player[col]}
+                                                {console.log(
+                                                    player,
+                                                    col,
+                                                    player[col]
+                                                )}
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <p>-</p>
+                                    )}
+                                    <button className="roster-btn">
+                                        {key.replace(/\d+/g, "")}
+                                    </button>
+                                </div>
+                            );
+                        })}
                 </div>
-                {Object.keys(rosterPlacement)
-                    .filter(
-                        (key) =>
-                            key.includes("CB") ||
-                            key.includes("FWD") ||
-                            key.includes("GRD") ||
-                            key.includes("SM")
-                    )
-                    .map((key, index) => (
-                        <div key={index} className="row">
-                            {rosterPlacement[key] ? null : <p>-</p>}
-                            <button className="roster-btn">
-                                {key.replace(/\d+/g, "")}
-                            </button>
-                        </div>
-                    ))}
+                <div className="util-table">
+                    <div className="header-util">
+                        {colsU.map((col, index) => (
+                            <div key={index}>{col}</div>
+                        ))}
+                    </div>
+                    {Object.keys(rosterPlacement)
+                        .filter((key) => key.includes("UTL"))
+                        .map((key, index) => {
+                            const player = roster.find(
+                                (player) => player.id === rosterPlacement[key]
+                            );
+                            return (
+                                <div key={index} className="row">
+                                    {player ? (
+                                        colsU.map((col, index) => (
+                                            <div key={index}>{player[col]}</div>
+                                        ))
+                                    ) : (
+                                        <p>-</p>
+                                    )}
+                                    <button className="roster-btn">
+                                        {key.replace(/\d+/g, "")}
+                                    </button>
+                                </div>
+                            );
+                        })}
+                </div>
+                <div className="main-table">
+                    <div className="header">
+                        {colsH.map((col, index) => (
+                            <div key={index}>{col}</div>
+                        ))}
+                    </div>
+                    {Object.keys(rosterPlacement)
+                        .filter(
+                            (key) =>
+                                (key.includes("CH") && !key.includes("BCH")) ||
+                                key.includes("WNG") ||
+                                key.includes("DEF") ||
+                                key.includes("GL")
+                        )
+                        .map((key, index) => {
+                            const player = roster.find(
+                                (player) => player.id === rosterPlacement[key]
+                            );
+                            const headers = key.includes("GL")
+                                ? glStats
+                                : colsH;
+                            return (
+                                <>
+                                    {key.includes("GL") && (
+                                        <div className="header gl-header">
+                                            {glStats.map((stat, index) => (
+                                                <div key={index}>{stat}</div>
+                                            ))}
+                                        </div>
+                                    )}
+                                    <div key={index} className="row">
+                                        {player ? (
+                                            headers.map((col, index) => (
+                                                <div key={index}>
+                                                    {player[col]}
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <p>-</p>
+                                        )}
+                                        <button className="roster-btn">
+                                            {key.replace(/\d+/g, "")}
+                                        </button>
+                                    </div>
+                                </>
+                            );
+                        })}
+                </div>
             </div>
-            <div className="util-table">
-                <div className="header-util">
-                    {colsU.map((col, index) => (
-                        <div key={index}>{col}</div>
-                    ))}
+            <div className="bench-section">
+                <div className="main-table combined-table">
+                    <div className="header combined">
+                        {combined.map((col, index) => (
+                            <div key={index}>{col}</div>
+                        ))}
+                    </div>
+                    {Object.keys(rosterPlacement)
+                        .filter((key) => key.includes("BCH"))
+                        .map((key, index) => {
+                            const player = roster.find(
+                                (player) => player.id === rosterPlacement[key]
+                            );
+                            return (
+                                <>
+                                    {key.includes("GL") && (
+                                        <div className="header gl-header">
+                                            {glStats.map((stat, index) => (
+                                                <div key={index}>{stat}</div>
+                                            ))}
+                                        </div>
+                                    )}
+                                    <div key={index} className="row">
+                                        {player ? (
+                                            combined.map((col, index) => (
+                                                <div key={index}>
+                                                    {player[col] || "-"}
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <p>-</p>
+                                        )}
+                                        <button className="roster-btn">
+                                            {key.replace(/\d+/g, "")}
+                                        </button>
+                                    </div>
+                                </>
+                            );
+                        })}
                 </div>
-                {Object.keys(rosterPlacement)
-                    .filter((key) => key.includes("UTL"))
-                    .map((key, index) => (
-                        <div key={index} className="row-util">
-                            {rosterPlacement[key] ? null : <p>-</p>}
-                            <button className="roster-btn">
-                                {key.replace(/\d+/g, "")}
-                            </button>
-                        </div>
-                    ))}
-            </div>
-            <div className="table2">
-                <div className="header">
-                    {colsH.map((col, index) => (
-                        <div key={index}>{col}</div>
-                    ))}
-                </div>
-                {Object.keys(rosterPlacement)
-                    .filter(
-                        (key) =>
-                            key.includes("CH") ||
-                            key.includes("WNG") ||
-                            key.includes("DEF") ||
-                            key.includes("GL")
-                    )
-                    .map((key, index) => (
-                        <div key={index} className="row">
-                            {rosterPlacement[key] ? null : <p>-</p>}
-                            <button className="roster-btn">
-                                {key.replace(/\d+/g, "")}
-                            </button>
-                        </div>
-                    ))}
             </div>
         </div>
     );
