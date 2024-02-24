@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import logo from "../images/logo.png";
 
 const Home = () => {
@@ -17,6 +18,8 @@ const Home = () => {
             >
                 Learn React
             </a>
+            <NavLink to="/abc/draft">DRAFT</NavLink>
+            <NavLink to="/abc/def">TEAM</NavLink>
         </header>
     );
 };
