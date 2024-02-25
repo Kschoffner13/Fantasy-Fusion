@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import "../Styles/draftPage.css";
 import logo from "../images/logo.png";
 import { useEffect, useState } from "react";
@@ -6,6 +5,7 @@ import DraftBoard from "../Components/DraftBoard/DraftBoard";
 import { fetchUserAttributes } from "@aws-amplify/auth";
 import TeamPane from "../Components/TeamPane/TeamPane";
 import DraftPane from "../Components/DraftPane/DraftPane";
+import ProfileHeaderSection from "../Components/ProfileHeaderSection/ProfileHeaderSection";
 
 const DraftPage = () => {
     /*
@@ -23,7 +23,6 @@ const DraftPage = () => {
             - keep track of whose been drafted at which draft position
     */
     const rounds = 12;
-    const [username, setUsername] = useState("NAME");
 
     const [teams, setTeams] = useState([
         {
@@ -83,16 +82,6 @@ const DraftPage = () => {
 
     const [timeLeft, setTimeLeft] = useState(120);
 
-    const getUserName = async () => {
-        try {
-            const username = (await fetchUserAttributes()).preferred_username;
-            setUsername(username);
-            return <p>username</p>;
-        } catch (error) {
-            console.log("error getting user", error);
-        }
-    };
-
     const getPlayers = async () => {
         try {
             const response = await fetch(
@@ -112,7 +101,6 @@ const DraftPage = () => {
     };
 
     useEffect(() => {
-        getUserName();
         getPlayers();
     }, []);
 
@@ -184,13 +172,7 @@ const DraftPage = () => {
                     <h4>You're Up in 5 picks!</h4>
                     <p>Current Pick: 1-1</p>
                 </div>
-                <div className="profile-icon">
-                    <img src="https://picsum.photos/seed/picsum/75/75" />
-                    <div className="profile-icon-info">
-                        <p>{username}</p>
-                        <NavLink>Account</NavLink>
-                    </div>
-                </div>
+                <ProfileHeaderSection />
             </header>
             <div
                 className="draft-board"

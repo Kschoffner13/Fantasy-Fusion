@@ -1,0 +1,94 @@
+.popup-overlay {
+    position: fixed; /* Position the overlay fixed, so it's always in front */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background to create a blur effect */
+    display: flex; /* Use flexbox to center the content */
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    z-index: 1000; /* High z-index to ensure the overlay is in front of everything else */
+}
+
+.popup-content {
+    background-color: #1F1F1F;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%; /* Set a width for the content */
+    max-width: 750px; /* Set a max-width for the content */
+}
+
+
+
+.player-listing{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid white;
+}
+
+.player-listing h5{
+    margin: 0 10px;
+
+}
+
+.player-listing button{
+    width: 30px;
+    height: 30px;
+    font-size: 0.75em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 1;
+    border-radius: 100%;
+    color: #ffffff;
+    font-weight: bold;
+    padding: auto;
+    margin-left: 5px;
+}
+
+.out-player{
+    border-bottom: 5px double white;
+}
+
+.out-btn{
+    border: 1px solid #A7282222;
+    background: radial-gradient(circle at center, #A72822AA, #A7282222);
+}
+
+.in-btn{
+    border: 1px solid #0A901A;
+    background: radial-gradient(circle at center, #28A74522, #28A745AA);
+}
+
+.in-btn:hover {
+    background: radial-gradient(circle at center, #28A745AA, #28A74522);
+    border: 1px solid #28A74522;
+    cursor: pointer;
+}
+
+.cancel-swap-btn{
+    width: 30px;
+    height: 30px;
+    font-size: 0.75em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 1;
+    border-radius: 10px;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 5px 40px;
+    margin-left: 5px;
+    border: 1px solid #A90A0A;
+    background: radial-gradient(circle at center, #A7282222, #A72822AA);
+    margin: 20px 0 5px 0;
+}
+
+.cancel-swap-btn:hover {
+    border: 1px solid #A7282222;
+    background: radial-gradient(circle at center, #A72822AA, #A7282222);
+    cursor: pointer;
+}

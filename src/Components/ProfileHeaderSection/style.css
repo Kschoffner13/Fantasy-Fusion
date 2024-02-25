@@ -1,0 +1,30 @@
+.profile-icon{
+    grid-column: 5;
+    display: flex;
+    justify-self: end;
+}
+
+.profile-icon img{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+}
+
+.profile-icon-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    margin-left: 5px;
+}
+
+.profile-icon-info p{
+    margin: 0;
+}
+
+.profile-icon-info a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 0.75em;
+}

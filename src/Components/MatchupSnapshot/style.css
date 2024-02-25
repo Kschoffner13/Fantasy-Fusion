@@ -1,0 +1,59 @@
+.matchup-snapshot{
+    display:flex;
+    flex-direction: column;
+    background-color: #1f1f1f;
+    height: fit-content;
+    border-radius: 15px;
+    width: 30%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
+
+}
+
+.matchup-snapshot h5{
+    margin: 15px 0 5px 0;
+}
+
+.matchup-snapshot h6{
+    margin: 0;
+    background-color: #2f2f2f;
+    width: 100%;
+    padding: 5px 0;
+    border-radius: 0 0 15px 15px;
+}
+
+.snapshot-teams{
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.75em;
+}
+
+.snapshot-teams h4{
+    margin: 10px 0;
+}
+
+.snapshot-scoreboard{
+    display: flex;
+    justify-content: space-around;
+    align-items:center;
+}
+
+.snapshot-scoreboard h5{
+    margin: 5px 10px 20px 10px;
+}
+
+.snapshot-score{
+    display: flex;
+    align-items: center;
+    margin: 5px 0 20px 0;
+}
+
+.snapshot-score h3{
+    margin: 0;
+}
+
+.snapshot-score img{
+    width: 50px;
+    height: 50px;
+    filter: brightness(0) invert(1);
+    margin: 0 20px;
+}

@@ -1,0 +1,10 @@
+.active-section{
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.bench-section{
+    width: 100%;
+    margin: 20px 0;
+}
