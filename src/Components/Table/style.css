@@ -75,3 +75,24 @@
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
+
+.player-basic-bio{
+    margin: 5px 0;
+}
+
+.player-basic-bio h5{
+    margin: 0;
+    font-size: 0.9em;
+}
+
+.player-basic-bio h6{
+    margin: 0;
+    font-weight: 300;
+    font-size: 0.75em;
+}
+
+.player-basic-bio p{
+    margin: 0;
+    font-size: 0.75em;
+    font-weight: lighter;
+}

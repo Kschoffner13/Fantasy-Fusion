@@ -77,13 +77,33 @@ const Table = ({
                                     key.startsWith("GL") ? (
                                         glStats.map((stat, index) => (
                                             <div key={index}>
-                                                {player[stat] || "-"}
+                                                {stat == "name" ? (
+                                                    <div className="player-basic-bio">
+                                                        <h5>
+                                                            {player[stat]} - pos
+                                                        </h5>
+                                                        <h6>A - pos</h6>
+                                                        <p>A vs B @ 5:00pm</p>
+                                                    </div>
+                                                ) : (
+                                                    player[stat] || "-"
+                                                )}
                                             </div>
                                         ))
                                     ) : (
                                         headers.map((col, index) => (
                                             <div key={index}>
-                                                {player[col] || "-"}
+                                                {col == "name" ? (
+                                                    <div className="player-basic-bio">
+                                                        <h5>
+                                                            {player[col]} - pos
+                                                        </h5>
+                                                        <h6>A - pos</h6>
+                                                        <p>A vs B @ 5:00pm</p>
+                                                    </div>
+                                                ) : (
+                                                    player[col] || "-"
+                                                )}
                                             </div>
                                         ))
                                     )
