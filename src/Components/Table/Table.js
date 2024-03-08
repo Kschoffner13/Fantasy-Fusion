@@ -9,6 +9,7 @@ const Table = ({
     setRosterPlacement,
     filterKeys,
     glStats,
+    title,
 }) => {
     const columnCount = headers.length + 1; // Determine column count based on headers size + 1
     const gridTemplateColumns = `2fr ${"1fr ".repeat(columnCount - 1)}`;
@@ -33,6 +34,7 @@ const Table = ({
                 columnCount > 3 && columnCount < 12 ? "league-table" : ""
             }`}
         >
+            <h3>{title}</h3>
             {isOpen ? (
                 <RosterPopup
                     roster={roster}
