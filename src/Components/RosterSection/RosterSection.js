@@ -387,8 +387,30 @@ const RosterSection = () => {
     const glStats = ["name", "GP", "W", "L", "SV", "FPPG"];
     const combined = [...new Set([...colsB, ...colsH, ...glStats])];
 
+    const [currentDate, setCurrentDate] = useState(new Date());
+    const goBackOneDay = () => {
+        setCurrentDate((prevDate) => {
+            let newDate = new Date(prevDate);
+            newDate.setDate(newDate.getDate() - 1);
+            return newDate;
+        });
+    };
+
+    const goForwardOneDay = () => {
+        setCurrentDate((prevDate) => {
+            let newDate = new Date(prevDate);
+            newDate.setDate(newDate.getDate() + 1);
+            return newDate;
+        });
+    };
+
     return (
         <div className="roster-section">
+            <div className="date-selector">
+                <button onClick={goBackOneDay}>&#9667;</button>
+                <p>{currentDate.toLocaleDateString()}</p>
+                <button onClick={goForwardOneDay}>&#9657;</button>
+            </div>
             <div className="active-section">
                 <Table
                     headers={colsB}
@@ -397,6 +419,7 @@ const RosterSection = () => {
                     filterKeys={["GRD", "FWD", "CB", "SM"]}
                     setRosterPlacement={setRosterPlacement}
                     glStats={null}
+                    title={"NBA Starters"}
                 />
 
                 <Table
@@ -406,6 +429,7 @@ const RosterSection = () => {
                     filterKeys={["UTL"]}
                     setRosterPlacement={setRosterPlacement}
                     glStats={null}
+                    title={"Utility"}
                 />
 
                 <Table
@@ -415,6 +439,7 @@ const RosterSection = () => {
                     filterKeys={["CH", "WNG", "DEF", "GL"]}
                     setRosterPlacement={setRosterPlacement}
                     glStats={glStats}
+                    title={"NHL Starters"}
                 />
             </div>
             <div className="bench-section">
@@ -425,6 +450,7 @@ const RosterSection = () => {
                     filterKeys={["BCH"]}
                     setRosterPlacement={setRosterPlacement}
                     glStats={null}
+                    title={"Bench"}
                 />
             </div>
         </div>

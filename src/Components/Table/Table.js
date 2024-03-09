@@ -9,6 +9,7 @@ const Table = ({
     setRosterPlacement,
     filterKeys,
     glStats,
+    title,
 }) => {
     const columnCount = headers.length + 1; // Determine column count based on headers size + 1
     const gridTemplateColumns = `2fr ${"1fr ".repeat(columnCount - 1)}`;
@@ -33,6 +34,7 @@ const Table = ({
                 columnCount > 3 && columnCount < 12 ? "league-table" : ""
             }`}
         >
+            <h3>{title}</h3>
             {isOpen ? (
                 <RosterPopup
                     roster={roster}
@@ -75,13 +77,33 @@ const Table = ({
                                     key.startsWith("GL") ? (
                                         glStats.map((stat, index) => (
                                             <div key={index}>
-                                                {player[stat] || "-"}
+                                                {stat == "name" ? (
+                                                    <div className="player-basic-bio">
+                                                        <h5>
+                                                            {player[stat]} - pos
+                                                        </h5>
+                                                        <h6>A - pos</h6>
+                                                        <p>A vs B @ 5:00pm</p>
+                                                    </div>
+                                                ) : (
+                                                    player[stat] || "-"
+                                                )}
                                             </div>
                                         ))
                                     ) : (
                                         headers.map((col, index) => (
                                             <div key={index}>
-                                                {player[col] || "-"}
+                                                {col == "name" ? (
+                                                    <div className="player-basic-bio">
+                                                        <h5>
+                                                            {player[col]} - pos
+                                                        </h5>
+                                                        <h6>A - pos</h6>
+                                                        <p>A vs B @ 5:00pm</p>
+                                                    </div>
+                                                ) : (
+                                                    player[col] || "-"
+                                                )}
                                             </div>
                                         ))
                                     )
