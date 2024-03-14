@@ -1,4 +1,8 @@
 import MatchupView from "../Components/MatchupView/MatchupView";
+import "../Styles/matchupPage.css";
+import MainHeader from "../Components/MainHeader/MainHeader.js";
+import Footer from "../Components/Footer/Footer.js";
+import { useState } from "react";
 
 const MatchupPage = () => {
     const roster = [
@@ -393,12 +397,40 @@ const MatchupPage = () => {
         format: format,
     };
 
+    const [currentDate, setCurrentDate] = useState(new Date());
+    const goBackOneDay = () => {
+        setCurrentDate((prevDate) => {
+            let newDate = new Date(prevDate);
+            newDate.setDate(newDate.getDate() - 1);
+            return newDate;
+        });
+    };
+
+    const goForwardOneDay = () => {
+        setCurrentDate((prevDate) => {
+            let newDate = new Date(prevDate);
+            newDate.setDate(newDate.getDate() + 1);
+            return newDate;
+        });
+    };
+
     return (
-        <div>
-            <div className="user-team-section">
-                <MatchupView team={userTeam} />
+        <div className="matchup-page">
+            <MainHeader />
+            <div className="date-selector">
+                <button onClick={goBackOneDay}>&#9667;</button>
+                <p>{currentDate.toLocaleDateString()}</p>
+                <button onClick={goForwardOneDay}>&#9657;</button>
             </div>
-            <div className="opponent-team-section"></div>
+            <div className="matchup-overview">
+                <div className="user-team-section">
+                    <MatchupView team={userTeam} />
+                </div>
+                <div className="opponent-team-section">
+                    <MatchupView team={userTeam} reversed={true} />
+                </div>
+            </div>
+            <Footer />
         </div>
     );
 };

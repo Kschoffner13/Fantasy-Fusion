@@ -3,7 +3,7 @@ import logo from "../../images/logo.png";
 import Table from "../Table/Table.js";
 import { useState } from "react";
 
-const MatchupView = ({ team }) => {
+const MatchupView = ({ team, reversed = false }) => {
     /*
         Team name/logo - points
         starters w/ games table
@@ -12,9 +12,12 @@ const MatchupView = ({ team }) => {
     const [format, setFormat] = useState(team.format);
 
     return (
-        <div>
-            <div>
-                <div>
+        <div className="matchup-view">
+            <div
+                className="score-header"
+                style={reversed ? { flexDirection: "row-reverse" } : {}}
+            >
+                <div className="team-header">
                     <img src={logo}></img>
                     <h3>{team.name}</h3>
                 </div>
