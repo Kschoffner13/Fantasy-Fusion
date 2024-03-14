@@ -2,7 +2,7 @@
   "name": "fantasy-fusion",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://Kschoffner13.github.io/Fantasy-Fusion",
+  "homepage": "https://kschoffner13.github.io/Fantasy-Fusion/",
   "dependencies": {
     "@aws-amplify/datastore": "^5.0.16",
     "@aws-amplify/ui-react": "^6.1.3",
