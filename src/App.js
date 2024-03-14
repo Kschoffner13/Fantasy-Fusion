@@ -4,6 +4,7 @@ import { HashRouter, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import DraftPage from "./Pages/DraftPage";
 import TeamPage from "./Pages/TeamPage";
+import FreeAgentsPage from "./Pages/FreeAgentsPage";
 
 function App() {
     return (
@@ -15,6 +16,10 @@ function App() {
                     <Route
                         path="/:leagueName/:teamName"
                         element={<TeamPage />}
+                    />
+                    <Route
+                        path="/:leagueName/players"
+                        element={<FreeAgentsPage />}
                     />
                 </Routes>
             </HashRouter>
