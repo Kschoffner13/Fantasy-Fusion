@@ -20,6 +20,7 @@ const Home = () => {
             </a>
             <NavLink to="/abc/draft">DRAFT</NavLink>
             <NavLink to="/abc/def">TEAM</NavLink>
+            <NavLink to="/abc/matchup">MATCHUP</NavLink>
         </header>
     );
 };

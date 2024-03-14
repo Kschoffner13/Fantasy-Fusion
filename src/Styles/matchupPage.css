@@ -1,0 +1,12 @@
+.matchup-page{
+    padding: 0 5%;
+}
+
+.matchup-overview{
+    display: flex;
+    justify-content: space-between;
+}
+
+.matchup-page .date-selector{
+    margin-top: 50px;
+}
