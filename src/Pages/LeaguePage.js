@@ -3,7 +3,6 @@ import MainHeader from "../Components/MainHeader/MainHeader";
 import "../Styles/leaguePage.css";
 
 const LeaguePage = () => {
-
     //fp leaders
     //standings
     //matchup snapshots
