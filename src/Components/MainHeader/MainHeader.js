@@ -26,9 +26,7 @@ const MainHeader = () => {
                     My Team
                 </NavLink>
                 <NavLink to={`/${leagueName}/matchup`}>Matchup</NavLink>
-                <NavLink to={`/${leagueName}/${teamName}/players`}>
-                    Free Agents
-                </NavLink>
+                <NavLink to={`/${leagueName}/players`}>Free Agents</NavLink>
                 <NavLink to={`/${leagueName}`}>League</NavLink>
 
                 <h6>THIS COULD BE YOUR COMPANYS AD!</h6>

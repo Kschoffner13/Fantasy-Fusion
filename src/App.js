@@ -5,6 +5,7 @@ import Home from "./Pages/Home";
 import DraftPage from "./Pages/DraftPage";
 import TeamPage from "./Pages/TeamPage";
 import MatchupPage from "./Pages/MatchupPage";
+import FreeAgentsPage from "./Pages/FreeAgentsPage";
 
 function App() {
     return (
@@ -20,6 +21,10 @@ function App() {
                     <Route
                         path="/:leagueName/matchup"
                         element={<MatchupPage />}
+                    />
+                    <Route
+                        path="/:leagueName/players"
+                        element={<FreeAgentsPage />}
                     />
                 </Routes>
             </HashRouter>
