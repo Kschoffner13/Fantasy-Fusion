@@ -1,0 +1,26 @@
+.league-page{
+
+}
+
+.league-tables{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.league-tables .table{
+    width: 100%;
+}
+
+.matchup-snapshots{
+    display: flex;
+    overflow: scroll;
+    padding-bottom: 10px;
+    border-top: 5px solid #0a901a;
+    border-radius: 40px 40px 0 0;
+    margin: 0.5px 0;
+}
+
+.matchup-snapshots .matchup-snapshot{
+    margin-right: 10px;
+}
