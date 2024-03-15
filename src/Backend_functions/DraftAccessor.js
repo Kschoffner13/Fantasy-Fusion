@@ -99,6 +99,5 @@ class DraftAccessor {
   }
 }
 
-
 // also need to accout for when we need to increment the pickdealine
 export default DraftAccessor;
