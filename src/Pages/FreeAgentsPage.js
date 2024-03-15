@@ -2,6 +2,7 @@ import MainHeader from "../Components/MainHeader/MainHeader";
 import "../Styles/freeAgentsPage.css";
 import Table from "../Components/Table/Table.js";
 import { useState } from "react";
+import Footer from "../Components/Footer/Footer.js";
 
 const FreeAgentsPage = () => {
     const [daysBack, setDaysBack] = useState("season");
@@ -11,21 +12,36 @@ const FreeAgentsPage = () => {
     return (
         <div className="fa-page">
             <MainHeader />
-            <div>
-                <label>
-                    Days:
-                    <select
-                        value={daysBack}
-                        onChange={(e) => setDaysBack(e.target.value)}
+            <div className="filters">
+                <div className="days-back-filter">
+                    <p>Days:</p>
+                    <button
+                        className={daysBack === "7" ? "active" : ""}
+                        onClick={() => setDaysBack("7")}
                     >
-                        <option value="7">7</option>
-                        <option value="14">14</option>
-                        <option value="30">30</option>
-                        <option value="season">Season</option>
-                    </select>
-                </label>
-                <label>
-                    League:
+                        7
+                    </button>
+                    <button
+                        className={daysBack === "14" ? "active" : ""}
+                        onClick={() => setDaysBack("14")}
+                    >
+                        14
+                    </button>
+                    <button
+                        className={daysBack === "30" ? "active" : ""}
+                        onClick={() => setDaysBack("30")}
+                    >
+                        30
+                    </button>
+                    <button
+                        className={daysBack === "season" ? "active" : ""}
+                        onClick={() => setDaysBack("season")}
+                    >
+                        23/24
+                    </button>
+                </div>
+                <div className="league-filter">
+                    <p>League:</p>
                     <select
                         value={league}
                         onChange={(e) => setLeague(e.target.value)}
@@ -34,9 +50,9 @@ const FreeAgentsPage = () => {
                         <option value="nhl">NHL</option>
                         <option value="all">All</option>
                     </select>
-                </label>
-                <label>
-                    Position:
+                </div>
+                <div className="position-filter">
+                    <p>Position:</p>
                     <select
                         value={pos}
                         onChange={(e) => setPos(e.target.value)}
@@ -49,7 +65,7 @@ const FreeAgentsPage = () => {
                         <option value="defense">D-man</option>
                         <option value="all">All</option>
                     </select>
-                </label>
+                </div>
             </div>
             <Table
                 headers={["test"]}
@@ -57,8 +73,9 @@ const FreeAgentsPage = () => {
                 rosterPlacement={[]}
                 setRosterPlacement={null}
                 filterKeys={null}
-                title={"players"}
+                title={"Free Agents"}
             />
+            <Footer />
         </div>
     );
 };
