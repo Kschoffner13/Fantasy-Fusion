@@ -21,7 +21,7 @@ class FLAccessor {
 
   // modify an existing fantasy league
   async updateFantasyLeague(id, dic) {
-    const original = await await DataStore.query(FantasyLeague, (c) =>
+    const original = await DataStore.query(FantasyLeague, (c) =>
       c.and((c) => [c.id.eq(id), c.OwnerID.eq(this.ownerID)])
     );
 
@@ -63,3 +63,4 @@ class FLAccessor {
 }
 
 export default FLAccessor;
+

@@ -14,10 +14,9 @@ import {
   TextAreaField,
   TextField,
 } from "@aws-amplify/ui-react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { FantasyLeague } from "../models";
-import { fetchByPath, validateField } from "./utils";
-import { DataStore } from "aws-amplify";
+import { fetchByPath, getOverrideProps, validateField } from "./utils";
+import { DataStore } from "aws-amplify/datastore";
 export default function FantasyLeagueUpdateForm(props) {
   const {
     id: idProp,
@@ -74,7 +73,8 @@ export default function FantasyLeagueUpdateForm(props) {
     setName(cleanValues.Name);
     setOwnerID(cleanValues.OwnerID);
     setProperties(
-      typeof cleanValues.Properties === "string"
+      typeof cleanValues.Properties === "string" ||
+        cleanValues.Properties === null
         ? cleanValues.Properties
         : JSON.stringify(cleanValues.Properties)
     );
@@ -86,7 +86,7 @@ export default function FantasyLeagueUpdateForm(props) {
     setWeeklyPickups(cleanValues.WeeklyPickups);
     setVetoVoteEnabled(cleanValues.VetoVoteEnabled);
     setSchedule(
-      typeof cleanValues.Schedule === "string"
+      typeof cleanValues.Schedule === "string" || cleanValues.Schedule === null
         ? cleanValues.Schedule
         : JSON.stringify(cleanValues.Schedule)
     );
@@ -197,8 +197,8 @@ export default function FantasyLeagueUpdateForm(props) {
         }
         try {
           Object.entries(modelFields).forEach(([key, value]) => {
-            if (typeof value === "string" && value.trim() === "") {
-              modelFields[key] = undefined;
+            if (typeof value === "string" && value === "") {
+              modelFields[key] = null;
             }
           });
           await DataStore.save(
