@@ -2,12 +2,34 @@ import { NavLink } from "react-router-dom";
 import logo from "../images/logo.png";
 import { signOut } from "aws-amplify/auth";
 import { Button } from "@aws-amplify/ui-react";
+import inviteClass from "../Accessors/InviteClass";
+import { fetchUserAttributes } from "aws-amplify/auth";
+
+async function handleFetchUserAttributes() {
+  try {
+    const userAttributes = await fetchUserAttributes();
+    console.log(userAttributes);
+    return userAttributes;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 async function handleSignOut() {
   try {
     await signOut();
   } catch (error) {
     console.log("error signing out: ", error);
   }
+}
+
+async function sendInvite() {
+  const sender = handleFetchUserAttributes().email;
+  // const receiver = "mbullock179@gmail.com";
+  const receiver = sender;
+  const invite = new inviteClass(sender, receiver);
+  invite.sendInvite();
+  console.log("Invite sent");
 }
 
 const Home = () => {
@@ -31,6 +53,7 @@ const Home = () => {
       <NavLink to="/abc/draft">DRAFT</NavLink>
       <NavLink to="/abc/def">TEAM</NavLink>
       <NavLink to="/abc/matchup">MATCHUP</NavLink>
+      <Button onClick={sendInvite}>Invite</Button>
     </header>
   );
 };
