@@ -28,6 +28,14 @@ class TeamAccessor {
     // console.log(response);
   }
 
+  // Get all the teams for a user.
+  async getUsersTeams() {
+    const response = await DataStore.query(Team, (c) =>
+      c.UserID.eq(this.userID)
+    );
+    return response;
+  }
+
   async getTeams() {
     const posts = await DataStore.query(Team, (c) =>
       c.fantasyleagueID.eq(this.fantasyleagueID)
