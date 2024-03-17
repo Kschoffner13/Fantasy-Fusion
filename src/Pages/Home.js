@@ -2,7 +2,9 @@ import { NavLink } from "react-router-dom";
 import logo from "../images/logo.png";
 import { signOut } from "aws-amplify/auth";
 import { Button } from "@aws-amplify/ui-react";
+
 import TeamAccessor from "../Accessors/TeamAccessor";
+
 async function handleSignOut() {
   try {
     await signOut();
@@ -11,11 +13,13 @@ async function handleSignOut() {
   }
 }
 
+
 async function test() {
   const teamAccessor = new TeamAccessor("123456", "123456");
 
   const response = await teamAccessor.getUsersTeams();
   console.log(response);
+
 }
 
 const Home = () => {
@@ -40,6 +44,7 @@ const Home = () => {
       <NavLink to="/abc/def">TEAM</NavLink>
       <NavLink to="/abc/matchup">MATCHUP</NavLink>
       <Button onClick={test}>test</Button>
+
     </header>
   );
 };
