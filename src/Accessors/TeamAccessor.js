@@ -1,21 +1,37 @@
 import { DataStore } from "@aws-amplify/datastore";
 import { Team, FantasyLeague } from "../models";
-import FLAccessor from "./FLAccessor";
 
 class TeamAccessor {
-  constructor(fantasyleagueID, userID) {
+  constructor(fantasyleagueID = null, userID = null) {
     this.fantasyleagueID = fantasyleagueID;
     this.userID = userID;
   }
-  // this file serves as a template for querying and saving to the database.
-  // Example correction, assuming these methods return Promises
 
-  // getFantasyLeagueID = async () => {
-  //   ownerID = await this.getOwnerID();
-  //   this.fantasyleagueID = await this.getFantasyLeagueID(ownerID, "id")
+  // THESE FUNCTIONS CAN ONLY BE USED IF THE LEAGUE AND USERID ARE SPECIFIED IN THE CTOR
+  // get all teams for a user
+  async getUsersTeams(userID) {
+    const teams = await DataStore.query(Team, (c) => c.UserID.eq(userID));
+    return teams;
+  }
 
-  // };
+  // get all teams for a league
+  async getLeaugesTeams(fantasyleagueID) {
+    const teams = await DataStore.query(Team, (c) =>
+      c.fantasyleagueID.eq(fantasyleagueID)
+    );
+    return teams;
+  }
 
+  // Setter functions
+  setFantasyLeagueID(fantasyleagueID) {
+    this.fantasyleagueID = fantasyleagueID;
+  }
+
+  setUserID(userID) {
+    this.userID = userID;
+  }
+
+  // OG FUNCTIONS
   // pass in the league id
   async saveTeam(teamData) {
     teamData["fantasyleagueID"] = this.fantasyleagueID;
@@ -64,9 +80,12 @@ class TeamAccessor {
     }
   }
 
-  async updateTeam(id, dic) {
+  async updateTeam(teamID, dic) {
     const original = await DataStore.query(Team, (c) =>
-      c.and((c) => [c.id.eq(id), c.fantasyleagueID.eq(this.fantasyleagueID)])
+      c.and((c) => [
+        c.id.eq(teamID),
+        c.fantasyleagueID.eq(this.fantasyleagueID),
+      ])
     );
 
     const response = await DataStore.save(
