@@ -2,18 +2,8 @@ import { NavLink } from "react-router-dom";
 import logo from "../images/logo.png";
 import { signOut } from "aws-amplify/auth";
 import { Button } from "@aws-amplify/ui-react";
-import inviteClass from "../Accessors/InviteClass";
-import { fetchUserAttributes } from "aws-amplify/auth";
 
-async function handleFetchUserAttributes() {
-  try {
-    const userAttributes = await fetchUserAttributes();
-    console.log(userAttributes);
-    return userAttributes;
-  } catch (error) {
-    console.log(error);
-  }
-}
+import TeamAccessor from "../Accessors/TeamAccessor";
 
 async function handleSignOut() {
   try {
@@ -23,13 +13,13 @@ async function handleSignOut() {
   }
 }
 
-async function sendInvite() {
-  const sender = handleFetchUserAttributes().email;
-  // const receiver = "mbullock179@gmail.com";
-  const receiver = sender;
-  const invite = new inviteClass(sender, receiver);
-  invite.sendInvite();
-  console.log("Invite sent");
+
+async function test() {
+  const teamAccessor = new TeamAccessor("123456", "123456");
+
+  const response = await teamAccessor.getUsersTeams();
+  console.log(response);
+
 }
 
 const Home = () => {
@@ -53,7 +43,8 @@ const Home = () => {
       <NavLink to="/abc/draft">DRAFT</NavLink>
       <NavLink to="/abc/def">TEAM</NavLink>
       <NavLink to="/abc/matchup">MATCHUP</NavLink>
-      <Button onClick={sendInvite}>Invite</Button>
+      <Button onClick={test}>test</Button>
+
     </header>
   );
 };
