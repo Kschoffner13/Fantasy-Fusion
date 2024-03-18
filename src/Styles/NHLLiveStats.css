@@ -1,0 +1,68 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.player-stats-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.player-stats {
+    width: 300px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.stat-sheet {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 10px;
+    padding: 5px;
+}
+
+.stat {
+    padding: 5px;
+    margin-bottom: 5px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 20px auto;
+    display: block;
+}
+
+input[type="text"]::placeholder {
+    color: #ccc;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ccc;
+}

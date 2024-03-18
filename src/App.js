@@ -8,6 +8,7 @@ import MatchupPage from "./Pages/MatchupPage";
 import FreeAgentsPage from "./Pages/FreeAgentsPage";
 import LeaguePage from "./Pages/LeaguePage";
 
+
 function App() {
     return (
         <div className="App">
@@ -15,18 +16,9 @@ function App() {
                 <Routes>
                     <Route exact path="/" element={<Home />} />
                     <Route path="/:leagueName/draft" element={<DraftPage />} />
-                    <Route
-                        path="/:leagueName/:teamName"
-                        element={<TeamPage />}
-                    />
-                    <Route
-                        path="/:leagueName/matchup"
-                        element={<MatchupPage />}
-                    />
-                    <Route
-                        path="/:leagueName/players"
-                        element={<FreeAgentsPage />}
-                    />
+                    <Route path="/:leagueName/:teamName" element={<TeamPage />} />
+                    <Route path="/:leagueName/matchup" element={<MatchupPage />} />
+                    <Route path="/:leagueName/players" element={<FreeAgentsPage />} />
                     <Route path="/:leagueName" element={<LeaguePage />} />
                 </Routes>
             </HashRouter>

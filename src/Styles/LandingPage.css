@@ -1,0 +1,33 @@
+.whole-page {
+    display: flex;
+    height: 100vh;
+    background: url('../images/hockeybackground.jpeg');
+    background-size: cover;
+}
+
+.Text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    color: white;
+
+    
+}
+
+.Text h1 {
+    margin-bottom: 10px;
+    font-size: 2em;
+    text-align: left;
+}
+
+.Text h2 {
+    font-size: 1.5em;
+    padding-bottom: 10px;
+}
+
+#getstartedbutton{
+    padding-top: 20%;
+}
