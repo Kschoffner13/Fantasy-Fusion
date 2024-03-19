@@ -2,12 +2,14 @@ import { NavLink } from "react-router-dom";
 import logo from "../images/logo.png";
 import { signOut } from "aws-amplify/auth";
 import { Button } from "@aws-amplify/ui-react";
+import { withAuthenticator } from "@aws-amplify/ui-react";
 
 import TeamAccessor from "../Accessors/TeamAccessor";
 
 async function handleSignOut() {
   try {
     await signOut();
+    
   } catch (error) {
     console.log("error signing out: ", error);
   }
@@ -39,7 +41,7 @@ const Home = () => {
       >
         Learn React
       </a>
-      <Button onClick={handleSignOut}>Sign Out</Button>
+      <Button onClick={handleSignOut} to='/'>Sign Out</Button>
       <NavLink to="/abc/draft">DRAFT</NavLink>
       <NavLink to="/abc/def">TEAM</NavLink>
       <NavLink to="/abc/matchup">MATCHUP</NavLink>
@@ -49,4 +51,5 @@ const Home = () => {
   );
 };
 
-export default Home;
+
+export default withAuthenticator(Home);

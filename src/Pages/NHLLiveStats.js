@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import '../../App.css';
+import '../App.css';
 import '../Styles/NHLLiveStats.css';
+import Navbar from '../Components/LandingNavbar/Navbar'
 
 function NHLLiveStats() {
   const [playerStats, setPlayerStats] = useState([]);
@@ -49,6 +50,7 @@ function NHLLiveStats() {
 
   return (
     <>
+    <Navbar />
       <h1>NHL Stats</h1>
       <input
         type="text"

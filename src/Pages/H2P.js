@@ -1,9 +1,12 @@
 import React from 'react';
-import '../../App.css';
+import '../App.css';
 import '../Styles/H2P.css';
+import Navbar from '../Components/LandingNavbar/Navbar'
 
 function H2P() {
   return (
+    <>
+    <Navbar />
       <div className='how2playpage'>
         <div className='Instructions'>
           <h1>How to Play Fusion Fantasy</h1>
@@ -21,6 +24,7 @@ function H2P() {
           </div>
         </div>
       </div>
+      </>
   );
 }
 

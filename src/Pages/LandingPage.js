@@ -1,11 +1,15 @@
 import React from 'react';
-import '../../App.css';
+import '../App.css';
 import '../Styles/LandingPage.css'
-import { Button } from '../Button';
+import {Button} from '../Components/Button/Button';
+import Navbar from '../Components/LandingNavbar/Navbar'
 
 function LandingPage() {
   return (
+    <>
+    <Navbar />
       <div className='whole-page'>
+
         <div className='Text'>
           <div className='Title'>
           <h1>Welcome to Fantasy Fusion</h1>
@@ -16,6 +20,7 @@ function LandingPage() {
         </div>
         </div>
       </div>
+      </>
   );
 }
 
