@@ -15,6 +15,24 @@ const LeagueCreationPage = () => {
 
     const [leagueAccessor, setLeagueAccessor] = useState(null);
 
+    const [teamCount, setTeamCount] = useState(1);
+    const [emails, setEmails] = useState([]);
+
+    const handleEmailChange = (index, event) => {
+        const newEmails = [...emails];
+        newEmails[index] = event.target.value;
+        setEmails(newEmails);
+    };
+
+    const handleTeamCountChange = (event) => {
+        setTeamCount(event.target.value);
+        setEmails(new Array(event.target.value - 1).fill(""));
+    };
+
+    const sendInvites = () => {
+        //Koen will work his magic here
+    };
+
     const initPage = async () => {
         try {
             const user = await getCurrentUser();
@@ -41,7 +59,13 @@ const LeagueCreationPage = () => {
             Schedule: null,
         };
 
-        await leagueAccessor.saveFantasyLeague(toUpload);
+        try {
+            await leagueAccessor.saveFantasyLeague(toUpload);
+            sendInvites();
+            //goto team create page
+        } catch {
+            console.log("FAILED");
+        }
     };
 
     return (
@@ -115,6 +139,26 @@ const LeagueCreationPage = () => {
                         <option value="both">NBA + NHL</option>
                     </select>
                 </label>
+                <label>
+                    Number of Teams:
+                    <input
+                        type="number"
+                        value={teamCount}
+                        onChange={handleTeamCountChange}
+                    />
+                </label>
+                {emails.map((email, index) => (
+                    <label key={index}>
+                        Team {index + 2} Email:
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(event) =>
+                                handleEmailChange(index, event)
+                            }
+                        />
+                    </label>
+                ))}
             </form>
             <button onClick={create}>Create</button>
         </div>
