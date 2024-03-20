@@ -33,15 +33,24 @@ class TeamAccessor {
 
   // OG FUNCTIONS
   // pass in the league id
-  async saveTeam(teamData) {
-    teamData["fantasyleagueID"] = this.fantasyleagueID;
-    teamData["UserID"] = this.userID;
+  async saveTeam(Name, TotalPointsFor, TotalPointsAgainst, MatchUpPoints, Wins, Losses, Draws, Roster, PlayerList, Lineup) {
+    teamData = {
+      Name: Name,
+      UserID: this.userID,
+      TotalPointsFor: TotalPointsFor,
+      TotalPointsAgainst: TotalPointsAgainst,
+      MatchUpPoints: MatchUpPoints,
+      Wins: Wins,
+      Losses: Losses,
+      Draws: Draws,
+      Roster: JSON.stringify(Roster),
+      fanatasyLeagueID: this.fantasyleagueID,
+      PlayerList: JSON.stringify(PlayerList),
+      Lineup: JSON.stringify(Lineup),
+    };
 
     const message = await DataStore.save(new Team(teamData));
     return message;
-
-    // const response = await DataStore.query(Team);
-    // console.log(response);
   }
 
   // Get all the teams for a user.
@@ -88,7 +97,7 @@ class TeamAccessor {
     }
   }
 
-  async updateTeam(teamID, dic) {
+  async updateTeam(teamID, { Name = null, TotalPointsFor = null, TotalPointsAgainst = null, MatchUpPoints = null, Wins = null, Losses = null, Draws = null, Roster = null, PlayerList = null, Lineup = null } = {}) {
     const original = await DataStore.query(Team, (c) =>
       c.and((c) => [
         c.id.eq(teamID),
@@ -96,13 +105,27 @@ class TeamAccessor {
       ])
     );
 
+    dic = {
+      Name: Name,
+      TotalPointsFor: TotalPointsFor,
+      TotalPointsAgainst: TotalPointsAgainst,
+      MatchUpPoints: MatchUpPoints,
+      Wins: Wins,
+      Losses: Losses,
+      Draws: Draws,
+      Roster: Roster ? JSON.stringify(Roster) : null,
+      PlayerList: PlayerList ? JSON.stringify(PlayerList) : null,
+      Lineup: Lineup ? JSON.stringify(Lineup) : null,
+    };
+
     const response = await DataStore.save(
       FantasyLeague.copyOf(original[0], (updated) => {
         for (const key in dic) {
           if (
-            dic[key] != updated[key] &&
+            dic[key] !== updated[key] &&
             key !== "fantasyleagueID" &&
-            key !== "id"
+            key !== "id" &&
+            dic[key] !== null
           ) {
             updated[key] = dic[key];
           }

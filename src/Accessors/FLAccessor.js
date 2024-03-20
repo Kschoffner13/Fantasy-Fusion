@@ -13,22 +13,49 @@ class FLAccessor {
   }
 
   // this function will take in the dictonry of values and save them to the users fantasy league
-  async saveFantasyLeague(dic) {
-    dic["OwnerID"] = this.ownerID;
+  async saveFantasyLeague(Name, Properties, DraftDate, TradeDeadline, PlayoffStartDate, PlayoffTeams, PlayoffMatchupLength,
+    WeeklyPickups, VetoVoteEnabled, Schedule) {
+    const dic = {
+      Name: Name,
+      OwnerID: this.ownerID,
+      Properties: JSON.stringify(Properties),
+      DraftDate: new Date(DraftDate).toISOString(),
+      TradeDeadline: new Date(TradeDeadline).toISOString(),
+      PlayoffStartDate: new Date(PlayoffStartDate).toISOString(),
+      PlayoffTeams: PlayoffTeams,
+      PlayoffMatchupLength: PlayoffMatchupLength,
+      WeeklyPickups: WeeklyPickups,
+      VetoVoteEnabled: VetoVoteEnabled,
+      Schedule: JSON.stringify(Schedule),
+    };
     const response = await DataStore.save(new FantasyLeague(dic));
     return response;
   }
 
   // modify an existing fantasy league
-  async updateFantasyLeague(id, dic) {
+  async updateFantasyLeague(id, { Name = null, Properties = null, DraftDate = null, TradeDeadline = null, PlayoffStartDate = null,
+    PlayoffTeams = null, PlayoffMatchupLength = null, WeeklyPickups = null, VetoVoteEnabled = null, Schedule = null } = {}) {
     const original = await await DataStore.query(FantasyLeague, (c) =>
       c.and((c) => [c.id.eq(id), c.OwnerID.eq(this.ownerID)])
     );
 
+    const dic = {
+      Name: Name,
+      Properties: Properties ? JSON.stringify(Properties) : null,
+      DraftDate: new Date(DraftDate).toISOString(),
+      TradeDeadline: new Date(TradeDeadline).toISOString(),
+      PlayoffStartDate: new Date(PlayoffStartDate).toISOString(),
+      PlayoffTeams: PlayoffTeams,
+      PlayoffMatchupLength: PlayoffMatchupLength,
+      WeeklyPickups: WeeklyPickups,
+      VetoVoteEnabled: VetoVoteEnabled,
+      Schedule: Schedule ? JSON.stringify(Schedule) : null,
+    };
+
     const response = await DataStore.save(
       FantasyLeague.copyOf(original[0], (updated) => {
         for (const key in dic) {
-          if (dic[key] != updated[key] && key !== "OwnerID" && key !== "id") {
+          if (dic[key] !== updated[key] && key !== "OwnerID" && key !== "id" && dic[key] !== null) {
             updated[key] = dic[key];
           }
         }
