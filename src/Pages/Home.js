@@ -237,7 +237,7 @@ const formFields = {
 async function handleSignOut() {
   try {
     await signOut();
-    
+    window.location.href = '/';
   } catch (error) {
     console.log("error signing out: ", error);
   }
