@@ -7,8 +7,6 @@
   font-size: 1.2rem;
   position: sticky;
   top: 0;
-
-
 }
 
 .navbar-container {
@@ -57,11 +55,7 @@
   text-decoration: none;
   padding: 0.5rem 1rem;
   height: 100%;
-}
-
-.nav-links:hover {
-  border-bottom: 4px solid #fff;
-  transition: all 0.2s ease-out;
+  margin-top: -10px;
 }
 
 .fa-bars {
