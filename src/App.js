@@ -7,6 +7,7 @@ import TeamPage from "./Pages/TeamPage";
 import MatchupPage from "./Pages/MatchupPage";
 import FreeAgentsPage from "./Pages/FreeAgentsPage";
 import LeaguePage from "./Pages/LeaguePage";
+import TeamCreationPage from "./Pages/TeamCreationPage";
 
 function App() {
     return (
@@ -28,6 +29,10 @@ function App() {
                         element={<FreeAgentsPage />}
                     />
                     <Route path="/:leagueName" element={<LeaguePage />} />
+                    <Route
+                        path="/:leagueName/createteam"
+                        element={<TeamCreationPage />}
+                    />
                 </Routes>
             </HashRouter>
             {/*  */}
