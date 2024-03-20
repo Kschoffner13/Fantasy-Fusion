@@ -1,0 +1,18 @@
+button.amplify-button.amplify-button--signUp {
+  background-color: red;
+}
+
+/* Override the color of the sign in header */
+.amplify-form-header {
+  color: blue;
+}
+
+/* Override the color of the sign in input labels */
+.amplify-label {
+  color: green;
+}
+
+.custSI {
+  /* Your custom styles for the sign-in button */
+  background-color: red;
+}
