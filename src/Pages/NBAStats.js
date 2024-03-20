@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import '../App.css';
-import '../Styles/NBALiveStats.css';
-import Navbar from '../Components/LandingNavbar/Navbar'
+import '../Styles/NBAStats.css';
+import Navbar from '../Components/Navbar/Navbar';
 
-function NBALiveStats() {
+const NBALiveStats = () => {
   const [playerStats, setPlayerStats] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredPlayerStats, setFilteredPlayerStats] = useState([]);
@@ -74,6 +73,6 @@ function NBALiveStats() {
       </div>
     </>
   );
-}
+};
 
 export default NBALiveStats;

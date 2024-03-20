@@ -1,4 +1,4 @@
-.how2playpage {
+.how-to-play-page {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -10,7 +10,7 @@
     padding: 20px;
 }
 
-.Instructions {
+.instructions {
     color: white;
     text-align: left;
     max-width: 600px;
@@ -22,7 +22,7 @@
     margin-bottom: 20px;
 }
 
-.Instructions div {
+.instructions div {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -33,11 +33,11 @@
     border-radius: 10px; /* Adjust the value to change the roundness */
 }
 
-.Instructions div h2 {
+.instructions div h2 {
     margin-bottom: 10px;
 }
 
-.Instructions div h3 {
+.instructions div h3 {
     margin-top: 5px;
     font-weight: normal;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import './Button.css';
-import { Link } from 'react-router-dom';
+import './LoginButton.css';
+import { NavLink } from 'react-router-dom';
 
 const STYLES = ['btn--primary', 'btn--outline', 'btn--test'];
 
@@ -20,7 +20,7 @@ export const Button = ({
   const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
 
   return (
-    <Link to='/home' className='btn-mobile'>
+    <NavLink to='/home' className='btn-mobile'>
       <button
         className={`btn ${checkButtonStyle} ${checkButtonSize}`}
         onClick={onClick}
@@ -28,6 +28,6 @@ export const Button = ({
       >
         {children}
       </button>
-    </Link>
+    </NavLink>
   );
 };

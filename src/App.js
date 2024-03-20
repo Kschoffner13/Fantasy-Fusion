@@ -1,5 +1,4 @@
 import "./App.css";
-import { withAuthenticator } from "@aws-amplify/ui-react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import DraftPage from "./Pages/DraftPage";
@@ -7,10 +6,10 @@ import TeamPage from "./Pages/TeamPage";
 import MatchupPage from "./Pages/MatchupPage";
 import FreeAgentsPage from "./Pages/FreeAgentsPage";
 import LeaguePage from "./Pages/LeaguePage";
-import H2P from './Pages/H2P';
-import NBALiveStats from './Pages/NBALiveStats';
-import LandingPage from './Pages/LandingPage';
-import NHLLiveStats from './Pages/NHLLiveStats';
+import HowToPlay from './Pages/HowToPlay';
+import NBALiveStats from './Pages/NBAStats';
+import LandingPage from './Pages/LandingHome';
+import NHLLiveStats from './Pages/NHLStats';
 
 
 function App() {
@@ -19,9 +18,9 @@ function App() {
             <HashRouter>
                 <Routes>
                     <Route exact path="/" element={<LandingPage />} />
-                    <Route path='/nba' element={<NBALiveStats />} />
-                    <Route path='/howtoplay' element={<H2P />} />
-                    <Route path='/nhl' element={<NHLLiveStats />} />
+                    <Route path='/nbastats' element={<NBALiveStats />} />
+                    <Route path='/howtoplay' element={<HowToPlay />} />
+                    <Route path='/nhlstats' element={<NHLLiveStats />} />
                     <Route path='/home' element={<Home />} />
                     <Route path="/:leagueName/draft" element={<DraftPage />} />
                     <Route path="/:leagueName/:teamName" element={<TeamPage />} />

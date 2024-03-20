@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from '../Button/Button';
+import { Button } from '../LoginButton/LoginButton';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
@@ -29,7 +29,7 @@ function Navbar() {
         <div className='navbar-container'>
           <Link to='/' className='navbar-logo' >
             Fantasy Fusion
-            <i class='fab fa-typo3' />
+            <i className='fab fa-typo3' />
           </Link>
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
@@ -41,30 +41,18 @@ function Navbar() {
               </Link>
             </li>
             <li className='nav-item'>
-              <Link
-                to='/nba'
-                className='nav-links'
-                
-              >
+              <Link to='/nbastats' className='nav-links'>
                 NBA Stats
               </Link>
             </li>
             <li className='nav-item'>
-              <Link
-                to='/nhl'
-                className='nav-links'
-                
-              >
+              <Link to='/nhlstats' className='nav-links'>
                 NHL Stats
               </Link>
             </li>
 
             <li>
-              <Link
-                to='/sign-up'
-                className='nav-links-mobile'
-                
-              >
+              <Link to='/sign-up' className='nav-links-mobile'>
                 Log In
               </Link>
             </li>
