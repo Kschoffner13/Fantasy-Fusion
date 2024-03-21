@@ -4,12 +4,13 @@ import { useNavigate, useParams } from "react-router";
 import { useEffect } from "react";
 import { useState } from "react";
 import { getCurrentUser } from "@aws-amplify/auth";
+import FLAccessor from "../Accessors/FLAccessor";
 
 const TeamCreationPage = () => {
     const { leagueName } = useParams();
     const nav = useNavigate();
     const [teamAccessor, setTeamAccessor] = useState(null);
-
+    const [league, setLeague] = useState(null);
     const [teamName, setTeamName] = useState("");
 
     console.log(leagueName);
@@ -17,18 +18,23 @@ const TeamCreationPage = () => {
     const verifyLeagueCode = async () => {
         try {
             const x = await teamAccessor.getLeaugesTeams(leagueName);
-            if (x.length <= 0) {
+            const leagueAccessor = new FLAccessor("");
+
+            const l = await leagueAccessor.getFantasyLeague(leagueName);
+            console.log("HERE", l);
+            setLeague(l);
+            if (l === undefined) {
                 nav("/");
             }
-        } catch {
-            console.log("INVALID LEAGUE");
+        } catch (e) {
+            console.log("INVALID LEAGUE", e);
         }
     };
 
     const initAccessor = async () => {
         try {
             const user = await getCurrentUser();
-            console.log(user);
+            console.log(user, leagueName);
             setTeamAccessor(new TeamAccessor(leagueName, user.userId));
         } catch {
             console.log("FAILED TO GET USER");
@@ -37,11 +43,18 @@ const TeamCreationPage = () => {
 
     useEffect(() => {
         initAccessor();
-        verifyLeagueCode();
     }, []);
 
+    useEffect(() => {
+        if (teamAccessor) {
+            verifyLeagueCode();
+        }
+    }, [teamAccessor]);
+
     const handleButtonClick = async () => {
-        console.log(`Button clicked with team name: ${teamName}`);
+        console.log(
+            `Button clicked with team name: ${teamName} - ${leagueName}`
+        );
         const rosterPlacement = {
             //Change this to grab from league settings in the future
             GRD1: null,
@@ -68,30 +81,39 @@ const TeamCreationPage = () => {
             BCH7: null,
             BCH8: null,
         };
-        await teamAccessor.saveTeam(
-            teamName,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            null,
-            null,
-            rosterPlacement
-        );
+        try {
+            await teamAccessor.saveTeam(
+                teamName,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                null,
+                null,
+                rosterPlacement
+            );
+            nav(`/${leagueName}/${teamName}`);
+        } catch {
+            console.log("CREATION FAILED");
+        }
     };
 
     return (
-        <div>
-            <h1>Create Team</h1>
+        <div className="container">
+            <h1 className="title">{league?.Name}</h1>
+            <h3 className="subtitle">Create Team</h3>
             <input
                 type="text"
                 value={teamName}
                 onChange={(e) => setTeamName(e.target.value)}
                 placeholder="Enter team name"
+                className="input-field"
             />
-            <button onClick={handleButtonClick}>Submit</button>
+            <button onClick={handleButtonClick} className="submit-button">
+                Submit
+            </button>
         </div>
     );
 };

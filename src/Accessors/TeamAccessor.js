@@ -55,7 +55,7 @@ class TeamAccessor {
             Losses: Losses,
             Draws: Draws,
             Roster: JSON.stringify(Roster),
-            fanatasyLeagueID: this.fantasyleagueID,
+            fantasyleagueID: this.fantasyleagueID,
             PlayerList: JSON.stringify(PlayerList),
             Lineup: JSON.stringify(Lineup),
         };
