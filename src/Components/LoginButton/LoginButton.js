@@ -1,5 +1,5 @@
 import React from 'react';
-import './LoginButton.css';
+import './style.css';
 import { NavLink } from 'react-router-dom';
 
 const STYLES = ['btn--primary', 'btn--outline', 'btn--test'];

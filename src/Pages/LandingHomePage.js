@@ -1,11 +1,10 @@
-import React from 'react';
-import '../App.css';
-import '../Styles/LandingPage.css'
-import {Button} from '../Components/LoginButton/LoginButton';
-import Navbar from '../Components/Navbar/Navbar'
+import React, { useEffect } from 'react';
+import '../Styles/landingHomePage.css';
+import { Button } from '../Components/LoginButton/LoginButton';
+import Navbar from '../Components/Navbar/Navbar';
 
-function LandingPage() {
-  React.useEffect(() => {
+const LandingPage = () => {
+  useEffect(() => {
     document.body.style.overflow = 'hidden';
 
     // Remove the inline style when the component unmounts
@@ -16,21 +15,20 @@ function LandingPage() {
 
   return (
     <>
-    <Navbar />
+      <Navbar />
       <div className='page'>
-
         <div className='Text'>
           <div className='Title'>
-          <h1>Welcome to Fantasy Fusion</h1>
-          <h2>The perfect mix of all your favorite fantasy sports in one place.</h2>
+            <h1>Welcome to Fantasy Fusion</h1>
+            <h2>The perfect mix of all your favorite fantasy sports in one place.</h2>
           </div>
           <div>
             <Button id='getstartedbutton' buttonStyle='btn--outline'>Get Started</Button>
           </div>
         </div>
       </div>
-      </>
+    </>
   );
-}
+};
 
 export default LandingPage;

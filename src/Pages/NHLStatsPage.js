@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../App.css';
-import '../Styles/NHLStats.css';
+import '../Styles/nhlStatsPage.css';
 import Navbar from '../Components/Navbar/Navbar';
 
 const NHLLiveStats = () => {

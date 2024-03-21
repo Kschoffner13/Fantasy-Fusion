@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import '../Styles/HowToPlay.css';
+import '../Styles/howToPlayPage.css';
 import Navbar from '../Components/Navbar/Navbar';
 
 const HowToPlay = () => {

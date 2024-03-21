@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../Styles/NBAStats.css';
+import '../Styles/nbaStatsPage.css';
 import Navbar from '../Components/Navbar/Navbar';
 
 const NBALiveStats = () => {
