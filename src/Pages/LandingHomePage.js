@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import '../Styles/landingHomePage.css';
-import { Button } from '../Components/LoginButton/LoginButton';
+import LoginButton from '../Components/LoginButton/LoginButton';
 import Navbar from '../Components/Navbar/Navbar';
 
 const LandingPage = () => {
@@ -23,7 +23,7 @@ const LandingPage = () => {
             <h2>The perfect mix of all your favorite fantasy sports in one place.</h2>
           </div>
           <div>
-            <Button id='getstartedbutton' buttonStyle='btn--outline'>Get Started</Button>
+            <LoginButton id='getstartedbutton' buttonStyle='btn--outline'>Get Started</LoginButton>
           </div>
         </div>
       </div>

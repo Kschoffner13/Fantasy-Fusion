@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from '../LoginButton/LoginButton';
+import  LoginButton  from '../LoginButton/LoginButton';
 import { Link } from 'react-router-dom';
 import './style.css';
 
-function Navbar() {
+const Navbar = () => {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
@@ -21,13 +21,23 @@ function Navbar() {
     showButton();
   }, []);
 
-  window.addEventListener('resize', showButton);
+  useEffect(() => {
+    const handleResize = () => {
+      showButton();
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <>
       <nav className='navbar'>
         <div className='navbar-container'>
-          <Link to='/' className='navbar-logo' >
+          <Link to='/' className='navbar-logo'>
             Fantasy Fusion
             <i className='fab fa-typo3' />
           </Link>
@@ -36,7 +46,7 @@ function Navbar() {
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
             <li className='nav-item'>
-              <Link to='/howtoplay' className='nav-links' >
+              <Link to='/howtoplay' className='nav-links'>
                 How to Play
               </Link>
             </li>
@@ -57,11 +67,11 @@ function Navbar() {
               </Link>
             </li>
           </ul>
-          {button && <Button buttonStyle='btn--outline'>LOG IN</Button>}
+          {button && <LoginButton buttonStyle='btn--outline'>LOG IN</LoginButton>}
         </div>
       </nav>
     </>
   );
-}
+};
 
 export default Navbar;
