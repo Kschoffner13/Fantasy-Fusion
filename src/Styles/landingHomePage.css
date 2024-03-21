@@ -1,3 +1,8 @@
+.landing-page-overflow-fix{
+    height: 100vh;
+    overflow: hidden;
+}
+
 .page {
     display: flex;
     height: 100vh;

@@ -1,3 +1,8 @@
+.overflow-fix{
+    height: 100vh;
+    overflow: hidden;
+}
+
 .how-to-play-page {
     display: flex;
     flex-direction: column;

@@ -1,20 +1,12 @@
-import React, { useEffect } from 'react';
 import '../Styles/landingHomePage.css';
 import LoginButton from '../Components/LoginButton/LoginButton';
 import Navbar from '../Components/Navbar/Navbar';
 
 const LandingPage = () => {
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
 
-    // Remove the inline style when the component unmounts
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, []);
 
   return (
-    <>
+    <div className='landing-page-overflow-fix'>
       <Navbar />
       <div className='page'>
         <div className='Text'>
@@ -27,7 +19,7 @@ const LandingPage = () => {
           </div>
         </div>
       </div>
-    </>
+    </ div>
   );
 };
 

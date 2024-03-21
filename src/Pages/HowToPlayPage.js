@@ -1,19 +1,11 @@
-import React, { useEffect } from 'react';
 import '../Styles/howToPlayPage.css';
 import Navbar from '../Components/Navbar/Navbar';
 
 const HowToPlay = () => {
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
 
-    // Remove the inline style when the component unmounts
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, []);
 
   return (
-    <>
+    <div className='overflow-fix'>
       <Navbar />
       <div className='how-to-play-page'>
         <div className='instructions'>
@@ -32,7 +24,7 @@ const HowToPlay = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
