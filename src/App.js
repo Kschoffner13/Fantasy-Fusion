@@ -6,10 +6,10 @@ import TeamPage from "./Pages/TeamPage";
 import MatchupPage from "./Pages/MatchupPage";
 import FreeAgentsPage from "./Pages/FreeAgentsPage";
 import LeaguePage from "./Pages/LeaguePage";
-import HowToPlay from './Pages/HowToPlay';
-import NBALiveStats from './Pages/NBAStats';
-import LandingPage from './Pages/LandingHome';
-import NHLLiveStats from './Pages/NHLStats';
+import HowToPlayPage from './Pages/HowToPlayPage';
+import NBAStatsPage from './Pages/NBAStatsPage';
+import LandingHomePage from './Pages/LandingHomePage';
+import NHLStatsPage from './Pages/NHLStatsPage';
 
 
 function App() {
@@ -17,10 +17,10 @@ function App() {
         <div className="App">
             <HashRouter>
                 <Routes>
-                    <Route exact path="/" element={<LandingPage />} />
-                    <Route path='/nbastats' element={<NBALiveStats />} />
-                    <Route path='/howtoplay' element={<HowToPlay />} />
-                    <Route path='/nhlstats' element={<NHLLiveStats />} />
+                    <Route exact path="/" element={<LandingHomePage />} />
+                    <Route path='/nbastats' element={<NBAStatsPage />} />
+                    <Route path='/howtoplay' element={<HowToPlayPage />} />
+                    <Route path='/nhlstats' element={<NHLStatsPage />} />
                     <Route path='/home' element={<Home />} />
                     <Route path="/:leagueName/draft" element={<DraftPage />} />
                     <Route path="/:leagueName/:teamName" element={<TeamPage />} />

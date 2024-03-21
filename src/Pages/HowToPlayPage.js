@@ -1,11 +1,9 @@
-import React from 'react';
-import '../App.css';
+import React, { useEffect } from 'react';
 import '../Styles/HowToPlay.css';
-import Navbar from '../Components/Navbar/Navbar'
+import Navbar from '../Components/Navbar/Navbar';
 
-function HowToPlay() {
-
-  React.useEffect(() => {
+const HowToPlay = () => {
+  useEffect(() => {
     document.body.style.overflow = 'hidden';
 
     // Remove the inline style when the component unmounts
@@ -16,7 +14,7 @@ function HowToPlay() {
 
   return (
     <>
-    <Navbar />
+      <Navbar />
       <div className='how-to-play-page'>
         <div className='instructions'>
           <h1>How to Play Fusion Fantasy</h1>
@@ -34,8 +32,8 @@ function HowToPlay() {
           </div>
         </div>
       </div>
-      </>
+    </>
   );
-}
+};
 
 export default HowToPlay;
