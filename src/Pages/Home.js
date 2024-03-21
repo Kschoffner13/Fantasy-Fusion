@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import logo from "../images/logo.png";
 import { signOut } from "aws-amplify/auth";
-import { Button } from "@aws-amplify/ui-react"
+import { Button } from "@aws-amplify/ui-react";
 import FLAccessor from "../Accessors/FLAccessor";
 import inviteClass from "../Accessors/InviteClass";
 
@@ -12,7 +12,6 @@ async function handleSignOut() {
     console.log("error signing out: ", error);
   }
 }
-
 
 async function test() {
   const FLA = new FLAccessor("654321");
@@ -31,11 +30,27 @@ async function test() {
 
     Schedule: { week1: "Team1 vs Team2", week2: "Team3 vs Team4" },
   };
-  const response1 = await FLA.saveFantasyLeague(newL.Name, newL.Properties, newL.DraftDate, newL.TradeDeadline, newL.PlayoffStartDate,
-    newL.PlayoffTeams, newL.PlayoffMatchupLength, newL.WeeklyPickups, newL.VetoVoteEnabled, newL.Schedule);
+  const response1 = await FLA.saveFantasyLeague(
+    newL.Name,
+    newL.Properties,
+    newL.DraftDate,
+    newL.TradeDeadline,
+    newL.PlayoffStartDate,
+    newL.PlayoffTeams,
+    newL.PlayoffMatchupLength,
+    newL.WeeklyPickups,
+    newL.VetoVoteEnabled,
+    newL.Schedule
+  );
 
-  const response2 = await FLA.updateFantasyLeague("1cb1b891-0b06-48e4-a843-3ed8ed0b7ecf",
-    { Name: "Second best", VetoVoteEnabled: false, Schedule: { week1: "Team1 vs Team2", week2: "Team3 vs Team4" } });
+  const response2 = await FLA.updateFantasyLeague(
+    "1cb1b891-0b06-48e4-a843-3ed8ed0b7ecf",
+    {
+      Name: "Second best",
+      VetoVoteEnabled: false,
+      Schedule: { week1: "Team1 vs Team2", week2: "Team3 vs Team4" },
+    }
+  );
   console.log(response1);
 }
 
@@ -67,7 +82,6 @@ const Home = () => {
       <NavLink to="/abc/def">TEAM</NavLink>
       <NavLink to="/abc/matchup">MATCHUP</NavLink>
       <Button onClick={test2}>test</Button>
-
     </header>
   );
 };

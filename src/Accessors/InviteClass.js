@@ -10,9 +10,14 @@ class inviteClass {
     emailjs.init(this.publicKey);
   }
 
-  async sendInvite(receiver) {
+  async sendInvite(receiver, leagueID) {
+    const baseUrl = window.location.protocol + "//" + window.location.host;
+    const inviteLink = baseUrl + "/" + leagueID + "/createteam";
+    console.log(inviteLink);
+
     const inputData = {
-      to_email: "Samirsakr8@gmail.com",
+      to_email: receiver,
+      inviteLink: inviteLink,
     };
 
     emailjs.send(this.serciveID, this.templateID, inputData).then(
