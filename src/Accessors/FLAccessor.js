@@ -13,8 +13,18 @@ class FLAccessor {
   }
 
   // this function will take in the dictonry of values and save them to the users fantasy league
-  async saveFantasyLeague(Name, Properties, DraftDate, TradeDeadline, PlayoffStartDate, PlayoffTeams, PlayoffMatchupLength,
-    WeeklyPickups, VetoVoteEnabled, Schedule) {
+  async saveFantasyLeague(
+    Name,
+    Properties,
+    DraftDate,
+    TradeDeadline,
+    PlayoffStartDate,
+    PlayoffTeams,
+    PlayoffMatchupLength,
+    WeeklyPickups,
+    VetoVoteEnabled,
+    Schedule
+  ) {
     const dic = {
       Name: Name,
       OwnerID: this.ownerID,
@@ -33,8 +43,21 @@ class FLAccessor {
   }
 
   // modify an existing fantasy league
-  async updateFantasyLeague(id, { Name = null, Properties = null, DraftDate = null, TradeDeadline = null, PlayoffStartDate = null,
-    PlayoffTeams = null, PlayoffMatchupLength = null, WeeklyPickups = null, VetoVoteEnabled = null, Schedule = null } = {}) {
+  async updateFantasyLeague(
+    id,
+    {
+      Name = null,
+      Properties = null,
+      DraftDate = null,
+      TradeDeadline = null,
+      PlayoffStartDate = null,
+      PlayoffTeams = null,
+      PlayoffMatchupLength = null,
+      WeeklyPickups = null,
+      VetoVoteEnabled = null,
+      Schedule = null,
+    } = {}
+  ) {
     const original = await await DataStore.query(FantasyLeague, (c) =>
       c.and((c) => [c.id.eq(id), c.OwnerID.eq(this.ownerID)])
     );
@@ -55,7 +78,12 @@ class FLAccessor {
     const response = await DataStore.save(
       FantasyLeague.copyOf(original[0], (updated) => {
         for (const key in dic) {
-          if (dic[key] !== updated[key] && key !== "OwnerID" && key !== "id" && dic[key] !== null) {
+          if (
+            dic[key] !== updated[key] &&
+            key !== "OwnerID" &&
+            key !== "id" &&
+            dic[key] !== null
+          ) {
             updated[key] = dic[key];
           }
         }
@@ -73,9 +101,7 @@ class FLAccessor {
 
   // get a specifc fantasy league by id
   async getFantasyLeague(id) {
-    const response = await DataStore.query(FantasyLeague, (c) =>
-      c.and((c) => [c.id.eq(id), c.OwnerID.eq(this.ownerID)])
-    );
+    const response = await DataStore.query(FantasyLeague, (c) => c.id.eq(id));
     return response[0];
   }
 
