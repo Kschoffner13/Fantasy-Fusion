@@ -66,7 +66,9 @@ const SimpleTable = ({ headers, itemList, showButton, buttonFunction }) => {
                         <div key={index}>
                             {col == "name" ? (
                                 <div className="player-basic-bio">
-                                    <h5>{item[col]} - pos</h5>
+                                    <h5>
+                                        {item[col]} - {item.id.substring(0, 3)}
+                                    </h5>
                                     <h6>
                                         {item.team} - {item.position}
                                     </h6>
