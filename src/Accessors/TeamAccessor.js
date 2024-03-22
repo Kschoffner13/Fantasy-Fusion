@@ -123,12 +123,9 @@ class TeamAccessor {
             Lineup = null,
         } = {}
     ) {
-        const original = await DataStore.query(Team, (c) =>
-            c.and((c) => [
-                c.id.eq(teamID),
-                c.fantasyleagueID.eq(this.fantasyleagueID),
-            ])
-        );
+        const original = await DataStore.query(Team, (c) => c.id.eq(teamID));
+
+        console.log("Original:", original);
 
         const dic = {
             Name: Name,
@@ -143,8 +140,10 @@ class TeamAccessor {
             Lineup: Lineup ? JSON.stringify(Lineup) : null,
         };
 
+        console.log("Dic:", dic);
+
         const response = await DataStore.save(
-            FantasyLeague.copyOf(original[0], (updated) => {
+            Team.copyOf(original[0], (updated) => {
                 for (const key in dic) {
                     if (
                         dic[key] !== updated[key] &&
