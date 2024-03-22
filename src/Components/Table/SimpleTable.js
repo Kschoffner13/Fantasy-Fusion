@@ -2,13 +2,15 @@ import "./style.css";
 import { useMemo } from "react";
 import { useState } from "react";
 
-const SimpleTable = ({ headers, itemList }) => {
+const SimpleTable = ({ headers, itemList, showButton, buttonFunction }) => {
     const [sortConfig, setSortConfig] = useState({
         key: null,
         direction: "ascending",
     });
     const columnCount = headers.length;
-    const gridTemplateColumns = `2fr ${"1fr ".repeat(columnCount - 1)}`;
+    const gridTemplateColumns = `2fr ${"1fr ".repeat(
+        columnCount - 1 + (showButton ? 1 : 0)
+    )}`;
 
     const sortedItems = useMemo(() => {
         let sortableItems = [...itemList];
@@ -56,12 +58,20 @@ const SimpleTable = ({ headers, itemList }) => {
                             : ""}
                     </div>
                 ))}
+                {showButton && <div>Actions</div>}
             </div>
             {sortedItems.map((item, index) => (
                 <div key={index} className="row">
                     {headers.map((col, index) => (
                         <div key={index}>{item[col] || "-"}</div>
                     ))}
+                    {showButton && (
+                        <div>
+                            <button onClick={() => buttonFunction(item)}>
+                                +
+                            </button>
+                        </div>
+                    )}
                 </div>
             ))}
         </div>
