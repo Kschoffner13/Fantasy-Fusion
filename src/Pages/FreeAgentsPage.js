@@ -77,9 +77,9 @@ const FreeAgentsPage = () => {
         userTeamCopy.Lineup = { ...userTeam.Lineup };
         // Modify the copy
         userTeamCopy.Lineup.BCH1 = playerId;
-
+        console.log("IDIDID", userTeamCopy.id);
         console.log("TO UPLOAD", userTeamCopy.Lineup);
-        await teamAccessor.updateTeam(userTeam.id, {
+        await teamAccessor.updateTeam(userTeamCopy.id, {
             Lineup: userTeamCopy.Lineup,
         });
 

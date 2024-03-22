@@ -1,41 +1,52 @@
-type Draft @model @auth(rules: [{allow: public, operations: [create, update, delete, read]}]) {
-  id: ID!
-  order: AWSJSON
-  pickDeadline: AWSDateTime
-  curentPick: Int
-  playersDrafted: AWSJSON
-  fantasyleagueID: String
+type Draft
+    @model
+    @auth(
+        rules: [{ allow: public, operations: [create, update, delete, read] }]
+    ) {
+    id: ID!
+    order: AWSJSON
+    pickDeadline: AWSDateTime
+    curentPick: Int
+    playersDrafted: AWSJSON
+    fantasyleagueID: String
 }
 
-type Team @model @auth(rules: [{allow: public, operations: [create, update, delete, read]}]) {
-  id: ID!
-  Name: String
-  UserID: String
-  TotalPointsFor: Int
-  TotalPointsAgainst: Int
-  MatchUpPoints: Int
-  Wins: Int
-  Losses: Int
-  Draws: Int
-  fantasyleagueID: ID! @index(name: "byFantasyLeague")
-  CurrentLineup: AWSJSON
-  Lineups: AWSJSON
+type Team
+    @model
+    @auth(
+        rules: [{ allow: public, operations: [create, update, delete, read] }]
+    ) {
+    id: ID!
+    Name: String
+    UserID: String
+    TotalPointsFor: Int
+    TotalPointsAgainst: Int
+    MatchUpPoints: Int
+    Wins: Int
+    Losses: Int
+    Draws: Int
+    fantasyleagueID: ID! @index(name: "byFantasyLeague")
+    CurrentLineup: AWSJSON
+    Lineups: AWSJSON
 }
 
-type FantasyLeague @model @auth(rules: [{allow: public, operations: [create, update, delete, read]}]) {
-  id: ID!
-  Name: String
-  OwnerID: String
-  Properties: AWSJSON
-  DraftDate: AWSDateTime
-  TradeDeadline: AWSDateTime
-  PlayoffStartDate: AWSDateTime
-  PlayoffTeams: Int
-  PlayoffMatchupLength: Int
-  WeeklyPickups: Int
-  VetoVoteEnabled: Boolean
-  Teams: [Team] @hasMany(indexName: "byFantasyLeague", fields: ["id"])
-  Schedule: AWSJSON
-  Draft: Draft @hasOne
+type FantasyLeague
+    @model
+    @auth(
+        rules: [{ allow: public, operations: [create, update, delete, read] }]
+    ) {
+    id: ID!
+    Name: String
+    OwnerID: String
+    Properties: AWSJSON
+    DraftDate: AWSDateTime
+    TradeDeadline: AWSDateTime
+    PlayoffStartDate: AWSDateTime
+    PlayoffTeams: Int
+    PlayoffMatchupLength: Int
+    WeeklyPickups: Int
+    VetoVoteEnabled: Boolean
+    Teams: [Team] @hasMany(indexName: "byFantasyLeague", fields: ["id"])
+    Schedule: AWSJSON
+    Draft: Draft @hasOne
 }
- 
