@@ -9,35 +9,29 @@ import FreeAgentsPage from "./Pages/FreeAgentsPage";
 import LeaguePage from "./Pages/LeaguePage";
 import TeamCreationPage from "./Pages/TeamCreationPage";
 
+import LeagueCreationPage from "./Pages/LeagueCreationPage.js";
+
 function App() {
-    return (
-        <div className="App">
-            <HashRouter>
-                <Routes>
-                    <Route exact path="/" element={<Home />} />
-                    <Route path="/:leagueName/draft" element={<DraftPage />} />
-                    <Route
-                        path="/:leagueName/:teamName"
-                        element={<TeamPage />}
-                    />
-                    <Route
-                        path="/:leagueName/matchup"
-                        element={<MatchupPage />}
-                    />
-                    <Route
-                        path="/:leagueName/players"
-                        element={<FreeAgentsPage />}
-                    />
-                    <Route path="/:leagueName" element={<LeaguePage />} />
-                    <Route
-                        path="/:leagueName/createteam"
-                        element={<TeamCreationPage />}
-                    />
-                </Routes>
-            </HashRouter>
-            {/*  */}
-        </div>
-    );
+  return (
+    <div className="App">
+      <HashRouter>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/:leagueName/draft" element={<DraftPage />} />
+          <Route path="/:leagueName/:teamName" element={<TeamPage />} />
+          <Route path="/:leagueName/matchup" element={<MatchupPage />} />
+          <Route path="/:leagueName/players" element={<FreeAgentsPage />} />
+          <Route path="/:leagueName" element={<LeaguePage />} />
+          <Route
+            path="/:leagueName/createteam"
+            element={<TeamCreationPage />}
+          />
+          <Route path="/createleague" element={<LeagueCreationPage />} />
+        </Routes>
+      </HashRouter>
+      {/*  */}
+    </div>
+  );
 }
 
 export default withAuthenticator(App);

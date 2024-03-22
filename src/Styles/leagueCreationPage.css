@@ -1,0 +1,36 @@
+.league-creation-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 5%;
+}
+
+.league-creation-page h1 {
+    color: #3f3f3f;
+    margin-bottom: 20px;
+}
+
+.league-creation-page form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+}
+
+.league-creation-page form label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.league-creation-page form input,
+.league-creation-page form select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #3f3f3f;
+}
+
+.league-creation-page form input[type="checkbox"] {
+    width: auto;
+    margin-top: 10px;
+}
