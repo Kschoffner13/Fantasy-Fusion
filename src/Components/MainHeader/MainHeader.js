@@ -11,7 +11,7 @@ const MainHeader = () => {
         <header>
             <div className="header-top">
                 <img className="header-logo" src={logo}></img>
-                <NavLink to="/home">
+                <NavLink to="/">
                     <h5>Home</h5>
                 </NavLink>
                 <h5>My Teams</h5> {/*MAKE THIS A DROP DOWN*/}
