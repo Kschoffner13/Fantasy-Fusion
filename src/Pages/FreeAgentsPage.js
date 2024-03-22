@@ -105,7 +105,11 @@ const FreeAgentsPage = () => {
                     </select>
                 </div>
             </div>
-            <SimpleTable headers={["name", "FP"]} itemList={nbaFA} />
+            <SimpleTable
+                headers={["name", "FP"]}
+                itemList={nbaFA}
+                showButton={true}
+            />
             <Footer />
         </div>
     );
