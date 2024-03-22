@@ -16,7 +16,8 @@ const FreeAgentsPage = () => {
     const [pos, setPos] = useState("all");
 
     const [nbaFA, setNbaFA] = useState([]);
-    const [nnlFA, setNhlFA] = useState([]);
+    const [nhlFA, setNhlFA] = useState([]);
+    const [filteredFa, setFilteredFa] = useState([]);
 
     const getFA = async () => {
         const resNBA = await fetch(
@@ -30,6 +31,10 @@ const FreeAgentsPage = () => {
 
         setNbaFA(JSON.parse(dataNBA.body));
         setNhlFA(JSON.parse(dataNHL.body));
+
+        setFilteredFa(
+            JSON.parse(dataNBA.body).concat(JSON.parse(dataNHL.body))
+        );
     };
 
     useEffect(() => {
@@ -123,7 +128,7 @@ const FreeAgentsPage = () => {
             </div>
             <SimpleTable
                 headers={["name", "FP"]}
-                itemList={nbaFA}
+                itemList={filteredFa}
                 showButton={true}
                 buttonFunction={addPlayer}
             />
