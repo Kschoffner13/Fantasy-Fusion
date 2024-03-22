@@ -66,6 +66,7 @@ const Home = () => {
                 <NavLink to="/abc/def">TEAM</NavLink>
                 <NavLink to="/abc/matchup">MATCHUP</NavLink>
                 <Button onClick={test2}>test</Button>
+                <NavLink to="/createleague">CREATE LEAGUE</NavLink>
                 <div>
                     <input
                         type="text"
