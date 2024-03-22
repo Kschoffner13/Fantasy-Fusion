@@ -13,9 +13,10 @@ import {
   TextAreaField,
   TextField,
 } from "@aws-amplify/ui-react";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Draft } from "../models";
-import { fetchByPath, getOverrideProps, validateField } from "./utils";
-import { DataStore } from "aws-amplify/datastore";
+import { fetchByPath, validateField } from "./utils";
+import { DataStore } from "aws-amplify";
 export default function DraftUpdateForm(props) {
   const {
     id: idProp,
@@ -52,15 +53,14 @@ export default function DraftUpdateForm(props) {
       ? { ...initialValues, ...draftRecord }
       : initialValues;
     setOrder(
-      typeof cleanValues.order === "string" || cleanValues.order === null
+      typeof cleanValues.order === "string"
         ? cleanValues.order
         : JSON.stringify(cleanValues.order)
     );
     setPickDeadline(cleanValues.pickDeadline);
     setCurentPick(cleanValues.curentPick);
     setPlayersDrafted(
-      typeof cleanValues.playersDrafted === "string" ||
-        cleanValues.playersDrafted === null
+      typeof cleanValues.playersDrafted === "string"
         ? cleanValues.playersDrafted
         : JSON.stringify(cleanValues.playersDrafted)
     );
@@ -158,8 +158,8 @@ export default function DraftUpdateForm(props) {
         }
         try {
           Object.entries(modelFields).forEach(([key, value]) => {
-            if (typeof value === "string" && value === "") {
-              modelFields[key] = null;
+            if (typeof value === "string" && value.trim() === "") {
+              modelFields[key] = undefined;
             }
           });
           await DataStore.save(

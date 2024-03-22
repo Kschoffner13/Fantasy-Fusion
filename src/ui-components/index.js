@@ -4,8 +4,8 @@
  * Any changes to this file will be overwritten when running amplify pull. *
  **************************************************************************/
 
+export { default as studioTheme } from "./studioTheme";
 export { default as DraftCreateForm } from "./DraftCreateForm";
 export { default as DraftUpdateForm } from "./DraftUpdateForm";
 export { default as FantasyLeagueCreateForm } from "./FantasyLeagueCreateForm";
 export { default as FantasyLeagueUpdateForm } from "./FantasyLeagueUpdateForm";
-export { default as studioTheme } from "./studioTheme";

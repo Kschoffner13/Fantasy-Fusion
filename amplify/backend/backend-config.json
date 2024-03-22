@@ -67,5 +67,39 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
+  },
+  "parameters": {
+    "AMPLIFY_function_getCareerStats_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getCareerStats"
+        }
+      ]
+    },
+    "AMPLIFY_function_getCareerStats_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getCareerStats"
+        }
+      ]
+    },
+    "AMPLIFY_function_getPlayerSeasonStats_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getPlayerSeasonStats"
+        }
+      ]
+    },
+    "AMPLIFY_function_getPlayerSeasonStats_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getPlayerSeasonStats"
+        }
+      ]
+    }
   }
 }

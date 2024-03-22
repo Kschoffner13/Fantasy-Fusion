@@ -2,6 +2,7 @@ import "../Styles/leagueCreationPage.css";
 import FLAccessor from "../Accessors/FLAccessor";
 import { useEffect, useState } from "react";
 import { getCurrentUser } from "@aws-amplify/auth";
+import inviteClass from "../Accessors/InviteClass";
 
 const LeagueCreationPage = () => {
     const [leagueName, setLeagueName] = useState("");
@@ -29,8 +30,16 @@ const LeagueCreationPage = () => {
         setEmails(new Array(event.target.value - 1).fill(""));
     };
 
-    const sendInvites = () => {
+    const sendInvites = (leagueId) => {
         //Koen will work his magic here
+        const emailer = new inviteClass();
+        try {
+            emails.forEach((email) => {
+                emailer.sendInvite(email, leagueId);
+            });
+        } catch {
+            console.log("failed to send email");
+        }
     };
 
     const initPage = async () => {
@@ -60,8 +69,20 @@ const LeagueCreationPage = () => {
         };
 
         try {
-            await leagueAccessor.saveFantasyLeague(toUpload);
-            sendInvites();
+            const status = await leagueAccessor.saveFantasyLeague(
+                leagueName,
+                null,
+                draftDate,
+                tradeDeadlineDate,
+                playoffStartDate,
+                4,
+                1,
+                4,
+                vetoEnabled,
+                null
+            );
+            console.log("USEME", status.id);
+            //sendInvites();
             //goto team create page
         } catch {
             console.log("FAILED");
