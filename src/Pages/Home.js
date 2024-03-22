@@ -6,6 +6,7 @@ import FLAccessor from "../Accessors/FLAccessor";
 import inviteClass from "../Accessors/InviteClass";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import AccessVerification from "../Helpers/AccessVerification";
 
 async function handleSignOut() {
     try {
@@ -71,6 +72,16 @@ const Home = () => {
         nav(`/${leagueCode}/createteam`);
     };
 
+    const [userId, setUserId] = useState("");
+    const [teamId, setTeamId] = useState("");
+    const [leagueId, setLeagueId] = useState("");
+
+    const accessVerificationTest = async () => {
+        const verifier = new AccessVerification(userId, leagueId);
+        const res = await verifier.verifyLeagueAccess();
+        console.log(res);
+    };
+
     return (
         <header className="App-header">
             <img src={logo} alt="logo" />
@@ -98,6 +109,28 @@ const Home = () => {
                     onChange={(event) => setLeagueCode(event.target.value)}
                 />
                 <button onClick={gotoTeamCreation}>Create Team</button>
+            </div>
+            <div>
+                <h3>ACCESS VERIFICATION TEST</h3>
+                <input
+                    type="text"
+                    placeholder="User ID"
+                    value={userId}
+                    onChange={(event) => setUserId(event.target.value)}
+                />
+                <input
+                    type="text"
+                    placeholder="Team ID"
+                    value={teamId}
+                    onChange={(event) => setTeamId(event.target.value)}
+                />
+                <input
+                    type="text"
+                    placeholder="League ID"
+                    value={leagueId}
+                    onChange={(event) => setLeagueId(event.target.value)}
+                />
+                <button onClick={accessVerificationTest}>Submit</button>
             </div>
         </header>
     );

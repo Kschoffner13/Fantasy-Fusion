@@ -3,8 +3,28 @@ import "../Styles/matchupPage.css";
 import MainHeader from "../Components/MainHeader/MainHeader.js";
 import Footer from "../Components/Footer/Footer.js";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import AccessVerification from "../Helpers/AccessVerification.js";
+import { getCurrentUser } from "aws-amplify/auth";
+import { useEffect } from "react";
 
 const MatchupPage = () => {
+    const { leagueName } = useParams();
+    const nav = useNavigate();
+
+    const verifyAccess = async () => {
+        const userId = (await getCurrentUser()).userId;
+        const verifier = new AccessVerification(userId, leagueName);
+        if (!(await verifier.verifyLeagueAccess())) {
+            nav("/");
+        }
+    };
+
+    useEffect(() => {
+        verifyAccess();
+    }, []);
+
     const roster = [
         {
             id: 0,

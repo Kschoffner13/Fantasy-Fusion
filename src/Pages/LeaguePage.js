@@ -3,16 +3,27 @@ import MainHeader from "../Components/MainHeader/MainHeader";
 import "../Styles/leaguePage.css";
 import Table from "../Components/Table/Table";
 import MatchupSnapshot from "../Components/MatchupSnapshot/MatchupSnapshot";
+import { useNavigate } from "react-router-dom";
+import AccessVerification from "../Helpers/AccessVerification.js";
+import { getCurrentUser } from "aws-amplify/auth";
+import { useEffect } from "react";
+import Footer from "../Components/Footer/Footer.js";
 
 const LeaguePage = () => {
-    //fp leaders
-    //standings
-    //matchup snapshots
-    //transactions
-
     const { leagueName } = useParams();
+    const nav = useNavigate();
 
-    console.log(leagueName);
+    const verifyAccess = async () => {
+        const userId = (await getCurrentUser()).userId;
+        const verifier = new AccessVerification(userId, leagueName);
+        if (!(await verifier.verifyLeagueAccess())) {
+            nav("/");
+        }
+    };
+
+    useEffect(() => {
+        verifyAccess();
+    }, []);
 
     return (
         <div className="league-page">
@@ -53,6 +64,7 @@ const LeaguePage = () => {
                     title={"Transactions"}
                 />
             </div>
+            <Footer />
         </div>
     );
 };

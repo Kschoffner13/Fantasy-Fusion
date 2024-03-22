@@ -3,11 +3,31 @@ import "../Styles/freeAgentsPage.css";
 import Table from "../Components/Table/Table.js";
 import { useState } from "react";
 import Footer from "../Components/Footer/Footer.js";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import AccessVerification from "../Helpers/AccessVerification.js";
+import { getCurrentUser } from "aws-amplify/auth";
+import { useEffect } from "react";
 
 const FreeAgentsPage = () => {
     const [daysBack, setDaysBack] = useState("season");
     const [league, setLeague] = useState("all");
     const [pos, setPos] = useState("all");
+
+    const { leagueName } = useParams();
+    const nav = useNavigate();
+
+    const verifyAccess = async () => {
+        const userId = (await getCurrentUser()).userId;
+        const verifier = new AccessVerification(userId, leagueName);
+        if (!(await verifier.verifyLeagueAccess())) {
+            nav("/");
+        }
+    };
+
+    useEffect(() => {
+        verifyAccess();
+    }, []);
 
     return (
         <div className="fa-page">

@@ -4,8 +4,32 @@ import MainHeader from "../Components/MainHeader/MainHeader.js";
 import RosterSection from "../Components/RosterSection/RosterSection.js";
 import Footer from "../Components/Footer/Footer.js";
 import MatchupSnapshot from "../Components/MatchupSnapshot/MatchupSnapshot.js";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { getCurrentUser } from "aws-amplify/auth";
+import AccessVerification from "../Helpers/AccessVerification.js";
+import { useNavigate } from "react-router-dom";
 
 const TeamPage = () => {
+    const { leagueName, teamName } = useParams();
+    const nav = useNavigate();
+
+    const verifyAccess = async () => {
+        const userId = (await getCurrentUser()).userId;
+        const verifier = new AccessVerification(userId, leagueName);
+        if (!(await verifier.verifyTeamAccess(teamName))) {
+            if (!(await verifier.verifyLeagueAccess())) {
+                nav("/");
+            } else {
+                nav(`/${leagueName}`);
+            }
+        }
+    };
+
+    useEffect(() => {
+        verifyAccess();
+    }, []);
+
     return (
         <div className="league-page">
             <MainHeader />
