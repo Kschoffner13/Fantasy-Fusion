@@ -4,8 +4,13 @@ import Table from "../Components/Table/Table.js";
 import { useEffect, useState } from "react";
 import Footer from "../Components/Footer/Footer.js";
 import SimpleTable from "../Components/Table/SimpleTable.js";
+import { useParams } from "react-router-dom";
+import TeamAccessor from "../Accessors/TeamAccessor.js";
+import { getCurrentUser } from "aws-amplify/auth";
 
 const FreeAgentsPage = () => {
+    const { leagueName } = useParams();
+
     const [daysBack, setDaysBack] = useState("season");
     const [league, setLeague] = useState("all");
     const [pos, setPos] = useState("all");
@@ -30,6 +35,33 @@ const FreeAgentsPage = () => {
     useEffect(() => {
         getFA();
     }, []);
+
+    const addPlayer = async (playerId) => {
+        console.log(playerId, leagueName);
+        //get team
+        const teamAccessor = new TeamAccessor();
+        const teams = Object.values(
+            await teamAccessor.getLeaugesTeams(leagueName)
+        );
+
+        const user = await getCurrentUser();
+        let userTeam = teams.find((team) => user.userId === team.UserID);
+        console.log("teams", userTeam, user);
+        //add player id to roster
+        console.log("teams", userTeam.Lineup);
+
+        // Create a copy of userTeam
+        let userTeamCopy = { ...userTeam };
+        // Create a copy of userTeam.Lineup
+        userTeamCopy.Lineup = { ...userTeam.Lineup };
+        // Modify the copy
+        userTeamCopy.Lineup.BCH1 = playerId;
+
+        console.log("teams", userTeamCopy.Lineup);
+        //await teamAccessor.updateTeam(userTeam.id, userTeam);
+
+        //remove player from pool
+    };
 
     return (
         <div className="fa-page">
@@ -93,6 +125,7 @@ const FreeAgentsPage = () => {
                 headers={["name", "FP"]}
                 itemList={nbaFA}
                 showButton={true}
+                buttonFunction={addPlayer}
             />
             <Footer />
         </div>
