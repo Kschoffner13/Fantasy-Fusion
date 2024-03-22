@@ -10,6 +10,7 @@ import HowToPlayPage from './Pages/HowToPlayPage';
 import NBAStatsPage from './Pages/NBAStatsPage';
 import LandingHomePage from './Pages/LandingHomePage';
 import NHLStatsPage from './Pages/NHLStatsPage';
+import AccountPage from "./Pages/AccountPage";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
                     <Route path="/:leagueName/matchup" element={<MatchupPage />} />
                     <Route path="/:leagueName/players" element={<FreeAgentsPage />} />
                     <Route path="/:leagueName" element={<LeaguePage />} />
+                    <Route path="/account" element={<AccountPage />} />
                 </Routes>
             </HashRouter>
             {/*  */}
