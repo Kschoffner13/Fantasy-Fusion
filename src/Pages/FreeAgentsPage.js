@@ -1,13 +1,13 @@
 import MainHeader from "../Components/MainHeader/MainHeader";
 import "../Styles/freeAgentsPage.css";
 import Table from "../Components/Table/Table.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../Components/Footer/Footer.js";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import AccessVerification from "../Helpers/AccessVerification.js";
 import { getCurrentUser } from "aws-amplify/auth";
-import { useEffect } from "react";
+import SimpleTable from "../Components/Table/SimpleTable.js";
 
 const FreeAgentsPage = () => {
     const [daysBack, setDaysBack] = useState("season");
@@ -25,8 +25,26 @@ const FreeAgentsPage = () => {
         }
     };
 
+    const [nbaFA, setNbaFA] = useState([]);
+    const [nnlFA, setNhlFA] = useState([]);
+
+    const getFA = async () => {
+        const resNBA = await fetch(
+            "https://2dyh8c8v1b.execute-api.ca-central-1.amazonaws.com/dev"
+        );
+        const resNHL = await fetch(
+            "https://v18r7qllfj.execute-api.ca-central-1.amazonaws.com/dev"
+        );
+        const dataNBA = await resNBA.json();
+        const dataNHL = await resNHL.json();
+
+        setNbaFA(JSON.parse(dataNBA.body));
+        setNhlFA(JSON.parse(dataNHL.body));
+    };
+
     useEffect(() => {
         verifyAccess();
+        getFA();
     }, []);
 
     return (
@@ -87,14 +105,7 @@ const FreeAgentsPage = () => {
                     </select>
                 </div>
             </div>
-            <Table
-                headers={["test"]}
-                roster={["test"]}
-                rosterPlacement={[]}
-                setRosterPlacement={null}
-                filterKeys={null}
-                title={"Free Agents"}
-            />
+            <SimpleTable headers={["name", "FP"]} itemList={nbaFA} />
             <Footer />
         </div>
     );
