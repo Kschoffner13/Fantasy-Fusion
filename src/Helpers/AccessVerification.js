@@ -1,3 +1,4 @@
+import FLAccessor from "../Accessors/FLAccessor";
 import TeamAccessor from "../Accessors/TeamAccessor";
 
 class AccessVerification {
@@ -19,8 +20,15 @@ class AccessVerification {
         return false;
     }
 
-    verifyLeagueAccess() {
-        return true;
+    async verifyLeagueAccess() {
+        const teamAccessor = new TeamAccessor();
+        const teams = await teamAccessor.getLeaugesTeams(this.leagueId);
+        for (let team of teams) {
+            if (this.userId === team.UserID) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 

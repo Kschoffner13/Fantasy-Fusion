@@ -78,7 +78,7 @@ const Home = () => {
 
     const accessVerificationTest = async () => {
         const verifier = new AccessVerification(userId, leagueId);
-        const res = await verifier.verifyTeamAccess(teamId);
+        const res = await verifier.verifyLeagueAccess();
         console.log(res);
     };
 
