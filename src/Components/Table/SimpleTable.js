@@ -67,7 +67,7 @@ const SimpleTable = ({ headers, itemList, showButton, buttonFunction }) => {
                     ))}
                     {showButton && (
                         <div>
-                            <button onClick={() => buttonFunction(item)}>
+                            <button onClick={() => buttonFunction(item.id)}>
                                 +
                             </button>
                         </div>
