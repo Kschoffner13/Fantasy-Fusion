@@ -2,25 +2,17 @@ import { NavLink } from "react-router-dom";
 import logo from "../images/logo.png";
 import { signOut } from "aws-amplify/auth";
 import { Button } from "@aws-amplify/ui-react";
-import { Authenticator} from "@aws-amplify/ui-react";
-import TeamAccessor from "../Accessors/TeamAccessor";
 import FLAccessor from "../Accessors/FLAccessor";
 import inviteClass from "../Accessors/InviteClass";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-
-
-
-
-
 async function handleSignOut() {
-  try {
-    await signOut();
-    
-  } catch (error) {
-    console.log("error signing out: ", error);
-  }
+    try {
+        await signOut();
+    } catch (error) {
+        console.log("error signing out: ", error);
+    }
 }
 
 async function test() {
@@ -78,10 +70,9 @@ const Home = () => {
 
         nav(`/${leagueCode}/createteam`);
     };
-  
-  return (
-    <Authenticator >
-      <header className="App-header">
+
+    return (
+        <header className="App-header">
             <img src={logo} alt="logo" />
             <h1>Fantasy Fusion</h1>
             <p>
@@ -109,10 +100,7 @@ const Home = () => {
                 <button onClick={gotoTeamCreation}>Create Team</button>
             </div>
         </header>
-    </Authenticator>
-  );
-
+    );
 };
-
 
 export default Home;
