@@ -63,7 +63,18 @@ const SimpleTable = ({ headers, itemList, showButton, buttonFunction }) => {
             {sortedItems.map((item, index) => (
                 <div key={index} className="row">
                     {headers.map((col, index) => (
-                        <div key={index}>{item[col] || "-"}</div>
+                        <div key={index}>
+                            {col == "name" ? (
+                                <div className="player-basic-bio">
+                                    <h5>{item[col]} - pos</h5>
+                                    <h6>
+                                        {item.team} - {item.position}
+                                    </h6>
+                                </div>
+                            ) : (
+                                item[col] || "-"
+                            )}
+                        </div>
                     ))}
                     {showButton && (
                         <div>
