@@ -1,4 +1,8 @@
-type Draft @model @auth(rules: [{allow: public}]) {
+type Draft
+  @model
+  @auth(
+    rules: [{ allow: public, operations: [create, update, delete, read] }]
+  ) {
   id: ID!
   order: AWSJSON
   pickDeadline: AWSDateTime
@@ -7,7 +11,11 @@ type Draft @model @auth(rules: [{allow: public}]) {
   fantasyleagueID: String
 }
 
-type Team @model @auth(rules: [{allow: public}]) {
+type Team
+  @model
+  @auth(
+    rules: [{ allow: public, operations: [create, update, delete, read] }]
+  ) {
   id: ID!
   Name: String
   UserID: String
@@ -23,7 +31,11 @@ type Team @model @auth(rules: [{allow: public}]) {
   Lineup: AWSJSON
 }
 
-type FantasyLeague @model @auth(rules: [{allow: public}]) {
+type FantasyLeague
+  @model
+  @auth(
+    rules: [{ allow: public, operations: [create, update, delete, read] }]
+  ) {
   id: ID!
   Name: String
   OwnerID: String
@@ -39,4 +51,3 @@ type FantasyLeague @model @auth(rules: [{allow: public}]) {
   Schedule: AWSJSON
   Draft: Draft @hasOne
 }
- 

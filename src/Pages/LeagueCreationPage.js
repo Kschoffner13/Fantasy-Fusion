@@ -3,8 +3,11 @@ import FLAccessor from "../Accessors/FLAccessor";
 import { useEffect, useState } from "react";
 import { getCurrentUser } from "@aws-amplify/auth";
 import inviteClass from "../Accessors/InviteClass";
+import { useNavigate } from "react-router-dom";
 
 const LeagueCreationPage = () => {
+    const nav = useNavigate();
+
     const [leagueName, setLeagueName] = useState("");
     const [draftDate, setDraftDate] = useState("");
     const [tradeDeadlineDate, setTradeDeadlineDate] = useState("");
@@ -56,18 +59,6 @@ const LeagueCreationPage = () => {
     }, []);
 
     const create = async () => {
-        const toUpload = {
-            Name: leagueName,
-            Properties: null,
-            DraftDate: new Date(draftDate).toISOString(),
-            TradeDeadline: new Date(tradeDeadlineDate).toISOString(),
-            PlayoffStartDate: new Date(playoffStartDate).toISOString(),
-            PlayoffTeams: 4,
-            PlayoffMatchupLength: 1,
-            VetoVoteEnabled: false,
-            Schedule: null,
-        };
-
         try {
             const status = await leagueAccessor.saveFantasyLeague(
                 leagueName,
@@ -82,10 +73,10 @@ const LeagueCreationPage = () => {
                 null
             );
             console.log("USEME", status.id);
-            //sendInvites();
-            //goto team create page
-        } catch {
-            console.log("FAILED");
+            sendInvites(status.id);
+            nav(`/${status.id}/createteam`);
+        } catch (error) {
+            console.log("FAILED", error);
         }
     };
 
