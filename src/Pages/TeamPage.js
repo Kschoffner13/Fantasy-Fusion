@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 
 const TeamPage = () => {
     const { leagueName, teamName } = useParams();
-    console.log(useParams());
     const nav = useNavigate();
 
     const verifyAccess = async () => {
