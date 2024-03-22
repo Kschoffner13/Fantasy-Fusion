@@ -1,5 +1,6 @@
 import { DataStore } from "@aws-amplify/datastore";
 import { FantasyLeague, Draft } from "../models";
+import { dblClick } from "@testing-library/user-event/dist/click";
 
 class DraftAccessor {
   // this will take in the idk of the fantasy leauge associated with that id/
@@ -8,8 +9,16 @@ class DraftAccessor {
   }
 
   // will need to make sure that there are no other draft items associated with the same fantasy league
-  async saveDraft(dic) {
-    dic["fantasyleagueID"] = this.FLID;
+  async saveDraft(order, pickDealine, currentPick, playersDrafted) {
+    dic = {
+      fantasyleagueID: this.FLID,
+      order: order,
+      pickDealine: pickDealine,
+      currentPick: currentPick,
+      playersDrafted: JSON.stringify(playersDrafted),
+    };
+
+
     const response = await DataStore.save(new Draft(dic));
     return response;
   }
@@ -21,10 +30,18 @@ class DraftAccessor {
     return response;
   }
 
-  async updateDraft(dic) {
+  async updateDraft({ oder = null, pickDeadline = null, currentPick = null, playersDrafted = null } = {}) {
     const original = await DataStore.query(Draft, (c) =>
       c.fantasyleagueID.eq(this.FLID)
     );
+
+    dic = {
+      fantasyleagueID: this.FLID,
+      order: order,
+      pickDeadline: pickDeadline,
+      currentPick: currentPick,
+      playersDrafted: playersDrafted ? JSON.stringify(playersDrafted) : null,
+    };
 
     const response = await DataStore.save(
       Draft.copyOf(original[0], (updated) => {
@@ -32,7 +49,8 @@ class DraftAccessor {
           if (
             dic[key] != updated[key] &&
             key !== "fantasyleagueID" &&
-            key !== "id"
+            key !== "id" &&
+            dic[key] !== null
           ) {
             updated[key] = dic[key];
           }
