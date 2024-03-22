@@ -13,10 +13,9 @@ import {
   TextAreaField,
   TextField,
 } from "@aws-amplify/ui-react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Draft } from "../models";
-import { fetchByPath, validateField } from "./utils";
-import { DataStore } from "aws-amplify";
+import { fetchByPath, getOverrideProps, validateField } from "./utils";
+import { DataStore } from "aws-amplify/datastore";
 export default function DraftCreateForm(props) {
   const {
     clearOnSuccess = true,
@@ -135,8 +134,8 @@ export default function DraftCreateForm(props) {
         }
         try {
           Object.entries(modelFields).forEach(([key, value]) => {
-            if (typeof value === "string" && value.trim() === "") {
-              modelFields[key] = undefined;
+            if (typeof value === "string" && value === "") {
+              modelFields[key] = null;
             }
           });
           await DataStore.save(new Draft(modelFields));

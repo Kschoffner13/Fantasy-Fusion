@@ -33,6 +33,7 @@
     margin: 0;
     font-size: 3em;
     letter-spacing: 0.05em;
+    text-align: left;
 }
 
 .team-info-text p{
