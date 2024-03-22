@@ -36,7 +36,7 @@ const FreeAgentsPage = () => {
 
     const getFA = async () => {
         const resNBA = await fetch(
-            "https://2dyh8c8v1b.execute-api.ca-central-1.amazonaws.com/dev"
+            "https://mhiakrcyoj.execute-api.ca-central-1.amazonaws.com/dev"
         );
         const resNHL = await fetch(
             "https://v18r7qllfj.execute-api.ca-central-1.amazonaws.com/dev"
@@ -66,7 +66,7 @@ const FreeAgentsPage = () => {
         );
 
         const user = await getCurrentUser();
-        let userTeam = teams.find((team) => user.userId === team.UserID);
+        let userTeam = await teams.find((team) => user.userId === team.UserID);
         console.log("teams", userTeam, user);
         //add player id to roster
         console.log("teams", userTeam.Lineup);
@@ -78,8 +78,10 @@ const FreeAgentsPage = () => {
         // Modify the copy
         userTeamCopy.Lineup.BCH1 = playerId;
 
-        console.log("teams", userTeamCopy.Lineup);
-        //await teamAccessor.updateTeam(userTeam.id, userTeam);
+        console.log("TO UPLOAD", userTeamCopy.Lineup);
+        await teamAccessor.updateTeam(userTeam.id, {
+            Lineup: userTeamCopy.Lineup,
+        });
 
         //remove player from pool
     };
