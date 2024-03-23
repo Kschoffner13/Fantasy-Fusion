@@ -79,9 +79,8 @@ const AccountPage = () => {
                                 <input type="file" accept="image/*" onChange={handleProfilePictureChange} className="form-input" />
                                 {profilePicture && <img src={profilePicture} alt="Profile" className="profile-picture" />}
                             </label>
-                        )}
-                        <br />
-                        <button type="submit" className="button-59">Update</button>
+                )}
+                        <button type="submit" className="button-59" id="submit-button">Update</button>
                     </form>
                 )}
             </div>

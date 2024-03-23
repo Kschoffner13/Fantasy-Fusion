@@ -21,6 +21,7 @@
     flex-direction: column;
     gap: 5px;
     margin-top: 10px;
+    padding-bottom: -50px;
     
   }
   
@@ -109,4 +110,8 @@
     .button-59 {
       min-width: 170px;
     }
+  }
+
+  #submit-button{
+    padding-top: -30px;
   }
