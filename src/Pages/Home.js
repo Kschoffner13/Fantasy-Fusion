@@ -22,7 +22,21 @@ async function handleSignOut() {
 async function test() {
     const teamAccessor = new TeamAccessor("123456", "123456");
 
-    const response = await teamAccessor.getUsersTeams();
+    // const response = await teamAccessor.getUsersTeams();
+    // console.log(response);
+    const FLA = new FLAccessor("654321");
+
+    const response = await FLA.checkIfPlayerDrafted(
+        "NBAdoncilu01",
+        "1cb1b891-0b06-48e4-a843-3ed8ed0b7ecf"
+    );
+
+    console.log(response);
+}
+
+async function test2() {
+    const I = new inviteClass();
+    const response = await I.sendInvite("kschoffner@gmail.com");
     console.log(response);
 }
 
