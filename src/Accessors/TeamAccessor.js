@@ -82,10 +82,10 @@ class TeamAccessor {
         try {
             const team = await DataStore.query(Team, teamId);
             if (team) {
-                console.log("Team found:", team);
+                //console.log("Team found:", team);
                 return team;
             } else {
-                console.log("Team not found");
+                //console.log("Team not found");
                 return null;
             }
         } catch (error) {
@@ -98,7 +98,7 @@ class TeamAccessor {
             const teamToDelete = await DataStore.query(Team, teamId);
             if (teamToDelete) {
                 await DataStore.delete(teamToDelete);
-                console.log("Team deleted successfully");
+                //console.log("Team deleted successfully");
             } else {
                 console.log("Team not found, cannot delete");
             }
