@@ -31,12 +31,19 @@ const RosterSection = ({ team }) => {
         if (ids.length <= 0) {
             return;
         }
-        const list_string = ids.join(",");
+        const list_string = `["${ids.join('","')}"]`;
         const date = getFormattedDate(currentDate);
-        await fetch(
-            `https://m3nosbczqoii3uygdwrpx4djbq0eakbp.lambda-url.ca-central-1.on.aws/?date=${date}&roster=[${list_string}]`
+        const res = await fetch(
+            `https://m3nosbczqoii3uygdwrpx4djbq0eakbp.lambda-url.ca-central-1.on.aws/?date=${date}&roster=${list_string}`
         );
-        console.log(list_string, date);
+
+        if (res.ok) {
+            const players = await res.json();
+            setRoster(players);
+            console.log(players);
+        } else {
+            console.log("Error Accessing Database");
+        }
     };
 
     useEffect(() => {

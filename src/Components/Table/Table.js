@@ -61,9 +61,11 @@ const Table = ({
                     filterKeys.some((filterKey) => key.startsWith(filterKey))
                 )
                 .map((key, index) => {
-                    const player = roster.find(
-                        (player) => player.id === rosterPlacement[key]
+                    const p = roster.find(
+                        (player) => player.player_id === rosterPlacement[key]
                     );
+                    const player = p?.stats;
+                    //console.log("OKASAFAUFY", player);
                     return (
                         <>
                             {key.startsWith("GL") && (
