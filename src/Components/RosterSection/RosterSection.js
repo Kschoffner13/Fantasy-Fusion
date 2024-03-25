@@ -9,7 +9,7 @@ const RosterSection = ({ team }) => {
     const [rosterPlacement, setRosterPlacement] = useState({});
 
     useEffect(() => {
-        setRosterPlacement(team.Lineup);
+        setRosterPlacement(team.CurrentLineup);
     }, [team]);
 
     useEffect(() => {
@@ -17,7 +17,9 @@ const RosterSection = ({ team }) => {
         let ids = [];
         if (rosterPlacement) {
             for (let [key, value] of Object.entries(rosterPlacement)) {
-                ids.push(value);
+                if (value) {
+                    ids.push(value);
+                }
             }
         }
         console.log("IDS", ids, rosterPlacement);
@@ -25,10 +27,16 @@ const RosterSection = ({ team }) => {
     }, [rosterPlacement]);
 
     const getPlayers = async (ids) => {
-        if (ids === undefined) {
+        ids = ids.filter((item) => item !== null);
+        if (ids.length <= 0) {
             return;
         }
-        console.log(ids);
+        const list_string = ids.join(",");
+        const date = getFormattedDate(currentDate);
+        await fetch(
+            `https://m3nosbczqoii3uygdwrpx4djbq0eakbp.lambda-url.ca-central-1.on.aws/?date=${date}&roster=[${list_string}]`
+        );
+        console.log(list_string, date);
     };
 
     useEffect(() => {
@@ -56,6 +64,18 @@ const RosterSection = ({ team }) => {
             newDate.setDate(newDate.getDate() + 1);
             return newDate;
         });
+    };
+
+    const getFormattedDate = (date) => {
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1; // getMonth() returns month index starting from 0
+        let day = date.getDate();
+
+        // Pad month and day with 0 if they are less than 10
+        month = month < 10 ? `0${month}` : month;
+        day = day < 10 ? `0${day}` : day;
+
+        return `${year}-${month}-${day}`;
     };
 
     return (
