@@ -92,6 +92,7 @@ const FreeAgentsPage = () => {
         await teamAccessor.updateTeam(userTeamCopy.id, {
             CurrentLineup: userTeamCopy.CurrentLineup,
         });
+        window.location.reload();
     };
 
     return (
