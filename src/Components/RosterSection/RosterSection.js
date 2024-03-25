@@ -14,30 +14,21 @@ const RosterSection = ({ team }) => {
 
     useEffect(() => {
         console.log("ROSTER PLACEMENT UPDATEED", rosterPlacement);
+        let ids = [];
         if (rosterPlacement) {
             for (let [key, value] of Object.entries(rosterPlacement)) {
-                if (value) {
-                    getPlayer(value);
-                }
+                ids.push(value);
             }
         }
+        console.log("IDS", ids, rosterPlacement);
+        getPlayers(ids);
     }, [rosterPlacement]);
 
-    const getPlayer = async (id) => {
-        const league = id.substring(0, 3);
-        let player = {};
-        if (league === "NBA") {
-            player = await fetch(
-                `https://h08m2lshuh.execute-api.ca-central-1.amazonaws.com/dev/${id}`
-            );
-        } else {
-            player = await fetch(
-                `https://qhraq82lr4.execute-api.ca-central-1.amazonaws.com/dev/?id=${id}`
-            );
+    const getPlayers = async (ids) => {
+        if (ids === undefined) {
+            return;
         }
-        player = JSON.parse((await player.json()).body);
-        player.id = id;
-        setRoster((prevRoster) => [...prevRoster, player]);
+        console.log(ids);
     };
 
     useEffect(() => {

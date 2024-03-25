@@ -56,10 +56,9 @@ type EagerTeam = {
   readonly Wins?: number | null;
   readonly Losses?: number | null;
   readonly Draws?: number | null;
-  readonly Roster?: string | null;
   readonly fantasyleagueID: string;
-  readonly PlayerList?: string | null;
-  readonly Lineup?: string | null;
+  readonly CurrentLineup?: string | null;
+  readonly Lineups?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -78,10 +77,9 @@ type LazyTeam = {
   readonly Wins?: number | null;
   readonly Losses?: number | null;
   readonly Draws?: number | null;
-  readonly Roster?: string | null;
   readonly fantasyleagueID: string;
-  readonly PlayerList?: string | null;
-  readonly Lineup?: string | null;
+  readonly CurrentLineup?: string | null;
+  readonly Lineups?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
