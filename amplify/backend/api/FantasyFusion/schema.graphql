@@ -25,9 +25,10 @@ type Team
     Wins: Int
     Losses: Int
     Draws: Int
+    Roster: AWSJSON
     fantasyleagueID: ID! @index(name: "byFantasyLeague")
-    CurrentLineup: AWSJSON
-    Lineups: AWSJSON
+    PlayerList: AWSJSON
+    Lineup: AWSJSON
 }
 
 type FantasyLeague
