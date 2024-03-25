@@ -121,12 +121,7 @@ class TeamAccessor {
       Lineups = null,
     } = {}
   ) {
-    const original = await DataStore.query(Team, (c) =>
-      c.and((c) => [
-        c.id.eq(teamID),
-        c.fantasyleagueID.eq(this.fantasyleagueID),
-      ])
-    );
+    const original = await DataStore.query(Team, (c) => c.id.eq(teamID));
 
     const dic = {
       Name: Name,
@@ -141,7 +136,7 @@ class TeamAccessor {
     };
 
     const response = await DataStore.save(
-      FantasyLeague.copyOf(original[0], (updated) => {
+      Team.copyOf(original[0], (updated) => {
         for (const key in dic) {
           if (
             dic[key] !== updated[key] &&
@@ -167,14 +162,14 @@ class TeamAccessor {
     return response[0][attribute];
   }
 
-  // async setLineup(ID, Date) {
-  //   const team = await DataStore.query(Team, ID);
-
-  //   console.log("Team", team);
-  //   // const lineups = team["Lineups"];
-
-  //   // console.log("Lineups", lineups);
-  // }
+  async setLineup(ID, Date) {
+    const team = await DataStore.query(Team, ID);
+    const lineups = team["Lineups"];
+    console.log("Lineups", lineups);
+    const newLineup = lineups[Date];
+    console.log("New Lineup", newLineup);
+    const r = await this.updateTeam(ID, { CurrentLineup: newLineup });
+  }
 }
 
 export default TeamAccessor;
