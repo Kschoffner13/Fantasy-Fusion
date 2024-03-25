@@ -91,7 +91,6 @@ const TeamCreationPage = () => {
                 0,
                 0,
                 null,
-                null,
                 rosterPlacement
             );
             nav(`/${leagueName}/${teamName}`);
