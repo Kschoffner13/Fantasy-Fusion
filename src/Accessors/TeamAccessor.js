@@ -171,9 +171,13 @@ class TeamAccessor {
   //   const team = await DataStore.query(Team, ID);
 
   //   console.log("Team", team);
-  //   // const lineups = team["Lineups"];
+  //   const lineups = team["Lineups"];
 
-  //   // console.log("Lineups", lineups);
+  //   console.log("Lineups", lineups);
+
+  //   const newLineup = team["Lineups"][Date];
+
+  //   const r = await this.updateTeam(ID, { CurrentLineup: newLineup });
   // }
 }
 
