@@ -40,7 +40,7 @@ const FreeAgentsPage = () => {
         );
         const dataNBA = await resNBA.json();
         const dataNHL = await resNHL.json();
-
+        console.log(dataNBA);
         setNbaFA(JSON.parse(dataNBA.body));
         setNhlFA(JSON.parse(dataNHL.body));
 
