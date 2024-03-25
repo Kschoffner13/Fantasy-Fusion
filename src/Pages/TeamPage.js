@@ -72,7 +72,7 @@ const TeamPage = () => {
                 </div>
                 <MatchupSnapshot />
             </div>
-            <RosterSection />
+            <RosterSection team={team} />
             <Footer />
         </div>
     );
