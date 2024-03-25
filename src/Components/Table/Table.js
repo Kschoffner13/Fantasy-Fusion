@@ -20,7 +20,7 @@ const Table = ({
     const swap = (playerId, pos) => {
         setToSwap({ id: playerId, slot: pos });
         setIsOpen(true);
-        console.log(playerId, pos);
+        //console.log(playerId, pos);
         // setRosterPlacement((prevState) => ({
         //     ...prevState,
         //     GRD1: 19,
