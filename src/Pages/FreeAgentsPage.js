@@ -36,10 +36,10 @@ const FreeAgentsPage = () => {
 
     const getFA = async () => {
         const resNBA = await fetch(
-            "https://mhiakrcyoj.execute-api.ca-central-1.amazonaws.com/dev"
+            `https://mhiakrcyoj.execute-api.ca-central-1.amazonaws.com/dev/?fantasy_id=${leagueName}`
         );
         const resNHL = await fetch(
-            "https://v18r7qllfj.execute-api.ca-central-1.amazonaws.com/dev"
+            `https://v18r7qllfj.execute-api.ca-central-1.amazonaws.com/dev/?fantasy_id=${leagueName}`
         );
         const dataNBA = await resNBA.json();
         const dataNHL = await resNHL.json();
@@ -64,26 +64,40 @@ const FreeAgentsPage = () => {
         const teams = Object.values(
             await teamAccessor.getLeaugesTeams(leagueName)
         );
-
         const user = await getCurrentUser();
         let userTeam = await teams.find((team) => user.userId === team.UserID);
+
         console.log("teams", userTeam, user);
         //add player id to roster
-        console.log("teams", userTeam.Lineup);
+        console.log("teams", userTeam.CurrentLineup);
 
         // Create a copy of userTeam
         let userTeamCopy = { ...userTeam };
         // Create a copy of userTeam.Lineup
-        userTeamCopy.Lineup = { ...userTeam.Lineup };
+        userTeamCopy.CurrentLineup = { ...userTeam.CurrentLineup };
         // Modify the copy
-        userTeamCopy.Lineup.BCH1 = playerId;
-        console.log("IDIDID", userTeamCopy.id);
-        console.log("TO UPLOAD", userTeamCopy.Lineup);
-        await teamAccessor.updateTeam(userTeamCopy.id, {
-            Lineup: userTeamCopy.Lineup,
-        });
+        let playerAdded = false;
+        for (let key in userTeamCopy.CurrentLineup) {
+            if (
+                key.startsWith("BCH") &&
+                userTeamCopy.CurrentLineup[key] === null
+            ) {
+                userTeamCopy.CurrentLineup[key] = playerId;
+                playerAdded = true;
+                break;
+            }
+        }
 
-        //remove player from pool
+        if (!playerAdded) {
+            alert(
+                "Make sure you have a open spot on your bench before adding a player"
+            );
+            return;
+        }
+
+        await teamAccessor.updateTeam(userTeamCopy.id, {
+            Lineup: userTeamCopy.CurrentLineup,
+        });
     };
 
     return (
