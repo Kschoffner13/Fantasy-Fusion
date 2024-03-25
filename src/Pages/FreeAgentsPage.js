@@ -8,9 +8,7 @@ import { useNavigate } from "react-router-dom";
 import AccessVerification from "../Helpers/AccessVerification.js";
 import { getCurrentUser } from "aws-amplify/auth";
 import SimpleTable from "../Components/Table/SimpleTable.js";
-import { useParams } from "react-router-dom";
 import TeamAccessor from "../Accessors/TeamAccessor.js";
-import { getCurrentUser } from "aws-amplify/auth";
 
 const FreeAgentsPage = () => {
   const { leagueName } = useParams();
