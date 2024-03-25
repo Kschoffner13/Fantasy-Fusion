@@ -11,6 +11,7 @@ class TeamAccessor {
     // get all teams for a user
     async getUsersTeams(userID) {
         const teams = await DataStore.query(Team, (c) => c.UserID.eq(userID));
+        console.log("ACCESSOR", teams);
         return teams;
     }
 
@@ -65,12 +66,12 @@ class TeamAccessor {
     }
 
     // Get all the teams for a user.
-    async getUsersTeams() {
-        const response = await DataStore.query(Team, (c) =>
-            c.UserID.eq(this.userID)
-        );
-        return response;
-    }
+    // async getUsersTeams() {
+    //     const response = await DataStore.query(Team, (c) =>
+    //         c.UserID.eq(this.userID)
+    //     );
+    //     return response;
+    // }
 
     async getTeams() {
         const posts = await DataStore.query(Team, (c) =>
