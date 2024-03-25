@@ -4,7 +4,7 @@ import Table from "../Table/Table.js";
 
 const RosterSection = ({ team }) => {
     console.log("ROS SECT", team);
-    const roster = [];
+    const [roster, setRoster] = useState([]);
 
     const [rosterPlacement, setRosterPlacement] = useState({});
 
@@ -25,7 +25,6 @@ const RosterSection = ({ team }) => {
 
     const getPlayer = async (id) => {
         const league = id.substring(0, 3);
-        console.log("LEAGUE", league);
         let player = {};
         if (league === "NBA") {
             player = await fetch(
@@ -36,11 +35,16 @@ const RosterSection = ({ team }) => {
                 `https://qhraq82lr4.execute-api.ca-central-1.amazonaws.com/dev/?id=${id}`
             );
         }
-
-        console.log(player);
+        player = JSON.parse((await player.json()).body);
+        player.id = id;
+        setRoster((prevRoster) => [...prevRoster, player]);
     };
 
-    const colsB = ["name", "GP", "PPG", "APG", "RPG", "FPPG"];
+    useEffect(() => {
+        console.log("ROSTER", roster);
+    }, [roster]);
+
+    const colsB = ["name", "GP", "PPG", "APG", "RPG", "FP"];
     const colsH = ["name", "GP", "P", "G", "A", "FPPG"];
     const colsU = ["name", "FPPG"];
     const glStats = ["name", "GP", "W", "L", "SV", "FPPG"];
