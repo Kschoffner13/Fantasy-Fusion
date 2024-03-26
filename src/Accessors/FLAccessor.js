@@ -59,7 +59,7 @@ class FLAccessor {
       Schedule = null,
     } = {}
   ) {
-    const original = await await DataStore.query(FantasyLeague, (c) =>
+    const original = await DataStore.query(FantasyLeague, (c) =>
       c.and((c) => [c.id.eq(id), c.OwnerID.eq(this.ownerID)])
     );
 
@@ -166,8 +166,7 @@ class FLAccessor {
     }
    
    // get the number of weeks
-    weeks = Math.ceil((actualEndDate - acutalStartDate) / (1000 * 60 * 60 * 24 * 7));
-    console.log("weeks", weeks);  
+    weeks = Math.ceil((actualEndDate - acutalStartDate) / (1000 * 60 * 60 * 24 * 7)); 
     
 
     // let date = new Date();
@@ -180,25 +179,21 @@ class FLAccessor {
     let teams = await DataStore.query(Team, (c) => c.fantasyleagueID.eq(LeagueID));
     numberofTeams = teams.length;
     const teamIDs = teams.map((team) => team.id);
-    console.log("number of teams", numberofTeams);
 
 
     // generate pairs
-    let pairings = [];
-    
-    for (let i = 0; i < numberofTeams - 1; i++) {
-        for (let j = i + 1; j < numberofTeams; j++) {
-            pairings.push([i, j]);
-        }
+    let played = {}
+    for (let i = 0; i < numberofTeams; i++) {
+      played[teamIDs[i]] = [];
     }
 
-    console.log(pairings);  
     
     // create the schedule
     for(let i = 1; i <= weeks; i++) {
       let week = "Week" + i;
       
       Schedule[week] = [];
+      let teamsplayed = [];
 
       let sDate = new Date(acutalStartDate);
       let eDate = new Date(acutalStartDate - 1);
@@ -211,25 +206,72 @@ class FLAccessor {
       numberofMatches = numberofTeams/2;
 
       // populate with basic format
-      for(let j = 1; j <= numberofMatches; j++) {
-        let match = "Match" + j;
-        Schedule[week].push(match);
-        Schedule[week][match] = {"Team1": null, "Team2": null, "Score": {"Team1": 0, "Team2": 0}};
+      for(let j = 0; j < numberofMatches; j++) {
 
+        let team1 = null;
+        let team2 = null
+
+        for (let y = 0; y < numberofTeams; y++) {
+          if (!teamsplayed.includes(teams[y].id)) {
+            team1 = teams[y].id;
+            teamsplayed.push(teams[y].id);
+            break;
+          }
+        }
+
+        // pick the second team
+        for (let y = 0; y < numberofTeams; y++) {
+          if(played[team1] && !played[team1].includes(teams[y].id) && teams[y].id !== team1) {
+            team2 = teams[y].id;
+            teamsplayed.push(teams[y].id);
+            played[team1].push(teams[y].id);
+            break;
+          }
+        }
+        Schedule[week][j] = {"Team1": team1, "Team2": team2, "Score": {"Team1": 0, "Team2": 0}};
 
       }
-      
-      
-      
-    }
-
-
     
+    }
+    
+    console.log(Schedule);
+
+    // for (let i = 1; i <= weeks; i++) {
+
+    //   let week = "Week" + i;
+    //   let teamsplayed = [];
+
+    //   for(let x = 0; x < numberofMatches; x++) {
+    //     let team1 = null;
+    //     let team2 = null;
+
+    //     // pick the first team
+    //     for (let y = 0; y < numberofTeams; y++) {
+    //       if (!teamsplayed.includes(teams[y].id)) {
+    //         team1 = teams[y].id;
+    //         teamsplayed.push(teams[y].id);
+    //         break;
+    //       }
+    //     }
+
+    //     // pick the second team
+    //     for (let y = 0; y < numberofTeams; y++) {
+    //       if(played[team1] && !played[team1].includes(teams[y].id)) {
+    //         team2 = teams[y].id;
+    //         teamsplayed.push(teams[y].id);
+    //         played[team1].push(teams[y].id);
+    //         break;
+    //       }
+    //     }
+    //     Schedule[week][x]["Team1"] = team1;
+    //     Schedule[week][x]["Team2"] = team2;
+
+    //   }
+    // }
 
     console.log(Schedule);
   }
 }
-
 export default FLAccessor;
 
 
@@ -285,4 +327,5 @@ export default FLAccessor;
 //       }
     
 //   ]
+
 // }
