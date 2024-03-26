@@ -20,18 +20,11 @@ async function handleSignOut() {
 }
 
 async function test() {
-  const teamAccessor = new TeamAccessor("123456", "123456");
+  const FLA = new FLAccessor("1");
 
-  // const response = await teamAccessor.getUsersTeams();
-  // console.log(response);
-  const FLA = new FLAccessor("654321");
+  await FLA.makeSchedule("41f79a0d-c708-4017-9afe-c2b31338186a", new Date(2024, 2, 23), new Date(2024, 3, 24));
 
-  const response = await FLA.checkIfPlayerDrafted(
-    "NBAdoncilu01",
-    "1cb1b891-0b06-48e4-a843-3ed8ed0b7ecf"
-  );
-
-  console.log(response);
+  
 }
 
 async function test2() {
