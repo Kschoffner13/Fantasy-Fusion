@@ -13,7 +13,7 @@ const RosterPopup = ({
     }
 
     console.log(toSwap);
-    const outPlayer = roster.find((player) => player.id === toSwap.id);
+    const outPlayer = roster.find((player) => player.player_id === toSwap.id);
 
     //get players on bench filter by pos
     // Get the IDs of the BCH items
@@ -23,17 +23,23 @@ const RosterPopup = ({
 
     let matchingPlayers = [];
 
-    const bchPlayers = roster.filter((player) => bchIds.includes(player.id));
+    console.log("BCHIDS", bchIds);
+
+    const bchPlayers = roster.filter((player) =>
+        bchIds.includes(player.player_id)
+    );
+
+    console.log("BCHplayers", bchPlayers);
 
     if (toSwap.slot == "SM") {
         matchingPlayers = bchPlayers.filter(
-            (player) => player.league === "NBA"
+            (player) => player.player_id.substring(0, 3) === "NBA"
         );
     } else if (toSwap.slot == "UTL") {
         matchingPlayers = bchPlayers;
     } else {
         matchingPlayers = bchPlayers.filter(
-            (player) => player.position === toSwap.slot
+            (player) => player.stats.position === toSwap.slot
         );
     }
 
@@ -41,7 +47,7 @@ const RosterPopup = ({
 
     const swapPlayers = (inPlayerId) => {
         const inSlot = Object.keys(rosterPlacement).find(
-            (key) => rosterPlacement[key] === outPlayer.id
+            (key) => rosterPlacement[key] === outPlayer?.player_id
         );
 
         const outSlot = Object.keys(rosterPlacement).find(
@@ -50,8 +56,8 @@ const RosterPopup = ({
 
         setRosterPlacement((prevState) => ({
             ...prevState,
-            [inSlot]: inPlayerId,
-            [outSlot]: outPlayer.id,
+            [toSwap.posSlot]: inPlayerId,
+            [outSlot]: outPlayer?.player_id,
         }));
         setIsOpen(false);
     };
@@ -60,28 +66,30 @@ const RosterPopup = ({
             <div className="popup-content">
                 <div className="swap-section">
                     <div className="player-listing out-player">
-                        <h5>{outPlayer.name}</h5>
-                        <p>Team: {outPlayer.team}</p>
-                        <p>Position: {outPlayer.position}</p>
-                        <p>PPG: {outPlayer.PPG}</p>
-                        <p>RPG: {outPlayer.RPG}</p>
-                        <p>APG: {outPlayer.APG}</p>
-                        <p>GP: {outPlayer.GP}</p>
+                        <h5>{outPlayer?.stats.name}</h5>
+                        <p>Team: </p>
+                        <p>Position: {outPlayer?.stats.position}</p>
+                        <p>PPG: </p>
+                        <p>RPG: </p>
+                        <p>APG: </p>
+                        <p>GP: </p>
                         <button className="out-btn">&#8595;</button>
                     </div>
                     <div>
                         {matchingPlayers.map((player, index) => (
                             <div key={index} className="player-listing">
-                                <h5>{player.name}</h5>
-                                <p>Team: {player.team}</p>
-                                <p>Position: {player.position}</p>
-                                <p>PPG: {player.PPG}</p>
-                                <p>RPG: {player.RPG}</p>
-                                <p>APG: {player.APG}</p>
-                                <p>GP: {player.GP}</p>
+                                <h5>{player.stats.name}</h5>
+                                <p>Team: </p>
+                                <p>Position: {player.stats.position}</p>
+                                <p>PPG:</p>
+                                <p>RPG: </p>
+                                <p>APG: </p>
+                                <p>GP: </p>
                                 <button
                                     className="in-btn"
-                                    onClick={() => swapPlayers(player.id)}
+                                    onClick={() =>
+                                        swapPlayers(player.player_id)
+                                    }
                                 >
                                     &#8593;
                                 </button>
