@@ -7,7 +7,7 @@ const RosterSection = ({ team }) => {
     console.log("ROS SECT", team);
     const [roster, setRoster] = useState([]);
     const [rosterPlacement, setRosterPlacement] = useState({});
-    const [currentDate, setCurrentDate] = useState(new Date(2024, 2, 21)); //change to current date
+    const [currentDate, setCurrentDate] = useState(new Date()); //change to current date
 
     useEffect(() => {
         setRosterPlacement(team.CurrentLineup);
@@ -76,12 +76,13 @@ const RosterSection = ({ team }) => {
         if (ids.length <= 0) {
             return;
         }
+        console.log("GRABBING");
         const list_string = `["${ids.join('","')}"]`;
         const date = getFormattedDate(currentDate);
         const res = await fetch(
             `https://m3nosbczqoii3uygdwrpx4djbq0eakbp.lambda-url.ca-central-1.on.aws/?date=${date}&roster=${list_string}`
         );
-
+        console.log("GRABBED");
         if (res.ok) {
             const players = await res.json();
             setRoster(players);
