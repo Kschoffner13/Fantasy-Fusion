@@ -63,6 +63,7 @@ class FLAccessor {
       c.and((c) => [c.id.eq(id), c.OwnerID.eq(this.ownerID)])
     );
 
+    console.log(Schedule)
     const dic = {
       Name: Name,
       Properties: Properties ? JSON.stringify(Properties) : null,
@@ -135,11 +136,11 @@ class FLAccessor {
   }
 
 
-// leagueID = String
-// startDate = Date object
-// endDate = new Date(YYYY, MM, DD) <-- ints (for months, start at 0)
+  // leagueID = String
+  // startDate = Date object
+  // endDate = new Date(YYYY, MM, DD) <-- ints (for months, start at 0)
   async makeSchedule(LeagueID, startDate, endDate) {
-    
+
     let acutalStartDate = null;
     let actualEndDate = null;
     let weeks = null;
@@ -148,8 +149,8 @@ class FLAccessor {
     let Schedule = {};
 
     // get the actaul start date which needs to be a monday
-    for(let i = 0; i < 7; i++) {
-      if(startDate.getDay() === 1) {
+    for (let i = 0; i < 7; i++) {
+      if (startDate.getDay() === 1) {
         acutalStartDate = startDate;
         break;
       }
@@ -157,23 +158,17 @@ class FLAccessor {
     }
 
     // get the actaul end date which needs to be a sunday
-    for(let i = 0; i < 7; i++) {
-      if(endDate.getDay() === 0) {
+    for (let i = 0; i < 7; i++) {
+      if (endDate.getDay() === 0) {
         actualEndDate = endDate;
         break;
       }
       endDate.setDate(endDate.getDate() - 1);
     }
-   
-   // get the number of weeks
-    weeks = Math.ceil((actualEndDate - acutalStartDate) / (1000 * 60 * 60 * 24 * 7)); 
-    
 
-    // let date = new Date();
-    // date = date.toLocaleString("en-US", {timeZone:'America/Denver', year: 'numeric', month: '2-digit', day: '2-digit'});
-    // let [month, day, year] = date.split('/');
-    // let formattedDate = `${year}-${month}-${day}`;
-    // console.log(formattedDate);
+    // get the number of weeks
+    weeks = Math.ceil((actualEndDate - acutalStartDate) / (1000 * 60 * 60 * 24 * 7));
+
 
     // get all teams in the league
     let teams = await DataStore.query(Team, (c) => c.fantasyleagueID.eq(LeagueID));
@@ -188,33 +183,34 @@ class FLAccessor {
       played[teamIDs[i]] = [];
     }
 
-    
+
     // create the schedule
-    for(let i = 1; i <= weeks; i++) {
+    for (let i = 1; i <= weeks; i++) {
       let week = "Week" + i;
-      
+
       //this will reset the played array if every team has played each other once already
-      if(i >= numberofTeams){
-          for (let i = 0; i < numberofTeams; i++) {
-            played[teamIDs[i]] = [];
-          }
+      if (i >= numberofTeams) {
+        for (let i = 0; i < numberofTeams; i++) {
+          played[teamIDs[i]] = [];
         }
-      Schedule[week] = [];
+      }
+      Schedule[week] = {};
+      Schedule[week]["Matches"] = [];
       // used to check if a team has already played that week
       let teamsplayed = [];
 
       let sDate = new Date(acutalStartDate);
       let eDate = new Date(acutalStartDate - 1);
       sDate.setDate(sDate.getDate() + (7 * (i - 1)));
-      eDate.setDate(eDate.getDate() + (7 * i) -1);
+      eDate.setDate(eDate.getDate() + (7 * i) - 1);
 
       Schedule[week]["StartDate"] = sDate.toISOString().split('T')[0];
       Schedule[week]["EndDate"] = eDate.toISOString().split('T')[0];
 
-      numberofMatches = numberofTeams/2;
+      numberofMatches = numberofTeams / 2;
 
       // populate with basic format
-      for(let j = 0; j < numberofMatches; j++) {
+      for (let j = 0; j < numberofMatches; j++) {
 
         let team1 = null;
         let team2 = null
@@ -222,7 +218,7 @@ class FLAccessor {
         for (let y = 0; y < numberofTeams; y++) {
           if (!teamsplayed.includes(teamIDs[y])) { // if the team hasnt polayed this week, set them as team 1
             team1 = teamIDs[y]
-            teamsplayed.push(teamIDs[y]); 
+            teamsplayed.push(teamIDs[y]);
             break;
           }
         }
@@ -230,7 +226,7 @@ class FLAccessor {
         // pick the second team
         for (let y = 0; y < numberofTeams; y++) {
           // if the team hasnt played this week and hasnt played the first team, set them as team 2
-          if(!teamsplayed.includes(teamIDs[y]) && !played[team1].includes(teamIDs[y]) && teamIDs[y] !== team1){
+          if (!teamsplayed.includes(teamIDs[y]) && !played[team1].includes(teamIDs[y]) && teamIDs[y] !== team1) {
             team2 = teamIDs[y];
             teamsplayed.push(teamIDs[y]);
             played[team1].push(teamIDs[y]);
@@ -238,70 +234,16 @@ class FLAccessor {
             break;
           }
         }
-        Schedule[week][j] = {"Team1": team1, "Team2": team2, "Score": {"Team1": 0, "Team2": 0}};
+        Schedule[week]['Matches'][j] = { "Team1": team1, "Team2": team2, "Score": { "Team1": 0, "Team2": 0 } };
 
       }
-    
+
     }
-  
 
     console.log(Schedule);
+    return Schedule;
   }
 }
 export default FLAccessor;
 
 
-
-
-
-// const sch = {
-//   "Week1": [
-    
-//       "Match1": {
-//         "Team1": "Team A",
-//         "Team2": "Team B",
-//         "Score": {
-//           "Team1": 0,
-//           "Team2": 0
-//         },
-//         "StartDate": "2022-01-01",
-//         "EndDate": "2022-01-07"
-//       },
-//       "Match2": {
-//         "Team1": "Team C",
-//         "Team2": "Team D",
-//         "Score": {
-//           "Team1": 0,
-//           "Team2": 0
-//         },
-//         "StartDate": "2022-01-01",
-//         "EndDate": "2022-01-07"
-//       }
-    
-//   ],
-//   "Week2": [
-    
-//       "Match1": {
-//         "Team1": "Team A",
-//         "Team2": "Team C",
-//         "Score": {
-//           "Team A": 0,
-//           "Team C": 0
-//         },
-//         "StartDate": "2022-01-08",
-//         "EndDate": "2022-01-14"
-//       },
-//       "Match2": {
-//         "Team1": "Team B",
-//         "Team2": "Team D",
-//         "Score": {
-//           "Team B": 0,
-//           "Team D": 0
-//         },
-//         "StartDate": "2022-01-08",
-//         "EndDate": "2022-01-14"
-//       }
-    
-//   ]
-
-// }
