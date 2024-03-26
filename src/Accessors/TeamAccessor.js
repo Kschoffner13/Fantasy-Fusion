@@ -175,13 +175,21 @@ class TeamAccessor {
         }
     }
 
-    async setLineup(ID, Date) {
-        const team = await DataStore.query(Team, ID);
-        const lineups = team["Lineups"];
-        console.log("Lineups", lineups);
-        const newLineup = lineups[Date];
-        console.log("New Lineup", newLineup);
-        const r = await this.updateTeam(ID, { CurrentLineup: newLineup });
+    async setLineup(teamId, date, lineup) {
+        if (lineup === undefined) {
+            return;
+        }
+        const team = await DataStore.query(Team, teamId);
+        console.log("TEAMATMEAMT", team);
+        let lineups = team["Lineups"];
+        let newLineups = { ...lineups };
+        newLineups[new Date(date).getTime()] = lineup;
+
+        if (Date.now() === new Date(date).getTime()) {
+            await this.updateTeam(teamId, { CurrentLineup: lineup });
+        }
+
+        await this.updateTeam(teamId, { Lineups: newLineups });
     }
 }
 

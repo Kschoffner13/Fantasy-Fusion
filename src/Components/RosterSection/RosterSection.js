@@ -1,11 +1,11 @@
 import "./style.css";
 import { useEffect, useState } from "react";
 import Table from "../Table/Table.js";
+import TeamAccessor from "../../Accessors/TeamAccessor.js";
 
 const RosterSection = ({ team }) => {
     console.log("ROS SECT", team);
     const [roster, setRoster] = useState([]);
-
     const [rosterPlacement, setRosterPlacement] = useState({});
     const [currentDate, setCurrentDate] = useState(new Date(2024, 2, 21)); //change to current date
 
@@ -40,6 +40,17 @@ const RosterSection = ({ team }) => {
         console.log("IDS", ids, rosterPlacement);
         getPlayers(ids);
     }, [rosterPlacement, currentDate]);
+
+    const updateLineup = async () => {
+        const teamAccessor = new TeamAccessor();
+        await teamAccessor.setLineup(team.id, currentDate, rosterPlacement);
+    };
+
+    useEffect(() => {
+        if (rosterPlacement) {
+            updateLineup();
+        }
+    }, [rosterPlacement]);
 
     const getPlayers = async (ids) => {
         ids = ids.filter((item) => item !== null);
