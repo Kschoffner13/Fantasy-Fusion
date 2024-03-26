@@ -183,6 +183,7 @@ class FLAccessor {
 
     // generate pairs
     let played = {}
+    //used to cehck if teams have already played each other 
     for (let i = 0; i < numberofTeams; i++) {
       played[teamIDs[i]] = [];
     }
@@ -192,7 +193,14 @@ class FLAccessor {
     for(let i = 1; i <= weeks; i++) {
       let week = "Week" + i;
       
+      //this will reset the played array if every team has played each other once already
+      if(i >= numberofTeams){
+          for (let i = 0; i < numberofTeams; i++) {
+            played[teamIDs[i]] = [];
+          }
+        }
       Schedule[week] = [];
+      // used to check if a team has already played that week
       let teamsplayed = [];
 
       let sDate = new Date(acutalStartDate);
@@ -212,19 +220,21 @@ class FLAccessor {
         let team2 = null
 
         for (let y = 0; y < numberofTeams; y++) {
-          if (!teamsplayed.includes(teams[y].id)) {
-            team1 = teams[y].id;
-            teamsplayed.push(teams[y].id);
+          if (!teamsplayed.includes(teamIDs[y])) { // if the team hasnt polayed this week, set them as team 1
+            team1 = teamIDs[y]
+            teamsplayed.push(teamIDs[y]); 
             break;
           }
         }
 
         // pick the second team
         for (let y = 0; y < numberofTeams; y++) {
-          if(played[team1] && !played[team1].includes(teams[y].id) && teams[y].id !== team1) {
-            team2 = teams[y].id;
-            teamsplayed.push(teams[y].id);
-            played[team1].push(teams[y].id);
+          // if the team hasnt played this week and hasnt played the first team, set them as team 2
+          if(!teamsplayed.includes(teamIDs[y]) && !played[team1].includes(teamIDs[y]) && teamIDs[y] !== team1){
+            team2 = teamIDs[y];
+            teamsplayed.push(teamIDs[y]);
+            played[team1].push(teamIDs[y]);
+            played[team2].push(team1);
             break;
           }
         }
@@ -233,41 +243,7 @@ class FLAccessor {
       }
     
     }
-    
-    console.log(Schedule);
-
-    // for (let i = 1; i <= weeks; i++) {
-
-    //   let week = "Week" + i;
-    //   let teamsplayed = [];
-
-    //   for(let x = 0; x < numberofMatches; x++) {
-    //     let team1 = null;
-    //     let team2 = null;
-
-    //     // pick the first team
-    //     for (let y = 0; y < numberofTeams; y++) {
-    //       if (!teamsplayed.includes(teams[y].id)) {
-    //         team1 = teams[y].id;
-    //         teamsplayed.push(teams[y].id);
-    //         break;
-    //       }
-    //     }
-
-    //     // pick the second team
-    //     for (let y = 0; y < numberofTeams; y++) {
-    //       if(played[team1] && !played[team1].includes(teams[y].id)) {
-    //         team2 = teams[y].id;
-    //         teamsplayed.push(teams[y].id);
-    //         played[team1].push(teams[y].id);
-    //         break;
-    //       }
-    //     }
-    //     Schedule[week][x]["Team1"] = team1;
-    //     Schedule[week][x]["Team2"] = team2;
-
-    //   }
-    // }
+  
 
     console.log(Schedule);
   }
