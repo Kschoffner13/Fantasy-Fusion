@@ -122,7 +122,7 @@ class TeamAccessor {
         } = {}
     ) {
         const original = await DataStore.query(Team, (c) => c.id.eq(teamID));
-
+        console.log("OG", original);
         const dic = {
             Name: Name,
             TotalPointsFor: TotalPointsFor,
@@ -176,16 +176,27 @@ class TeamAccessor {
     }
 
     async setLineup(teamId, date, lineup) {
-        if (lineup === undefined) {
+        if (!lineup) {
             return;
         }
         const team = await DataStore.query(Team, teamId);
         console.log("TEAMATMEAMT", team);
         let lineups = team["Lineups"];
         let newLineups = { ...lineups };
-        newLineups[new Date(date).getTime()] = lineup;
 
-        if (Date.now() === new Date(date).getTime()) {
+        // Create a Date object from the input date string
+        let inputDate = new Date(date);
+
+        // Format the date as YYYY-MM-DD
+        let formattedDate = inputDate.toISOString().split("T")[0];
+
+        newLineups[formattedDate] = lineup;
+
+        // Get the current date and time
+        let now = new Date();
+
+        // Compare the dates (ignoring the time)
+        if (now.toISOString().split("T")[0] === formattedDate) {
             await this.updateTeam(teamId, { CurrentLineup: lineup });
         }
 

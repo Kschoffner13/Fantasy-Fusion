@@ -41,13 +41,32 @@ const RosterSection = ({ team }) => {
         getPlayers(ids);
     }, [rosterPlacement, currentDate]);
 
+    const formatDate = (date) => {
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Months are 0-based in JavaScript
+        const day = date.getDate().toString().padStart(2, "0");
+
+        return `${year}-${month}-${day}`;
+    };
+
+    useEffect(() => {
+        if (team && team.Lineups && team.Lineups[formatDate(currentDate)]) {
+            console.log("IF");
+            setRosterPlacement(team.Lineups[formatDate(currentDate)]);
+        } else if (team && team.CurrentLineup) {
+            console.log("ELSE");
+            setRosterPlacement(team.CurrentLineup);
+        }
+    }, [currentDate]);
+
     const updateLineup = async () => {
         const teamAccessor = new TeamAccessor();
         await teamAccessor.setLineup(team.id, currentDate, rosterPlacement);
     };
 
     useEffect(() => {
-        if (rosterPlacement) {
+        if (rosterPlacement && Object.keys(rosterPlacement).length > 0) {
+            console.log("MOTHERFUCK", rosterPlacement);
             updateLineup();
         }
     }, [rosterPlacement]);
