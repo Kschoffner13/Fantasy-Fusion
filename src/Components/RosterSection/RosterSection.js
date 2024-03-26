@@ -7,13 +7,28 @@ const RosterSection = ({ team }) => {
     const [roster, setRoster] = useState([]);
 
     const [rosterPlacement, setRosterPlacement] = useState({});
+    const [currentDate, setCurrentDate] = useState(new Date(2024, 2, 21)); //change to current date
 
     useEffect(() => {
         setRosterPlacement(team.CurrentLineup);
     }, [team]);
 
+    // useEffect(() => {
+    //     console.log("ROSTER PLACEMENT UPDATEED", rosterPlacement);
+    //     let ids = [];
+    //     if (rosterPlacement) {
+    //         for (let [key, value] of Object.entries(rosterPlacement)) {
+    //             if (value) {
+    //                 ids.push(value);
+    //             }
+    //         }
+    //     }
+    //     console.log("IDS", ids, rosterPlacement);
+    //     getPlayers(ids);
+    // }, [rosterPlacement]);
+
     useEffect(() => {
-        console.log("ROSTER PLACEMENT UPDATEED", rosterPlacement);
+        console.log("Date changed", currentDate);
         let ids = [];
         if (rosterPlacement) {
             for (let [key, value] of Object.entries(rosterPlacement)) {
@@ -24,7 +39,7 @@ const RosterSection = ({ team }) => {
         }
         console.log("IDS", ids, rosterPlacement);
         getPlayers(ids);
-    }, [rosterPlacement]);
+    }, [rosterPlacement, currentDate]);
 
     const getPlayers = async (ids) => {
         ids = ids.filter((item) => item !== null);
@@ -50,13 +65,12 @@ const RosterSection = ({ team }) => {
         console.log("ROSTER", roster);
     }, [roster]);
 
-    const colsB = ["name", "GP", "PPG", "APG", "RPG", "FP"];
-    const colsH = ["name", "GP", "P", "G", "A", "FPPG"];
+    const colsB = ["name", "points", "assists", "rebounds", "FP"];
+    const colsH = ["name", "goals", "assists", "FP"];
     const colsU = ["name", "FPPG"];
-    const glStats = ["name", "GP", "W", "L", "SV", "FPPG"];
+    const glStats = ["name", "FP"];
     const combined = [...new Set([...colsB, ...colsH, ...glStats])];
 
-    const [currentDate, setCurrentDate] = useState(new Date());
     const goBackOneDay = () => {
         setCurrentDate((prevDate) => {
             let newDate = new Date(prevDate);
