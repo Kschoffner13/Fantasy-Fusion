@@ -10,7 +10,13 @@ const RosterSection = ({ team, getTeam }) => {
     const [currentDate, setCurrentDate] = useState(new Date()); //change to current date "2024-03-22"
 
     useEffect(() => {
-        setRosterPlacement(team?.CurrentLineup);
+        if (team && team.Lineups && team.Lineups[formatDate(currentDate)]) {
+            setRosterPlacement(team.Lineups[formatDate(currentDate)]);
+        } else if (team && team.CurrentLineup) {
+            // console.log("ELSE");
+            setRosterPlacement(team.CurrentLineup);
+        }
+        //setRosterPlacement(team?.CurrentLineup);
     }, [team]);
 
     // useEffect(() => {
@@ -50,14 +56,14 @@ const RosterSection = ({ team, getTeam }) => {
     };
 
     useEffect(() => {
-        getTeam();
         if (rosterPlacement && Object.keys(rosterPlacement).length > 0) {
             // console.log("MOTHERFUCK", rosterPlacement);
-            console.log("MADE IT", rosterPlacement);
+            // console.log("MADE IT", rosterPlacement);
             updateLineup();
         }
+
+        getTeam();
         if (team && team.Lineups && team.Lineups[formatDate(currentDate)]) {
-            // console.log("IF");
             setRosterPlacement(team.Lineups[formatDate(currentDate)]);
         } else if (team && team.CurrentLineup) {
             // console.log("ELSE");
@@ -72,15 +78,16 @@ const RosterSection = ({ team, getTeam }) => {
             currentDate,
             rosterPlacement
         );
-        console.log("FUCK", res);
+        // console.log("FUCK", res);
     };
 
     useEffect(() => {
-        if (rosterPlacement && Object.keys(rosterPlacement).length > 0) {
-            // console.log("MOTHERFUCK", rosterPlacement);
-            console.log("MADE IT", rosterPlacement);
-            updateLineup();
-        }
+        // if (rosterPlacement && Object.keys(rosterPlacement).length > 0) {
+        //     // console.log("MOTHERFUCK", rosterPlacement);
+        //     // console.log("MADE IT", rosterPlacement);
+        //     updateLineup();
+        // }
+        // getTeam();
     }, [rosterPlacement]);
 
     const getPlayers = async (ids) => {
@@ -96,7 +103,7 @@ const RosterSection = ({ team, getTeam }) => {
         for (let i = 0; i < ids.length; i += 4) {
             idChunks.push(ids.slice(i, i + 4));
         }
-
+        // console.log
         const fetchPlayers = idChunks.map((idChunk) =>
             fetch(
                 `https://m3nosbczqoii3uygdwrpx4djbq0eakbp.lambda-url.ca-central-1.on.aws/?date=${date}&roster=[${idChunk

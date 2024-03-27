@@ -90,10 +90,38 @@ const FreeAgentsPage = () => {
             return;
         }
         console.log("ADDED", userTeamCopy);
+
+        const today = new Date();
+        const date = `${today.getFullYear()}-${String(
+            today.getMonth() + 1
+        ).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+
+        console.log("FUTURE", userTeamCopy.Lineups);
+
+        for (let date in userTeamCopy.Lineups) {
+            if (date >= today) {
+                for (let position in userTeamCopy.Lineups[date]) {
+                    if (
+                        position.startsWith("BCH") &&
+                        userTeamCopy.Lineups[date][position] === null
+                    ) {
+                        userTeamCopy.Lineups[date][position] = playerId;
+                        break;
+                    }
+                }
+            }
+        }
+        console.log("FUTURE", userTeamCopy.Lineups);
         await teamAccessor.updateTeam(userTeamCopy.id, {
             CurrentLineup: userTeamCopy.CurrentLineup,
+            Lineups: userTeamCopy.Lineups,
         });
-        window.location.reload();
+        await teamAccessor.setLineup(
+            userTeam.id,
+            date,
+            userTeamCopy.CurrentLineup
+        );
+        // window.location.reload();
     };
 
     return (
