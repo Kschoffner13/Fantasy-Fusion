@@ -144,8 +144,8 @@ const RosterSection = ({ team, getTeam }) => {
     //     console.log("ROSTER", roster);
     // }, [roster]);
 
-    const colsB = ["name", "points", "assists", "rebounds", "FP"];
-    const colsH = ["name", "goals", "assists", "FP"];
+    const colsB = ["name", "Pts", "Ast", "Rbs", "FP"];
+    const colsH = ["name", "G", "Ast", "FP"];
     const colsU = ["name", "FP"];
     const glStats = ["name", "FP"];
     const combined = [...new Set([...colsB, ...colsH, ...glStats])];
