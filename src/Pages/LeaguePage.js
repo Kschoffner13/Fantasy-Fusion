@@ -21,6 +21,8 @@ const LeaguePage = () => {
         }
     };
 
+    const getAllLeagueInfo = async () => {};
+
     useEffect(() => {
         verifyAccess();
     }, []);
