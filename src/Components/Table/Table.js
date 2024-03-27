@@ -65,6 +65,9 @@ const Table = ({
                 .filter((key) =>
                     filterKeys.some((filterKey) => key.startsWith(filterKey))
                 )
+                .sort((a, b) =>
+                    a.startsWith("GL") ? 1 : b.startsWith("GL") ? -1 : 0
+                )
                 .map((key, index) => {
                     const player = roster.find(
                         (player) => player.player_id === rosterPlacement[key]
