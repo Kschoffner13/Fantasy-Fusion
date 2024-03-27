@@ -93,6 +93,15 @@ const TeamCreationPage = () => {
                 null,
                 rosterPlacement
             );
+
+            const FLA = new FLAccessor("");
+            // get the dates
+            const id = teamAccessor.getFantasyLeagueID();
+            console.log("ID", id);  
+            const sched = await FLA.makeSchedule(id, new Date(2024, 4, 1), new Date(2024, 5, 1));
+            await FLA.updateFantasyLeague(id, { Schedule: sched });
+            // use the dates to make the schedule and add it to the league
+
             nav(`/${leagueName}/${teamName}`);
         } catch {
             console.log("CREATION FAILED");

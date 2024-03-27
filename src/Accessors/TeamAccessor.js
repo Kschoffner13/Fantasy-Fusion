@@ -2,9 +2,100 @@ import { DataStore } from "@aws-amplify/datastore";
 import { Team, FantasyLeague } from "../models";
 
 class TeamAccessor {
-    constructor(fantasyleagueID = null, userID = null) {
-        this.fantasyleagueID = fantasyleagueID;
-        this.userID = userID;
+
+  constructor(fantasyleagueID = null, userID = null) {
+    this.fantasyleagueID = fantasyleagueID;
+    this.userID = userID;
+  }
+
+  // THESE FUNCTIONS CAN ONLY BE USED IF THE LEAGUE AND USERID ARE SPECIFIED IN THE CTOR
+  // get all teams for a user
+  async getUsersTeams(userID) {
+    const teams = await DataStore.query(Team, (c) => c.UserID.eq(userID));
+    console.log("ACCESSOR", teams);
+    return teams;
+  }
+
+  // get all teams for a league
+  async getLeaugesTeams(fantasyleagueID) {
+    const teams = await DataStore.query(Team, (c) =>
+      c.fantasyleagueID.eq(fantasyleagueID)
+    );
+    return teams;
+  }
+
+  // Setter functions
+  setFantasyLeagueID(fantasyleagueID) {
+    this.fantasyleagueID = fantasyleagueID;
+  }
+
+  setUserID(userID) {
+    this.userID = userID;
+  }
+
+  getFantasyLeagueID() {
+    return this.fantasyleagueID;
+  }
+
+  // OG FUNCTIONS
+  // pass in the league id
+  async saveTeam(
+    Name,
+    TotalPointsFor,
+    TotalPointsAgainst,
+    MatchUpPoints,
+    Wins,
+    Losses,
+    Draws,
+    Lineups,
+    CurrentLineup
+  ) {
+    const teamData = {
+      Name: Name,
+      UserID: this.userID,
+      TotalPointsFor: TotalPointsFor,
+      TotalPointsAgainst: TotalPointsAgainst,
+      MatchUpPoints: MatchUpPoints,
+      Wins: Wins,
+      Losses: Losses,
+      Draws: Draws,
+      Lineups: JSON.stringify(Lineups),
+      fantasyleagueID: this.fantasyleagueID,
+      CurrentLineup: JSON.stringify(CurrentLineup),
+    };
+
+    const message = await DataStore.save(new Team(teamData));
+    return message;
+  }
+
+  // Get all the teams for a user.
+  // async getUsersTeams() {
+  //     const response = await DataStore.query(Team, (c) =>
+  //         c.UserID.eq(this.userID)
+  //     );
+  //     return response;
+  // }
+
+  async getTeams() {
+    const posts = await DataStore.query(Team, (c) =>
+      c.fantasyleagueID.eq(this.fantasyleagueID)
+    );
+    return posts;
+  }
+
+  async getTeamById(teamId) {
+    try {
+      const team = await DataStore.query(Team, teamId);
+      if (team) {
+        console.log("Team found:", team);
+        return team;
+      } else {
+        console.log("Team not found");
+        return null;
+      }
+    } catch (error) {
+      console.error("Error retrieving team:", error);
+
     }
 
     // THESE FUNCTIONS CAN ONLY BE USED IF THE LEAGUE AND USERID ARE SPECIFIED IN THE CTOR
