@@ -73,9 +73,9 @@ const MatchupPage = () => {
         if (match.Team1 === userTeamRaw.id) {
             setUserScore(match.Score.Team1);
             setOppScore(match.Score.Team2);
-            console.log("MATRHC", match, "T", teamsRes);
+            // console.log("MATRHC", match, "T", teamsRes);
             const oppTeamRaw = teamsRes.find((team) => team.id === match.Team2);
-            console.log("MATRHC", oppTeamRaw);
+            // console.log("MATRHC", oppTeamRaw);
             setOppTeam(oppTeamRaw);
         } else {
             setUserScore(match.Score.Team2);
@@ -92,28 +92,24 @@ const MatchupPage = () => {
         getInfo();
     }, []);
 
-    useEffect(() => {
-        console.log("FUICK ME", oppTeam);
-    }, []);
-
     const [currentDate, setCurrentDate] = useState(
         new Date(Date.now() - 86400000)
     );
-    const goBackOneDay = () => {
-        setCurrentDate((prevDate) => {
-            let newDate = new Date(prevDate);
-            newDate.setDate(newDate.getDate() - 1);
-            return newDate;
-        });
-    };
+    // const goBackOneDay = () => {
+    //     setCurrentDate((prevDate) => {
+    //         let newDate = new Date(prevDate);
+    //         newDate.setDate(newDate.getDate() - 1);
+    //         return newDate;
+    //     });
+    // };
 
-    const goForwardOneDay = () => {
-        setCurrentDate((prevDate) => {
-            let newDate = new Date(prevDate);
-            newDate.setDate(newDate.getDate() + 1);
-            return newDate;
-        });
-    };
+    // const goForwardOneDay = () => {
+    //     setCurrentDate((prevDate) => {
+    //         let newDate = new Date(prevDate);
+    //         newDate.setDate(newDate.getDate() + 1);
+    //         return newDate;
+    //     });
+    // };
 
     return (
         <div className="matchup-page">

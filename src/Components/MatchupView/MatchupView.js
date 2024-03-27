@@ -12,10 +12,6 @@ const MatchupView = ({ team, score, reversed = false }) => {
     const [roster, setRoster] = useState([]);
     const [rosterPlacement, setRosterPlacement] = useState([]);
 
-    const printall = () => {
-        console.log("INVIEW", roster, rosterPlacement);
-    };
-
     function getFormattedDate(date, format = "YYYY-MM-DD") {
         const year = date.getFullYear();
         let month = date.getMonth() + 1; // Months are zero based
@@ -110,12 +106,12 @@ const MatchupView = ({ team, score, reversed = false }) => {
         }
     }, [team]);
 
-    useEffect(() => {
-        console.log(roster);
-    }, [roster]);
+    // useEffect(() => {
+    //     console.log(roster);
+    // }, [roster]);
 
     return (
-        <div className="matchup-view" onClick={printall}>
+        <div className="matchup-view">
             <div
                 className="score-header"
                 style={reversed ? { flexDirection: "row-reverse" } : {}}
