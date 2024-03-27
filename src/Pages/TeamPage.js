@@ -60,7 +60,6 @@ const TeamPage = () => {
                                 : team.Name}
                         </h1>
                         <div className="team-record-info">
-                            <h2>2nd Place</h2>
                             <h3>
                                 Record: <span>{team.Wins}</span> -{" "}
                                 <span>{team.Losses}</span> -
