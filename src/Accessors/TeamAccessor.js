@@ -11,7 +11,7 @@ class TeamAccessor {
     // get all teams for a user
     async getUsersTeams(userID) {
         const teams = await DataStore.query(Team, (c) => c.UserID.eq(userID));
-        console.log("ACCESSOR", teams);
+        // console.log("ACCESSOR", teams);
         return teams;
     }
 
@@ -122,7 +122,7 @@ class TeamAccessor {
         } = {}
     ) {
         const original = await DataStore.query(Team, (c) => c.id.eq(teamID));
-        console.log("OG", original);
+        // console.log("OG", original);
         const dic = {
             Name: Name,
             TotalPointsFor: TotalPointsFor,
@@ -180,7 +180,7 @@ class TeamAccessor {
             return;
         }
         const team = await DataStore.query(Team, teamId);
-        console.log("TEAMATMEAMT", team);
+        // console.log("TEAMATMEAMT", team);
         let lineups = team["Lineups"];
         let newLineups = { ...lineups };
 

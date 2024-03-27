@@ -31,7 +31,7 @@ const MatchupSnapshot = ({ leagueName, userTeamId }) => {
 
     const parseInfo = async () => {
         const weekMatches = league.Schedule[week];
-        console.log("BEGIN", weekMatches);
+        // console.log("BEGIN", weekMatches);
         for (let match of weekMatches.Matches) {
             if (match.Team1 === userTeamId || match.Team2 === userTeamId) {
                 const teamAccessor = new TeamAccessor();
@@ -47,7 +47,7 @@ const MatchupSnapshot = ({ leagueName, userTeamId }) => {
                     opp["score"] = match.Score.Team1;
                     opp["name"] = res.Name;
                 }
-                console.log("MATCH", match, opp);
+                // console.log("MATCH", match, opp);
                 setOppTeam(opp);
                 break;
             }
@@ -63,10 +63,10 @@ const MatchupSnapshot = ({ leagueName, userTeamId }) => {
             // Get the previous week
             let lastWeek = "Week" + (weekNumber - 1);
             const lastWeekMatches = league.Schedule[lastWeek];
-            console.log("LAST WEEK");
+            // console.log("LAST WEEK");
             for (let match of lastWeekMatches.Matches) {
                 if (match.Team1 === userTeamId || match.Team2 === userTeamId) {
-                    console.log("LAST", match);
+                    // console.log("LAST", match);
                     if (match.Team1 === userTeamId) {
                         setLastWeekUserScore(match.Score.Team1);
                         setLastWeekOppScore(match.Score.Team2);
@@ -87,14 +87,14 @@ const MatchupSnapshot = ({ leagueName, userTeamId }) => {
     }, []);
 
     useEffect(() => {
-        console.log(league.Schedule);
+        // console.log(league.Schedule);
         if (league && Object.keys(league).length !== 0) {
             getWeek();
         }
     }, [league]);
 
     useEffect(() => {
-        console.log("WEEK", week);
+        // console.log("WEEK", week);
         if (week.length > 0) {
             parseInfo();
             parseInfoLastWeek();
