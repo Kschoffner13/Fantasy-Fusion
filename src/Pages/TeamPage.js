@@ -11,6 +11,7 @@ import AccessVerification from "../Helpers/AccessVerification.js";
 import { useNavigate } from "react-router-dom";
 import TeamAccessor from "../Accessors/TeamAccessor.js";
 import { toBeEnabled } from "@testing-library/jest-dom/matchers.js";
+import FLAccessor from "../Accessors/FLAccessor.js";
 
 const TeamPage = () => {
     const { leagueName, teamName } = useParams();
@@ -55,21 +56,24 @@ const TeamPage = () => {
                     <img src={logo}></img>
                     <div className="team-info-text">
                         <h1>
-                            {team.Name.length > 10
-                                ? team.Name.substring(0, 10) + "..."
-                                : team.Name}
+                            {team?.Name.length > 10
+                                ? team?.Name.substring(0, 10) + "..."
+                                : team?.Name}
                         </h1>
                         <div className="team-record-info">
                             <h3>
-                                Record: <span>{team.Wins}</span> -{" "}
-                                <span>{team.Losses}</span> -
-                                <span> {team.Draws}</span>
+                                Record: <span>{team?.Wins}</span> -{" "}
+                                <span>{team?.Losses}</span> -
+                                <span> {team?.Draws}</span>
                             </h3>
                         </div>
                         <p>Owner: {user.preferred_username}</p>
                     </div>
                 </div>
-                <MatchupSnapshot />
+                <MatchupSnapshot
+                    leagueName={leagueName}
+                    userTeamId={teamName}
+                />
             </div>
             <RosterSection team={team} />
             <Footer />

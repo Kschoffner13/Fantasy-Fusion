@@ -10,7 +10,7 @@ const RosterSection = ({ team }) => {
     const [currentDate, setCurrentDate] = useState(new Date("2024-03-22")); //change to current date
 
     useEffect(() => {
-        setRosterPlacement(team.CurrentLineup);
+        setRosterPlacement(team?.CurrentLineup);
     }, [team]);
 
     // useEffect(() => {
