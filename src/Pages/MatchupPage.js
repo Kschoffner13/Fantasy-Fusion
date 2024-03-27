@@ -437,11 +437,11 @@ const MatchupPage = () => {
     return (
         <div className="matchup-page">
             <MainHeader />
-            <div className="date-selector">
+            {/* <div className="date-selector">
                 <button onClick={goBackOneDay}>&#9667;</button>
                 <p>{currentDate.toLocaleDateString()}</p>
                 <button onClick={goForwardOneDay}>&#9657;</button>
-            </div>
+            </div> */}
             <div className="matchup-overview">
                 <div className="user-team-section">
                     <MatchupView team={userTeam} />
