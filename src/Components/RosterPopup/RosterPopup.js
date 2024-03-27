@@ -12,7 +12,7 @@ const RosterPopup = ({
         return null;
     }
 
-    console.log(toSwap);
+    // console.log(toSwap);
     const outPlayer = roster.find((player) => player.player_id === toSwap.id);
 
     //get players on bench filter by pos
@@ -23,13 +23,13 @@ const RosterPopup = ({
 
     let matchingPlayers = [];
 
-    console.log("BCHIDS", bchIds);
+    // console.log("BCHIDS", bchIds);
 
     const bchPlayers = roster.filter((player) =>
         bchIds.includes(player.player_id)
     );
 
-    console.log("BCHplayers", bchPlayers);
+    // console.log("BCHplayers", bchPlayers);
 
     if (toSwap.slot == "SM") {
         matchingPlayers = bchPlayers.filter(
@@ -43,7 +43,7 @@ const RosterPopup = ({
         );
     }
 
-    console.log("OPEN", matchingPlayers, outPlayer);
+    // console.log("OPEN", matchingPlayers, outPlayer);
 
     const swapPlayers = (inPlayerId) => {
         const inSlot = Object.keys(rosterPlacement).find(

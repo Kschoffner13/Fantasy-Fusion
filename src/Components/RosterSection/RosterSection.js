@@ -4,7 +4,7 @@ import Table from "../Table/Table.js";
 import TeamAccessor from "../../Accessors/TeamAccessor.js";
 
 const RosterSection = ({ team }) => {
-    console.log("ROS SECT", team);
+    // console.log("ROS SECT", team);
     const [roster, setRoster] = useState([]);
     const [rosterPlacement, setRosterPlacement] = useState({});
     const [currentDate, setCurrentDate] = useState(new Date("2024-03-22")); //change to current date
@@ -28,7 +28,7 @@ const RosterSection = ({ team }) => {
     // }, [rosterPlacement]);
 
     useEffect(() => {
-        console.log("Date changed", currentDate);
+        // console.log("Date changed", currentDate);
         let ids = [];
         if (rosterPlacement) {
             for (let [key, value] of Object.entries(rosterPlacement)) {
@@ -37,7 +37,7 @@ const RosterSection = ({ team }) => {
                 }
             }
         }
-        console.log("IDS", ids, rosterPlacement);
+        // console.log("IDS", ids, rosterPlacement);
         getPlayers(ids);
     }, [rosterPlacement, currentDate]);
 
@@ -51,10 +51,10 @@ const RosterSection = ({ team }) => {
 
     useEffect(() => {
         if (team && team.Lineups && team.Lineups[formatDate(currentDate)]) {
-            console.log("IF");
+            // console.log("IF");
             setRosterPlacement(team.Lineups[formatDate(currentDate)]);
         } else if (team && team.CurrentLineup) {
-            console.log("ELSE");
+            // console.log("ELSE");
             setRosterPlacement(team.CurrentLineup);
         }
     }, [currentDate]);
@@ -66,7 +66,7 @@ const RosterSection = ({ team }) => {
 
     useEffect(() => {
         if (rosterPlacement && Object.keys(rosterPlacement).length > 0) {
-            console.log("MOTHERFUCK", rosterPlacement);
+            // console.log("MOTHERFUCK", rosterPlacement);
             updateLineup();
         }
     }, [rosterPlacement]);
@@ -78,13 +78,13 @@ const RosterSection = ({ team }) => {
         }
 
         const date = getFormattedDate(currentDate);
-        console.log("GRABBING");
+        // console.log("GRABBING");
         const fetchPlayers = ids.map((id) =>
             fetch(
                 `https://m3nosbczqoii3uygdwrpx4djbq0eakbp.lambda-url.ca-central-1.on.aws/?date=${date}&roster=["${id}"]`
             )
         );
-        console.log("GRABBed");
+        // console.log("GRABBed");
         const responses = await Promise.all(fetchPlayers);
 
         for (const res of responses) {
@@ -97,12 +97,12 @@ const RosterSection = ({ team }) => {
                             (p) => p.player_id === player.player_id
                         )
                     ) {
-                        console.log("UPDATING", player);
+                        // console.log("UPDATING", player);
                         return prevPlayers.map((p) =>
                             p.player_id === player.player_id ? player : p
                         );
                     } else {
-                        console.log("ADDING", player);
+                        // console.log("ADDING", player);
                         // If not, add the player to the roster
                         return [...prevPlayers, player];
                     }
@@ -113,9 +113,9 @@ const RosterSection = ({ team }) => {
         }
     };
 
-    useEffect(() => {
-        console.log("ROSTER", roster);
-    }, [roster]);
+    // useEffect(() => {
+    //     console.log("ROSTER", roster);
+    // }, [roster]);
 
     const colsB = ["name", "points", "assists", "rebounds", "FP"];
     const colsH = ["name", "goals", "assists", "FP"];

@@ -42,10 +42,10 @@ const TeamPage = () => {
         getTeam();
     }, []);
 
-    useEffect(() => {
-        console.log(user);
-        console.log("REAK TEANM", team);
-    }, [user]);
+    // useEffect(() => {
+    //     console.log(user);
+    //     console.log("REAK TEANM", team);
+    // }, [user]);
 
     return (
         <div className="league-page">
