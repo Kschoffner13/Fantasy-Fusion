@@ -184,7 +184,13 @@ const FreeAgentsPage = () => {
             </div>
             <SimpleTable
                 headers={["name", "FP"]}
-                itemList={filteredFa}
+                itemList={
+                    league === "nba"
+                        ? nbaFA
+                        : league === "nhl"
+                        ? nhlFA
+                        : filteredFa
+                }
                 showButton={true}
                 buttonFunction={addPlayer}
             />
