@@ -99,10 +99,16 @@ const Table = ({
                                             <div key={index}>
                                                 {stat == "name" ? (
                                                     <div className="player-basic-bio">
-                                                        <h5>{player[stat]}</h5>
+                                                        <h5>
+                                                            {player.stats[stat]}
+                                                        </h5>
                                                         <h6>
-                                                            Team -{" "}
-                                                            {player.position}
+                                                            {player.stats.team}{" "}
+                                                            -{" "}
+                                                            {
+                                                                player.stats
+                                                                    .position
+                                                            }
                                                         </h6>
                                                         {/* <p>A vs B @ 5:00pm</p> */}
                                                     </div>
@@ -120,7 +126,8 @@ const Table = ({
                                                             {player.stats[col]}
                                                         </h5>
                                                         <h6>
-                                                            Team -{" "}
+                                                            {player.stats.team}{" "}
+                                                            -{" "}
                                                             {
                                                                 player.stats
                                                                     .position
