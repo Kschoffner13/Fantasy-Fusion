@@ -83,7 +83,13 @@ const Table = ({
                                     )}{" "}
                                 </div>
                             )}
-                            <div key={index} className="row">
+                            <div
+                                key={index}
+                                className="row"
+                                style={{
+                                    gridTemplateColumns: gridTemplateColumns,
+                                }}
+                            >
                                 {player ? (
                                     key.startsWith("GL") ? (
                                         glStats.map((stat, index) => (

@@ -20,15 +20,16 @@
 }
 
 .row {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    /* justify-content: space-between; */
     padding: 5px 10px;
     border-bottom: 1px solid #ddd;
     align-items: center;
 }
 
-.row p{
+.row div{
     margin: 0;
+    width: fit-content;
 }
 
 .cell {
@@ -51,15 +52,16 @@
     font-size: 0.6em;
     display: flex;
     justify-content: center;
+    
     align-items: center;
-    grid-column: 1;
+    grid-column:100;
     border-radius: 100%;
     border: 1px solid #0A901A;
     background: radial-gradient(circle at center, #28A74522, #28A745AA);
     color: #ffffff99;
     font-weight: bold;
     padding: auto;
-    margin-left: 5px;
+    
 }
 
 .roster-btn:hover {
