@@ -1,0 +1,140 @@
+.App-header {
+    background-color: #161616;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    padding: 20vh 0;
+  }
+
+.App-header .logo-img{
+    filter: brightness(0) invert(1);
+    width: 200px;
+}
+
+.create-league-btn{
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    background-color: #0A901A;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+}
+
+.home-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.home-input {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-right: 20px;
+}
+
+.home-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #0A901A;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.amplify-tabs{
+    text-align: center;
+    margin: 10vw 0;
+}
+
+.amplify-tabs__list{
+    padding-left: 2vw;
+    display: flex;
+    justify-content: space-between;
+    width: 50vw;
+    margin: 0 auto;
+}
+
+.amplify-flex {
+    border-color: #0A901A;
+    border-radius: 20px;
+    padding: 5px; /* Reduced padding */
+    margin:0 auto;
+    color: #fff; /* Light text */
+    width: 50vw;
+
+    text-align: center;
+}
+
+.amplify-flex fieldset{
+    background-color: #1f1f1f;
+}
+
+.amplify-tabs__item {
+    padding: 5px 10px; /* Reduced padding */
+    font-size: 14px; /* Smaller text */
+    background-color: #0A901A;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 2px 5px; /* Reduced margin */
+    transition: background-color 0.3s ease;
+}
+
+.amplify-tabs__item:hover {
+    background-color: #086814;
+}
+
+.amplify-button {
+    padding: 5px 10px; /* Reduced padding */
+    font-size: 14px; /* Smaller text */
+    background-color: #0A901A;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px 5px; /* Reduced margin */
+    transition: background-color 0.3s ease;
+}
+
+.amplify-field__show-password{
+    padding: 5px 50px
+}
+
+.amplify-button:hover {
+    background-color: #086814;
+}
+
+.amplify-input {
+    padding: 5px; /* Reduced padding */
+    font-size: 14px; /* Smaller text */
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin: 10px 0 20px 0;
+    width: 50%;
+    background-color: #333; /* Darker background */
+    color: #fff; /* Light text */
+}
+
+.amplify-label {
+    font-size: 14px; /* Smaller text */
+    color: #fff; /* Light text */
+    margin-bottom: 2px; /* Reduced margin */
+    display: block;
+}
+
+.amplify-visually-hidden legend{
+    margin: 10px 0;
+    font-size: 1.5em;
+    font-weight: bold;
+}
