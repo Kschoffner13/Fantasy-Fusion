@@ -97,7 +97,7 @@ class TeamAccessor {
       console.error("Error retrieving team:", error);
 
     }
-
+  }
     // THESE FUNCTIONS CAN ONLY BE USED IF THE LEAGUE AND USERID ARE SPECIFIED IN THE CTOR
     // get all teams for a user
     async getUsersTeams(userID) {
