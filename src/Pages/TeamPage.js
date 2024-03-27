@@ -75,7 +75,7 @@ const TeamPage = () => {
                     userTeamId={teamName}
                 />
             </div>
-            <RosterSection team={team} />
+            <RosterSection team={team} getTeam={getTeam} />
             <Footer />
         </div>
     );

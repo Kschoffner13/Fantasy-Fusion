@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import Table from "../Table/Table.js";
 import TeamAccessor from "../../Accessors/TeamAccessor.js";
 
-const RosterSection = ({ team }) => {
+const RosterSection = ({ team, getTeam }) => {
     // console.log("ROS SECT", team);
     const [roster, setRoster] = useState([]);
     const [rosterPlacement, setRosterPlacement] = useState({});
-    const [currentDate, setCurrentDate] = useState(new Date("2024-03-22")); //change to current date
+    const [currentDate, setCurrentDate] = useState(new Date()); //change to current date "2024-03-22"
 
     useEffect(() => {
         setRosterPlacement(team?.CurrentLineup);
@@ -30,15 +30,15 @@ const RosterSection = ({ team }) => {
     useEffect(() => {
         // console.log("Date changed", currentDate);
         let ids = [];
-        if (rosterPlacement) {
+        if (rosterPlacement && Object.keys(rosterPlacement).length !== 0) {
             for (let [key, value] of Object.entries(rosterPlacement)) {
                 if (value) {
                     ids.push(value);
                 }
             }
+            getPlayers(ids);
         }
         // console.log("IDS", ids, rosterPlacement);
-        getPlayers(ids);
     }, [rosterPlacement, currentDate]);
 
     const formatDate = (date) => {
@@ -50,6 +50,12 @@ const RosterSection = ({ team }) => {
     };
 
     useEffect(() => {
+        getTeam();
+        if (rosterPlacement && Object.keys(rosterPlacement).length > 0) {
+            // console.log("MOTHERFUCK", rosterPlacement);
+            console.log("MADE IT", rosterPlacement);
+            updateLineup();
+        }
         if (team && team.Lineups && team.Lineups[formatDate(currentDate)]) {
             // console.log("IF");
             setRosterPlacement(team.Lineups[formatDate(currentDate)]);
@@ -61,12 +67,18 @@ const RosterSection = ({ team }) => {
 
     const updateLineup = async () => {
         const teamAccessor = new TeamAccessor();
-        await teamAccessor.setLineup(team.id, currentDate, rosterPlacement);
+        const res = await teamAccessor.setLineup(
+            team.id,
+            currentDate,
+            rosterPlacement
+        );
+        console.log("FUCK", res);
     };
 
     useEffect(() => {
         if (rosterPlacement && Object.keys(rosterPlacement).length > 0) {
             // console.log("MOTHERFUCK", rosterPlacement);
+            console.log("MADE IT", rosterPlacement);
             updateLineup();
         }
     }, [rosterPlacement]);
@@ -78,35 +90,43 @@ const RosterSection = ({ team }) => {
         }
 
         const date = getFormattedDate(currentDate);
-        // console.log("GRABBING");
-        const fetchPlayers = ids.map((id) =>
+
+        // Group ids into chunks of 4
+        const idChunks = [];
+        for (let i = 0; i < ids.length; i += 4) {
+            idChunks.push(ids.slice(i, i + 4));
+        }
+
+        const fetchPlayers = idChunks.map((idChunk) =>
             fetch(
-                `https://m3nosbczqoii3uygdwrpx4djbq0eakbp.lambda-url.ca-central-1.on.aws/?date=${date}&roster=["${id}"]`
+                `https://m3nosbczqoii3uygdwrpx4djbq0eakbp.lambda-url.ca-central-1.on.aws/?date=${date}&roster=[${idChunk
+                    .map((id) => `"${id}"`)
+                    .join(",")}]`
             )
         );
-        // console.log("GRABBed");
+
         const responses = await Promise.all(fetchPlayers);
 
         for (const res of responses) {
             if (res.ok) {
-                const player = (await res.json())[0];
-                setRoster((prevPlayers) => {
-                    // If the player is already in the roster, update the player
-                    if (
-                        prevPlayers.find(
-                            (p) => p.player_id === player.player_id
-                        )
-                    ) {
-                        // console.log("UPDATING", player);
-                        return prevPlayers.map((p) =>
-                            p.player_id === player.player_id ? player : p
-                        );
-                    } else {
-                        // console.log("ADDING", player);
-                        // If not, add the player to the roster
-                        return [...prevPlayers, player];
-                    }
-                });
+                const players = await res.json();
+                for (const player of players) {
+                    setRoster((prevPlayers) => {
+                        // If the player is already in the roster, update the player
+                        if (
+                            prevPlayers.find(
+                                (p) => p.player_id === player.player_id
+                            )
+                        ) {
+                            return prevPlayers.map((p) =>
+                                p.player_id === player.player_id ? player : p
+                            );
+                        } else {
+                            // If not, add the player to the roster
+                            return [...prevPlayers, player];
+                        }
+                    });
+                }
             } else {
                 console.log("Error Accessing Database", res);
             }
