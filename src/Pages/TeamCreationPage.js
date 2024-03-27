@@ -98,7 +98,7 @@ const TeamCreationPage = () => {
             // get the dates
             const id = teamAccessor.getFantasyLeagueID();
             console.log("ID", id);  
-            const sched = await FLA.makeSchedule(id, new Date(2024, 4, 1), new Date(2024, 5, 1));
+            const sched = await FLA.makeSchedule(id, new Date(2024, 2, 1), new Date(2024, 4, 31));
             await FLA.updateFantasyLeague(id, { Schedule: sched });
             // use the dates to make the schedule and add it to the league
 
