@@ -13,51 +13,12 @@ import MainHeader from "../Components/MainHeader/MainHeader";
 import "../Styles/homePage.css";
 import Footer from "../Components/Footer/Footer";
 
-async function handleSignOut() {
-    try {
-        await signOut();
-    } catch (error) {
-        console.log("error signing out: ", error);
-    }
-}
-
-async function test() {
-    const FLA = new FLAccessor("3c4d45b8-20e1-702a-9302-09873f8e9c8a");
-
-    const sch = await FLA.makeSchedule(
-        "086ff1a8-ebe7-4eaa-8f4d-522afc082bba",
-        new Date(2024, 1, 15),
-        new Date(2024, 2, 22)
-    );
-
-    await FLA.updateFantasyLeague("086ff1a8-ebe7-4eaa-8f4d-522afc082bba", {
-        Schedule: sch,
-    });
-}
-
-async function test2() {
-    const I = new inviteClass();
-    const response = await I.sendInvite("kschoffner@gmail.com");
-    console.log(response);
-}
-
 const Home = () => {
     const [leagueCode, setLeagueCode] = useState("");
     const nav = useNavigate();
     const gotoTeamCreation = () => {
-        //CHECK IF CODE VALID BEFOREHAND
-
+        //CHECK IF CODE VALID BEFOREHAND (HANDLE IN THE NEXT PAGE)
         nav(`/${leagueCode}/createteam`);
-    };
-
-    const [userId, setUserId] = useState("");
-    const [teamId, setTeamId] = useState("");
-    const [leagueId, setLeagueId] = useState("");
-
-    const accessVerificationTest = async () => {
-        const verifier = new AccessVerification(userId, leagueId);
-        const res = await verifier.verifyLeagueAccess();
-        console.log(res);
     };
 
     return (
@@ -65,27 +26,36 @@ const Home = () => {
             <div style={{ padding: "0 5%" }}>
                 <MainHeader />
                 <header className="App-header">
-                    <img src={logo} alt="logo" />
-                    <h1>Fantasy Fusion</h1>
+                    <img src={logo} alt="logo" className="logo-img" />
                     <p>
                         Ever think one ball wasn't enough. Now is your
                         oppurtunity to enjoy all the balls you could ever wish
                         for
                     </p>
 
-                    <NavLink to="/createleague">CREATE LEAGUE</NavLink>
-                    <div>
+                    <NavLink to="/createleague" className="create-league-btn">
+                        CREATE LEAGUE
+                    </NavLink>
+                    <p>or</p>
+                    <div className="home-container">
                         <input
                             type="text"
+                            className="home-input"
                             onChange={(event) =>
                                 setLeagueCode(event.target.value)
                             }
+                            placeholder="Invite Code"
                         />
-                        <button onClick={gotoTeamCreation}>Create Team</button>
+                        <button
+                            className="home-button"
+                            onClick={gotoTeamCreation}
+                        >
+                            Create Team
+                        </button>
                     </div>
                 </header>
+                <Footer />
             </div>
-            <Footer />
         </Authenticator>
     );
 };
