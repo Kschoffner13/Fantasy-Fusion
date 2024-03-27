@@ -15,12 +15,16 @@ const Table = ({
     const columnCount = hasButton ? headers.length + 1 : headers.length; // Adjust column count based on hasButton
     const gridTemplateColumns = `2fr ${"1fr ".repeat(columnCount - 1)}`;
 
-    const [toSwap, setToSwap] = useState({ id: null, slot: null });
+    const [toSwap, setToSwap] = useState({
+        id: null,
+        slot: null,
+        posSlot: null,
+    });
 
-    const swap = (playerId, pos) => {
-        setToSwap({ id: playerId, slot: pos });
+    const swap = (playerId, pos, posSlot) => {
+        setToSwap({ id: playerId, slot: pos, posSlot: posSlot });
         setIsOpen(true);
-        console.log(playerId, pos);
+        //console.log(playerId, pos);
         // setRosterPlacement((prevState) => ({
         //     ...prevState,
         //     GRD1: 19,
@@ -45,6 +49,7 @@ const Table = ({
                     isOpen={isOpen}
                     setIsOpen={setIsOpen}
                     toSwap={toSwap}
+                    //outSlot=
                 />
             ) : null}
             <div
@@ -60,10 +65,15 @@ const Table = ({
                 .filter((key) =>
                     filterKeys.some((filterKey) => key.startsWith(filterKey))
                 )
+                .sort((a, b) =>
+                    a.startsWith("GL") ? 1 : b.startsWith("GL") ? -1 : 0
+                )
                 .map((key, index) => {
                     const player = roster.find(
-                        (player) => player.id === rosterPlacement[key]
+                        (player) => player.player_id === rosterPlacement[key]
                     );
+                    //const player = p?.stats;
+                    //console.log("OKASAFAUFY", player);
                     return (
                         <>
                             {key.startsWith("GL") && (
@@ -76,7 +86,13 @@ const Table = ({
                                     )}{" "}
                                 </div>
                             )}
-                            <div key={index} className="row">
+                            <div
+                                key={index}
+                                className="row"
+                                style={{
+                                    gridTemplateColumns: gridTemplateColumns,
+                                }}
+                            >
                                 {player ? (
                                     key.startsWith("GL") ? (
                                         glStats.map((stat, index) => (
@@ -84,10 +100,17 @@ const Table = ({
                                                 {stat == "name" ? (
                                                     <div className="player-basic-bio">
                                                         <h5>
-                                                            {player[stat]} - pos
+                                                            {player.stats[stat]}
                                                         </h5>
-                                                        <h6>A - pos</h6>
-                                                        <p>A vs B @ 5:00pm</p>
+                                                        <h6>
+                                                            {player.stats.team}{" "}
+                                                            -{" "}
+                                                            {
+                                                                player.stats
+                                                                    .position
+                                                            }
+                                                        </h6>
+                                                        {/* <p>A vs B @ 5:00pm</p> */}
                                                     </div>
                                                 ) : (
                                                     player[stat] || "-"
@@ -100,13 +123,20 @@ const Table = ({
                                                 {col == "name" ? (
                                                     <div className="player-basic-bio">
                                                         <h5>
-                                                            {player[col]} - pos
+                                                            {player.stats[col]}
                                                         </h5>
-                                                        <h6>A - pos</h6>
-                                                        <p>A vs B @ 5:00pm</p>
+                                                        <h6>
+                                                            {player.stats.team}{" "}
+                                                            -{" "}
+                                                            {
+                                                                player.stats
+                                                                    .position
+                                                            }
+                                                        </h6>
+                                                        {/* <p>A vs B @ 5:00pm</p> */}
                                                     </div>
                                                 ) : (
-                                                    player[col] || "-"
+                                                    player.stats[col] || "-"
                                                 )}
                                             </div>
                                         ))
@@ -119,8 +149,9 @@ const Table = ({
                                         className="roster-btn"
                                         onClick={() =>
                                             swap(
-                                                player.id,
-                                                key.replace(/\d+/g, "")
+                                                player?.player_id,
+                                                key.replace(/\d+/g, ""),
+                                                key
                                             )
                                         }
                                     >

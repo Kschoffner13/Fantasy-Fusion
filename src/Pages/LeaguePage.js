@@ -28,14 +28,14 @@ const LeaguePage = () => {
     return (
         <div className="league-page">
             <MainHeader />
-            <div className="matchup-snapshots">
+            {/* <div className="matchup-snapshots">
                 <MatchupSnapshot />
                 <MatchupSnapshot />
                 <MatchupSnapshot />
                 <MatchupSnapshot />
                 <MatchupSnapshot />
                 <MatchupSnapshot />
-            </div>
+            </div> */}
             <h1>{leagueName}</h1>
             <div className="league-tables">
                 <Table

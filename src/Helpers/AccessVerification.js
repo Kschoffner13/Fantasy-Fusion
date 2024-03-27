@@ -10,7 +10,7 @@ class AccessVerification {
     async verifyTeamAccess(teamId) {
         const teamAccessor = new TeamAccessor();
         const res = await teamAccessor.getTeamById(teamId);
-        console.log("HERE", res);
+        //console.log("HERE", res);
         if (
             this.leagueId === res?.fantasyleagueID &&
             this.userId === res?.UserID
