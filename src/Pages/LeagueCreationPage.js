@@ -73,7 +73,11 @@ const LeagueCreationPage = () => {
                 null
             );
             console.log("USEME", status.id);
-            leagueAccessor.makeSchedule(status.id, new Date(2024, 4, 1), new Date(2024, 5, 1));
+            leagueAccessor.makeSchedule(
+                status.id,
+                new Date(2024, 4, 1),
+                new Date(2024, 5, 1)
+            );
             sendInvites(status.id);
             nav(`/${status.id}/createteam`);
         } catch (error) {
@@ -117,31 +121,31 @@ const LeagueCreationPage = () => {
                         onChange={(e) => setPlayoffStartDate(e.target.value)}
                     />
                 </label>
-                <label>
+                {/* <label>
                     Weekly Pickups:
                     <input
                         type="number"
                         value={weeklyPickups}
                         onChange={(e) => setWeeklyPickups(e.target.value)}
                     />
-                </label>
-                <label>
+                </label> */}
+                {/* <label>
                     Veto Enabled:
                     <input
                         type="checkbox"
                         checked={vetoEnabled}
                         onChange={(e) => setVetoEnabled(e.target.checked)}
                     />
-                </label>
-                <label>
+                </label> */}
+                {/* <label>
                     Roster Size:
                     <input
                         type="number"
                         value={rosterSize}
                         onChange={(e) => setRosterSize(e.target.value)}
                     />
-                </label>
-                <label>
+                </label> */}
+                {/* <label>
                     Included Leagues:
                     <select
                         value={includedLeagues}
@@ -151,7 +155,7 @@ const LeagueCreationPage = () => {
                         <option value="nhl">NHL</option>
                         <option value="both">NBA + NHL</option>
                     </select>
-                </label>
+                </label> */}
                 <label>
                     Number of Teams:
                     <input
@@ -173,7 +177,9 @@ const LeagueCreationPage = () => {
                     </label>
                 ))}
             </form>
-            <button onClick={create}>Create</button>
+            <button onClick={create} className="create-button">
+                Create
+            </button>
         </div>
     );
 };
