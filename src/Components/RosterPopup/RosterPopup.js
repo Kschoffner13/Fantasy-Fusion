@@ -57,7 +57,7 @@ const RosterPopup = ({
         setRosterPlacement((prevState) => ({
             ...prevState,
             [toSwap.posSlot]: inPlayerId,
-            [outSlot]: outPlayer?.player_id,
+            [outSlot]: outPlayer?.player_id ? outPlayer.player_id : null,
         }));
         setIsOpen(false);
     };

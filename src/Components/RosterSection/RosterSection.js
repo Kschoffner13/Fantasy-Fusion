@@ -7,7 +7,7 @@ const RosterSection = ({ team }) => {
     console.log("ROS SECT", team);
     const [roster, setRoster] = useState([]);
     const [rosterPlacement, setRosterPlacement] = useState({});
-    const [currentDate, setCurrentDate] = useState(new Date()); //change to current date
+    const [currentDate, setCurrentDate] = useState(new Date("2024-03-22")); //change to current date
 
     useEffect(() => {
         setRosterPlacement(team.CurrentLineup);
@@ -76,19 +76,40 @@ const RosterSection = ({ team }) => {
         if (ids.length <= 0) {
             return;
         }
-        console.log("GRABBING");
-        const list_string = `["${ids.join('","')}"]`;
+
         const date = getFormattedDate(currentDate);
-        const res = await fetch(
-            `https://m3nosbczqoii3uygdwrpx4djbq0eakbp.lambda-url.ca-central-1.on.aws/?date=${date}&roster=${list_string}`
+        console.log("GRABBING");
+        const fetchPlayers = ids.map((id) =>
+            fetch(
+                `https://m3nosbczqoii3uygdwrpx4djbq0eakbp.lambda-url.ca-central-1.on.aws/?date=${date}&roster=["${id}"]`
+            )
         );
-        console.log("GRABBED");
-        if (res.ok) {
-            const players = await res.json();
-            setRoster(players);
-            console.log(players);
-        } else {
-            console.log("Error Accessing Database");
+        console.log("GRABBed");
+        const responses = await Promise.all(fetchPlayers);
+
+        for (const res of responses) {
+            if (res.ok) {
+                const player = (await res.json())[0];
+                setRoster((prevPlayers) => {
+                    // If the player is already in the roster, update the player
+                    if (
+                        prevPlayers.find(
+                            (p) => p.player_id === player.player_id
+                        )
+                    ) {
+                        console.log("UPDATING", player);
+                        return prevPlayers.map((p) =>
+                            p.player_id === player.player_id ? player : p
+                        );
+                    } else {
+                        console.log("ADDING", player);
+                        // If not, add the player to the roster
+                        return [...prevPlayers, player];
+                    }
+                });
+            } else {
+                console.log("Error Accessing Database", res);
+            }
         }
     };
 
@@ -98,7 +119,7 @@ const RosterSection = ({ team }) => {
 
     const colsB = ["name", "points", "assists", "rebounds", "FP"];
     const colsH = ["name", "goals", "assists", "FP"];
-    const colsU = ["name", "FPPG"];
+    const colsU = ["name", "FP"];
     const glStats = ["name", "FP"];
     const combined = [...new Set([...colsB, ...colsH, ...glStats])];
 

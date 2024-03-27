@@ -72,6 +72,7 @@ const FreeAgentsPage = () => {
         let userTeamCopy = { ...userTeam };
         // Create a copy of userTeam.Lineup
         userTeamCopy.CurrentLineup = { ...userTeam.CurrentLineup };
+        //const dayLineup = {}
         // Modify the copy
         let playerAdded = false;
         for (let [key, value] of Object.entries(userTeamCopy.CurrentLineup)) {
