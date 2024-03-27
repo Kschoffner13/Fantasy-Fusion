@@ -6,12 +6,18 @@ import MatchupSnapshot from "../Components/MatchupSnapshot/MatchupSnapshot";
 import { useNavigate } from "react-router-dom";
 import AccessVerification from "../Helpers/AccessVerification.js";
 import { getCurrentUser } from "aws-amplify/auth";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../Components/Footer/Footer.js";
+import FLAccessor from "../Accessors/FLAccessor.js";
+import TeamAccessor from "../Accessors/TeamAccessor.js";
+import SimpleTable from "../Components/Table/SimpleTable.js";
 
 const LeaguePage = () => {
     const { leagueName } = useParams();
     const nav = useNavigate();
+
+    const [league, setLeague] = useState({});
+    const [teams, setTeams] = useState([]);
 
     const verifyAccess = async () => {
         const userId = (await getCurrentUser()).userId;
@@ -21,10 +27,37 @@ const LeaguePage = () => {
         }
     };
 
-    const getAllLeagueInfo = async () => {};
+    const getAllLeagueInfo = async () => {
+        const leagueAccessor = new FLAccessor("");
+        const teamAccessor = new TeamAccessor();
+
+        const res = await leagueAccessor.getFantasyLeague(leagueName);
+        let teamRes = await teamAccessor.getLeaugesTeams(leagueName);
+
+        // Sort teams by win percentage
+        teamRes = teamRes.sort((a, b) => {
+            const aWinPerc = a.Wins / (a.Wins + a.Losses + a.Draws);
+            const bWinPerc = b.Wins / (b.Wins + b.Losses + b.Draws);
+
+            // Sort in descending order
+            return bWinPerc - aWinPerc;
+        });
+
+        setLeague(res);
+        setTeams(teamRes);
+    };
+
+    useEffect(() => {
+        console.log("teams", teams);
+    }, [teams]);
+
+    useEffect(() => {
+        console.log("bother", league);
+    }, [league]);
 
     useEffect(() => {
         verifyAccess();
+        getAllLeagueInfo();
     }, []);
 
     return (
@@ -38,32 +71,12 @@ const LeaguePage = () => {
                 <MatchupSnapshot />
                 <MatchupSnapshot />
             </div> */}
-            <h1>{leagueName}</h1>
+            <h1>{league.Name}</h1>
             <div className="league-tables">
-                <Table
-                    headers={["test"]}
-                    roster={["test"]}
-                    rosterPlacement={[]}
-                    setRosterPlacement={null}
-                    filterKeys={null}
-                    title={"Fantasy Leaders"}
-                />
-
-                <Table
-                    headers={["test"]}
-                    roster={["test"]}
-                    rosterPlacement={[]}
-                    setRosterPlacement={null}
-                    filterKeys={null}
-                    title={"Standings"}
-                />
-                <Table
-                    headers={["test"]}
-                    roster={["test"]}
-                    rosterPlacement={[]}
-                    setRosterPlacement={null}
-                    filterKeys={null}
-                    title={"Transactions"}
+                <SimpleTable
+                    headers={["Name", "Wins", "Losses", "Draws"]}
+                    itemList={teams}
+                    showButton={false}
                 />
             </div>
             <Footer />
