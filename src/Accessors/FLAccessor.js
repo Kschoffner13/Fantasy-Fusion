@@ -59,9 +59,7 @@ class FLAccessor {
       Schedule = null,
     } = {}
   ) {
-    const original = await DataStore.query(FantasyLeague, (c) =>
-      c.and((c) => [c.id.eq(id), c.OwnerID.eq(this.ownerID)])
-    );
+    const original = await DataStore.query(FantasyLeague, (c) => c.id.eq(id));
 
     console.log(Schedule)
     const dic = {
@@ -243,6 +241,7 @@ class FLAccessor {
     console.log(Schedule);
     return Schedule;
   }
+
 }
 export default FLAccessor;
 
