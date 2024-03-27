@@ -61,21 +61,12 @@ const LeaguePage = () => {
     };
 
     useEffect(() => {
-        console.log("Matchups", matchups);
-    }, [matchups]);
-
-    useEffect(() => {
         if (week.length > 0) {
             setMatchups(league.Schedule[week].Matches);
         }
     }, [week]);
 
     useEffect(() => {
-        console.log("teams", teams);
-    }, [teams]);
-
-    useEffect(() => {
-        console.log("bother", league);
         getWeek();
     }, [league]);
 
