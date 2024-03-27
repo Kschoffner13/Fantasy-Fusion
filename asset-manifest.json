@@ -1,16 +1,17 @@
 {
   "files": {
-    "main.css": "/Fantasy-Fusion/static/css/main.d203a018.css",
-    "main.js": "/Fantasy-Fusion/static/js/main.a7ac0c5b.js",
+    "main.css": "/Fantasy-Fusion/static/css/main.2271e09c.css",
+    "main.js": "/Fantasy-Fusion/static/js/main.35e55c3b.js",
     "static/js/592.f26077c6.chunk.js": "/Fantasy-Fusion/static/js/592.f26077c6.chunk.js",
     "static/media/logo.png": "/Fantasy-Fusion/static/media/logo.a385dda7b9418ced3ee5.png",
+    "static/media/index.cjs": "/Fantasy-Fusion/static/media/index.671993152dc0f6e0b17a.cjs",
     "index.html": "/Fantasy-Fusion/index.html",
-    "main.d203a018.css.map": "/Fantasy-Fusion/static/css/main.d203a018.css.map",
-    "main.a7ac0c5b.js.map": "/Fantasy-Fusion/static/js/main.a7ac0c5b.js.map",
+    "main.2271e09c.css.map": "/Fantasy-Fusion/static/css/main.2271e09c.css.map",
+    "main.35e55c3b.js.map": "/Fantasy-Fusion/static/js/main.35e55c3b.js.map",
     "592.f26077c6.chunk.js.map": "/Fantasy-Fusion/static/js/592.f26077c6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d203a018.css",
-    "static/js/main.a7ac0c5b.js"
+    "static/css/main.2271e09c.css",
+    "static/js/main.35e55c3b.js"
   ]
 }
