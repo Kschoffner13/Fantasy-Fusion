@@ -121,7 +121,7 @@ const FreeAgentsPage = () => {
             date,
             userTeamCopy.CurrentLineup
         );
-        // window.location.reload();
+        window.location.reload();
     };
 
     return (
