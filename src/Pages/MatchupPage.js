@@ -73,25 +73,27 @@ const MatchupPage = () => {
         if (match.Team1 === userTeamRaw.id) {
             setUserScore(match.Score.Team1);
             setOppScore(match.Score.Team2);
-            const oppTeamRaw = teamsRes.find(
-                (team) => team.UserID === match.Team2
-            );
+            console.log("MATRHC", match, "T", teamsRes);
+            const oppTeamRaw = teamsRes.find((team) => team.id === match.Team2);
+            console.log("MATRHC", oppTeamRaw);
             setOppTeam(oppTeamRaw);
         } else {
             setUserScore(match.Score.Team2);
             setOppScore(match.Score.Team1);
-            const oppTeamRaw = teamsRes.find(
-                (team) => team.UserID === match.Team1
-            );
+            const oppTeamRaw = teamsRes.find((team) => team.id === match.Team1);
             setOppTeam(oppTeamRaw);
         }
 
-        console.log("HRER", userTeamRaw, schedule, week, match);
+        //console.log("HRER", userTeamRaw, schedule, week, match);
     };
 
     useEffect(() => {
         verifyAccess();
         getInfo();
+    }, []);
+
+    useEffect(() => {
+        console.log("FUICK ME", oppTeam);
     }, []);
 
     const [currentDate, setCurrentDate] = useState(
@@ -126,7 +128,11 @@ const MatchupPage = () => {
                     <MatchupView team={userTeam} score={userScore} />
                 </div>
                 <div className="opponent-team-section">
-                    <MatchupView team={userTeam} reversed={true} />
+                    <MatchupView
+                        team={oppTeam}
+                        score={oppScore}
+                        reversed={true}
+                    />
                 </div>
             </div>
             <Footer />

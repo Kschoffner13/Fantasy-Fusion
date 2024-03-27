@@ -105,7 +105,7 @@ const MatchupView = ({ team, score, reversed = false }) => {
 
     useEffect(() => {
         //get all players yesterday
-        if (Object.keys(team).length > 0) {
+        if (team && Object.keys(team).length > 0) {
             getPlayers(getLineup(team));
         }
     }, [team]);
