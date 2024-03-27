@@ -32,6 +32,10 @@ class TeamAccessor {
     this.userID = userID;
   }
 
+  getFantasyLeagueID() {
+    return this.fantasyleagueID;
+  }
+
   // OG FUNCTIONS
   // pass in the league id
   async saveTeam(

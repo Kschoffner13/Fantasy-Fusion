@@ -73,6 +73,7 @@ const LeagueCreationPage = () => {
                 null
             );
             console.log("USEME", status.id);
+            leagueAccessor.makeSchedule(status.id, new Date(2024, 4, 1), new Date(2024, 5, 1));
             sendInvites(status.id);
             nav(`/${status.id}/createteam`);
         } catch (error) {
