@@ -14,6 +14,16 @@
     "categories": {
       "auth": {
         "FantasyFusion": {}
+      },
+      "function": {
+        "getCareerStats": {
+          "deploymentBucketName": "amplify-fantasyfusion-staging-200824-deployment",
+          "s3Key": "amplify-builds/getCareerStats-3973542f393844557073-build.zip"
+        },
+        "getPlayerSeasonStats": {
+          "deploymentBucketName": "amplify-fantasyfusion-staging-200824-deployment",
+          "s3Key": "amplify-builds/getPlayerSeasonStats-544b4630702f71776444-build.zip"
+        }
       }
     }
   }

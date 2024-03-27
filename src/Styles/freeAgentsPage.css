@@ -1,0 +1,94 @@
+.fa-page{
+    padding: 0 5%;
+}
+
+.filters{
+    margin: 50px 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.filters p{
+    margin: 0;
+    margin-right: 5px;
+    padding: 0;
+    font-size: 0.75em;
+}
+
+.days-back-filter{
+    display: flex;
+    align-items: center;
+    border: 1px solid #3f3f3f;
+    border-radius: 50px;
+    padding: 10px 20px;
+}
+
+.days-back-filter:hover{
+    border: 1px solid #0a901a;
+}
+
+.days-back-filter button{
+    border: 0;
+    background-color: #00000000;
+    color: white;
+    width: 35px;
+    height: 35px;
+    font-size: 0.6em;
+    font-weight: bold;
+    border-radius: 100%;
+    padding: 0;
+    margin: 0 5px;
+}
+
+.days-back-filter button:hover{
+    cursor: pointer;
+    background-color: #2f2f2f;
+}
+
+.days-back-filter .active{
+    border: 1px solid #0a901a;
+}
+
+
+
+
+
+.league-filter, .position-filter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #3f3f3f;
+    border-radius: 50px;
+    padding: 0 20px;
+}
+
+.league-filter:hover, .position-filter:hover {
+    border: 1px solid #0a901a;
+}
+
+.league-filter select, .position-filter select {
+    border: 0;
+    background-color: #00000000;
+    color: white;
+    font-size: 0.7em;
+    font-weight: bold;
+    width: 10vw;
+    border-radius: 5px;
+    padding: 10px 5px;
+    margin: 0 5px;
+}
+
+.league-filter select:hover, .position-filter select:hover {
+    cursor: pointer;
+    background-color: #2f2f3f;
+}
+
+.fa-page .table{
+    width: 100%;
+}
+
+.fa-page .table .row{
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    text-align: left;
+}

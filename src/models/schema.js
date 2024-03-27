@@ -153,13 +153,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "Roster": {
-                    "name": "Roster",
-                    "isArray": false,
-                    "type": "AWSJSON",
-                    "isRequired": false,
-                    "attributes": []
-                },
                 "fantasyleagueID": {
                     "name": "fantasyleagueID",
                     "isArray": false,
@@ -167,15 +160,15 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "PlayerList": {
-                    "name": "PlayerList",
+                "CurrentLineup": {
+                    "name": "CurrentLineup",
                     "isArray": false,
                     "type": "AWSJSON",
                     "isRequired": false,
                     "attributes": []
                 },
-                "Lineup": {
-                    "name": "Lineup",
+                "Lineups": {
+                    "name": "Lineups",
                     "isArray": false,
                     "type": "AWSJSON",
                     "isRequired": false,
@@ -405,6 +398,6 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "codegenVersion": "3.4.4",
-    "version": "8cd14a30f33cbc6c59e624f9f0fbab3e"
+    "codegenVersion": "3.4.2",
+    "version": "7cd6bac378fca8783e60032d12857d55"
 };

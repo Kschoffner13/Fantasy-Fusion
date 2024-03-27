@@ -1,0 +1,25 @@
+.matchup-view{
+    margin: 50px 0;
+}
+
+.table{
+    width: 40vw;
+}
+
+
+.score-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.team-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.team-header img{
+    filter: brightness(0) invert(1);
+    width: 100px;
+}
