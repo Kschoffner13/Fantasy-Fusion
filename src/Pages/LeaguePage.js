@@ -18,6 +18,8 @@ const LeaguePage = () => {
 
     const [league, setLeague] = useState({});
     const [teams, setTeams] = useState([]);
+    const [matchups, setMatchups] = useState([]);
+    const [week, setWeek] = useState("");
 
     const verifyAccess = async () => {
         const userId = (await getCurrentUser()).userId;
@@ -47,12 +49,34 @@ const LeaguePage = () => {
         setTeams(teamRes);
     };
 
+    const getWeek = () => {
+        const currentDate = new Date();
+        for (let week in league.Schedule) {
+            let startDate = new Date(league.Schedule[week].StartDate);
+            let endDate = new Date(league.Schedule[week].EndDate);
+            if (currentDate >= startDate && currentDate <= endDate) {
+                setWeek(week);
+            }
+        }
+    };
+
+    useEffect(() => {
+        console.log("Matchups", matchups);
+    }, [matchups]);
+
+    useEffect(() => {
+        if (week.length > 0) {
+            setMatchups(league.Schedule[week].Matches);
+        }
+    }, [week]);
+
     useEffect(() => {
         console.log("teams", teams);
     }, [teams]);
 
     useEffect(() => {
         console.log("bother", league);
+        getWeek();
     }, [league]);
 
     useEffect(() => {
@@ -63,22 +87,25 @@ const LeaguePage = () => {
     return (
         <div className="league-page">
             <MainHeader />
-            {/* <div className="matchup-snapshots">
-                <MatchupSnapshot />
-                <MatchupSnapshot />
-                <MatchupSnapshot />
-                <MatchupSnapshot />
-                <MatchupSnapshot />
-                <MatchupSnapshot />
-            </div> */}
             <h1>{league.Name}</h1>
+            <div className="matchup-snapshots">
+                {matchups.map((match, index) => (
+                    <MatchupSnapshot
+                        leagueName={leagueName}
+                        userTeamId={match.Team1}
+                    />
+                ))}
+            </div>
+
             <div className="league-tables">
+                <h3>Standings</h3>
                 <SimpleTable
                     headers={["Name", "Wins", "Losses", "Draws"]}
                     itemList={teams}
                     showButton={false}
                 />
             </div>
+            <br></br>
             <Footer />
         </div>
     );
