@@ -8,9 +8,9 @@ const SimpleTable = ({ headers, itemList, showButton, buttonFunction }) => {
         direction: "ascending",
     });
     const columnCount = headers.length;
-    const gridTemplateColumns = `2fr ${"1fr ".repeat(
-        columnCount - 1 + (showButton ? 1 : 0)
-    )}`;
+    const gridTemplateColumns = `1fr ${"1fr ".repeat(
+        columnCount - 1 //+ //(showButton ? 1 : 0)
+    )} auto`;
 
     const sortedItems = useMemo(() => {
         // console.log(itemList);
@@ -89,7 +89,10 @@ const SimpleTable = ({ headers, itemList, showButton, buttonFunction }) => {
                     ))}
                     {showButton && (
                         <div>
-                            <button onClick={() => buttonFunction(item.id)}>
+                            <button
+                                className="roster-btn"
+                                onClick={() => buttonFunction(item.id)}
+                            >
                                 +
                             </button>
                         </div>
