@@ -121,14 +121,14 @@ const FreeAgentsPage = () => {
             date,
             userTeamCopy.CurrentLineup
         );
-        // window.location.reload();
+        window.location.reload();
     };
 
     return (
         <div className="fa-page">
             <MainHeader />
             <div className="filters">
-                <div className="days-back-filter">
+                {/* <div className="days-back-filter">
                     <p>Days:</p>
                     <button
                         className={daysBack === "7" ? "active" : ""}
@@ -154,7 +154,7 @@ const FreeAgentsPage = () => {
                     >
                         23/24
                     </button>
-                </div>
+                </div> */}
                 <div className="league-filter">
                     <p>League:</p>
                     <select
@@ -166,7 +166,7 @@ const FreeAgentsPage = () => {
                         <option value="all">All</option>
                     </select>
                 </div>
-                <div className="position-filter">
+                {/* <div className="position-filter">
                     <p>Position:</p>
                     <select
                         value={pos}
@@ -180,11 +180,17 @@ const FreeAgentsPage = () => {
                         <option value="defense">D-man</option>
                         <option value="all">All</option>
                     </select>
-                </div>
+                </div> */}
             </div>
             <SimpleTable
                 headers={["name", "FP"]}
-                itemList={filteredFa}
+                itemList={
+                    league === "nba"
+                        ? nbaFA
+                        : league === "nhl"
+                        ? nhlFA
+                        : filteredFa
+                }
                 showButton={true}
                 buttonFunction={addPlayer}
             />

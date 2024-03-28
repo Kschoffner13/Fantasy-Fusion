@@ -34,3 +34,18 @@
     width: auto;
     margin-top: 10px;
 }
+
+.create-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color:#0A901A;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.create-button:hover {
+    background-color: #;
+}
