@@ -1,6 +1,6 @@
 import { DataStore } from "@aws-amplify/datastore";
 import { FantasyLeague, Draft } from "../models";
-import { dblClick } from "@testing-library/user-event/dist/click";
+//import { dblClick } from "@testing-library/user-event/dist/click";
 
 class DraftAccessor {
   // this will take in the idk of the fantasy leauge associated with that id/
@@ -10,14 +10,19 @@ class DraftAccessor {
 
   // will need to make sure that there are no other draft items associated with the same fantasy league
   async saveDraft(order, pickDealine, currentPick, playersDrafted) {
-    dic = {
+    var dic = {
       fantasyleagueID: this.FLID,
       order: order,
       pickDealine: pickDealine,
       currentPick: currentPick,
       playersDrafted: JSON.stringify(playersDrafted),
     };
+    const existingDrafts =await DataStore.query(Draft, (c) =>
+    c.fantasyleagueID.eq(this.FLID))
 
+    if (existingDrafts && existingDrafts.length > 0) {
+      throw new Error('A draft for this fantasy league already exists');
+    }
 
     const response = await DataStore.save(new Draft(dic));
     return response;
@@ -27,15 +32,23 @@ class DraftAccessor {
     const response = await DataStore.query(Draft, (c) =>
       c.fantasyleagueID.eq(this.FLID)
     );
+    if(!response.length){
+      throw new Error('No drafts found for this fantasy league.');
+
+    }
+
     return response;
   }
 
-  async updateDraft({ oder = null, pickDeadline = null, currentPick = null, playersDrafted = null } = {}) {
+  async updateDraft({ order = null, pickDeadline = null, currentPick = null, playersDrafted = null } = {}) {
     const original = await DataStore.query(Draft, (c) =>
       c.fantasyleagueID.eq(this.FLID)
     );
+    if (!original.length) {
+      throw new Error('No drafts found for this fantasy league.');
+    }
 
-    dic = {
+    const dic = {
       fantasyleagueID: this.FLID,
       order: order,
       pickDeadline: pickDeadline,
@@ -84,9 +97,31 @@ class DraftAccessor {
       c.fantasyleagueID.eq(this.FLID)
     );
 
+    if(!original.length){
+      throw new Error('Draft not found');
+    }
+    
     // array to be used for the new playersDrafted object
     let newdata = null;
+    let draft = original[0];
 
+    let playersDrafted;
+  
+    try {
+        const parsedData = JSON.parse(draft.playersDrafted);
+        playersDrafted = parsedData.picks || [];
+       
+    
+    } catch (error) {
+        // Handle case where 'playersDrafted' might not be in the expected format or is undefined
+        throw new Error('Error parsing playersDrafted data');
+    }
+
+    if (playersDrafted.length >= 23) {
+      throw new Error('The draft is already full');
+  }
+  
+   
     // create the new player drafted object that gets appened to the playersDrafted list
     const newPlayerDrafted = {
       pick: original[0].curentPick + 1,
@@ -98,7 +133,7 @@ class DraftAccessor {
     const oldPlayersDrafted = original[0].playersDrafted["picks"];
 
     // if its null, submit new data
-    if (oldPlayersDrafted.length === 0) {
+    if (!oldPlayersDrafted) {
       newdata = {
         picks: [newPlayerDrafted],
       };

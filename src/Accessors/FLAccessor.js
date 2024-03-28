@@ -26,6 +26,16 @@ class FLAccessor {
     VetoVoteEnabled,
     Schedule
   ) {
+
+    if (!Name || !Properties || !DraftDate || !TradeDeadline || !PlayoffStartDate || !PlayoffTeams || PlayoffMatchupLength === undefined || WeeklyPickups === undefined || VetoVoteEnabled === undefined || !Schedule) {
+      throw new Error("Missing required information to save fantasy league.");
+    }
+    
+  
+    // Additional validation to ensure dates are valid
+    if (isNaN(new Date(DraftDate).getTime()) || isNaN(new Date(TradeDeadline).getTime()) || isNaN(new Date(PlayoffStartDate).getTime())) {
+      throw new Error("One or more provided dates are invalid.");
+    }
     const dic = {
       Name: Name,
       OwnerID: this.ownerID,
@@ -39,6 +49,7 @@ class FLAccessor {
       VetoVoteEnabled: VetoVoteEnabled,
       Schedule: JSON.stringify(Schedule),
     };
+   
     const response = await DataStore.save(new FantasyLeague(dic));
     return response;
   }
@@ -60,7 +71,9 @@ class FLAccessor {
     } = {}
   ) {
     const original = await DataStore.query(FantasyLeague, (c) => c.id.eq(id));
-
+    if (original.length === 0) { // Check if the array is empty
+      throw new Error('Fantasy league not found');
+    }
     console.log(Schedule)
     const dic = {
       Name: Name,
@@ -96,12 +109,18 @@ class FLAccessor {
     const response = await DataStore.query(FantasyLeague, (c) =>
       c.OwnerID.eq(this.ownerID)
     );
+  
+
     return response;
   }
 
   // get a specifc fantasy league by id
   async getFantasyLeague(id) {
     const response = await DataStore.query(FantasyLeague, (c) => c.id.eq(id));
+    if(!response.length){
+      throw new Error('Fantasy league not found');
+
+    }
     return response[0];
   }
 
@@ -111,8 +130,12 @@ class FLAccessor {
     const response = await DataStore.query(FantasyLeague, (c) =>
       c.and((c) => [c.id.eq(ID), c.OwnerID.eq(this.ownerID)])
     );
+    if (response.length === 0 || response[0][attribute] === undefined) {
+      throw new Error('Fantasy league or attribute not found.');
+    }
     return response[0][attribute];
   }
+  
 
   // returns true if the player is drafted in the league
   async checkIfPlayerDrafted(playerID, leagueID) {
