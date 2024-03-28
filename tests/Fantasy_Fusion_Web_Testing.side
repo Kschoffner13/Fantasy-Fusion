@@ -1,0 +1,200 @@
+{
+  "id": "663e350f-3670-4981-8fc7-886efc8098f1",
+  "version": "2.0",
+  "name": "Fantasy Fusion Web Testing",
+  "url": "https://kschoffner13.github.io/Fantasy-Fusion/",
+  "tests": [{
+    "id": "f0ca3e4e-09a1-4c65-a90b-82769f3b7f0c",
+    "name": "Checking incorrect username password",
+    "commands": [{
+      "id": "fb281215-8268-421b-b1c7-7f2383a3370a",
+      "comment": "",
+      "command": "open",
+      "target": "/Fantasy-Fusion/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "75525bc3-a71e-4f87-970b-e011ae8f4acb",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1470x920",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3db0db73-7d2f-4eec-9c98-eb1fdaae037a",
+      "comment": "",
+      "command": "click",
+      "target": "id=amplify-id-:r1:",
+      "targets": [
+        ["id=amplify-id-:r1:", "id"],
+        ["name=username", "name"],
+        ["css=#amplify-id-\\3Ar1\\3A", "css:finder"],
+        ["xpath=//input[@id='amplify-id-:r1:']", "xpath:attributes"],
+        ["xpath=//div[@id='signIn-panel']/div/form/div/fieldset/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "99b0788a-b7e9-4810-b6cd-be59946962dd",
+      "comment": "",
+      "command": "type",
+      "target": "id=amplify-id-:r1:",
+      "targets": [
+        ["id=amplify-id-:r1:", "id"],
+        ["name=username", "name"],
+        ["css=#amplify-id-\\3Ar1\\3A", "css:finder"],
+        ["xpath=//input[@id='amplify-id-:r1:']", "xpath:attributes"],
+        ["xpath=//div[@id='signIn-panel']/div/form/div/fieldset/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "tanzic01"
+    }, {
+      "id": "a927e0cd-783c-449e-8184-5d540228fcec",
+      "comment": "",
+      "command": "click",
+      "target": "id=amplify-id-:r4:",
+      "targets": [
+        ["id=amplify-id-:r4:", "id"],
+        ["name=password", "name"],
+        ["css=#amplify-id-\\3Ar4\\3A", "css:finder"],
+        ["xpath=//input[@id='amplify-id-:r4:']", "xpath:attributes"],
+        ["xpath=//div[@id='signIn-panel']/div/form/div/fieldset/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f793d89f-ef5f-434b-98b3-0c997a1500a4",
+      "comment": "",
+      "command": "type",
+      "target": "id=amplify-id-:r4:",
+      "targets": [
+        ["id=amplify-id-:r4:", "id"],
+        ["name=password", "name"],
+        ["css=#amplify-id-\\3Ar4\\3A", "css:finder"],
+        ["xpath=//input[@id='amplify-id-:r4:']", "xpath:attributes"],
+        ["xpath=//div[@id='signIn-panel']/div/form/div/fieldset/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": "iawfea"
+    }, {
+      "id": "e82b7a7f-b75e-411b-a724-8bd6b2d503f0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.amplify-button--primary",
+      "targets": [
+        ["css=.amplify-button--primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='signIn-panel']/div/form/div/button", "xpath:idRelative"],
+        ["xpath=//form/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sign in')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "817d1088-1e3f-43ff-8796-c1095e508d30",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=legend",
+      "targets": [
+        ["css=legend", "css:finder"],
+        ["xpath=//div[@id='signIn-panel']/div/form/div/fieldset/span/legend", "xpath:idRelative"],
+        ["xpath=//legend", "xpath:position"],
+        ["xpath=//legend[contains(.,'Sign in')]", "xpath:innerText"]
+      ],
+      "value": "Sign in"
+    }]
+  }, {
+    "id": "76bbbd9d-59d4-4c3d-aef4-34f0bbbfc6d5",
+    "name": "Checking correct username and password",
+    "commands": [{
+      "id": "b573df25-ae59-4347-86a3-fdb60b8f3e60",
+      "comment": "",
+      "command": "open",
+      "target": "https://kschoffner13.github.io/Fantasy-Fusion/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8fcb597a-9490-4ed7-b514-a74d857055b0",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1470x920",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3abcf25a-2065-4fa8-b222-ecc82107a33e",
+      "comment": "",
+      "command": "click",
+      "target": "id=amplify-id-:r1:",
+      "targets": [
+        ["id=amplify-id-:r1:", "id"],
+        ["name=username", "name"],
+        ["css=#amplify-id-\\3Ar1\\3A", "css:finder"],
+        ["xpath=//input[@id='amplify-id-:r1:']", "xpath:attributes"],
+        ["xpath=//div[@id='signIn-panel']/div/form/div/fieldset/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "754eb329-36c8-49ed-9c46-fec635c9a84e",
+      "comment": "",
+      "command": "type",
+      "target": "id=amplify-id-:r1:",
+      "targets": [
+        ["id=amplify-id-:r1:", "id"],
+        ["name=username", "name"],
+        ["css=#amplify-id-\\3Ar1\\3A", "css:finder"],
+        ["xpath=//input[@id='amplify-id-:r1:']", "xpath:attributes"],
+        ["xpath=//div[@id='signIn-panel']/div/form/div/fieldset/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "tanzic01@gmail.com"
+    }, {
+      "id": "72e6993e-8c9c-420b-a128-773f787189aa",
+      "comment": "",
+      "command": "type",
+      "target": "id=amplify-id-:r4:",
+      "targets": [
+        ["id=amplify-id-:r4:", "id"],
+        ["name=password", "name"],
+        ["css=#amplify-id-\\3Ar4\\3A", "css:finder"],
+        ["xpath=//input[@id='amplify-id-:r4:']", "xpath:attributes"],
+        ["xpath=//div[@id='signIn-panel']/div/form/div/fieldset/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": "Fusion44!"
+    }, {
+      "id": "f98cc602-5695-4158-98c4-bcf3b520d186",
+      "comment": "",
+      "command": "click",
+      "target": "css=.amplify-button--primary",
+      "targets": [
+        ["css=.amplify-button--primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='signIn-panel']/div/form/div/button", "xpath:idRelative"],
+        ["xpath=//form/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sign in')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ae39d9e2-5f37-40a4-9bce-8193af842070",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.App-header > p:nth-child(2)",
+      "targets": [
+        ["css=.App-header > p:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='root']/div/div/header[2]/p", "xpath:idRelative"],
+        ["xpath=//header[2]/p", "xpath:position"]
+      ],
+      "value": "Ever think one ball wasn't enough. Now is your oppurtunity to enjoy all the balls you could ever wish for"
+    }]
+  }],
+  "suites": [{
+    "id": "51e6358b-3413-4e3c-934c-c47aefaf1872",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["f0ca3e4e-09a1-4c65-a90b-82769f3b7f0c"]
+  }],
+  "urls": ["https://kschoffner13.github.io/", "https://kschoffner13.github.io/Fantasy-Fusion/"],
+  "plugins": []
+}
