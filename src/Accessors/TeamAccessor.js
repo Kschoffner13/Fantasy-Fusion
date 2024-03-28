@@ -213,7 +213,9 @@ class TeamAccessor {
         } = {}
     ) {
         const original = await DataStore.query(Team, (c) => c.id.eq(teamID));
-        // console.log("OG", original);
+        if (!original) {
+            throw new Error("Team not found for update");
+        }
         const dic = {
             Name: Name,
             TotalPointsFor: TotalPointsFor,
@@ -225,6 +227,7 @@ class TeamAccessor {
             Lineups: Lineups ? JSON.stringify(Lineups) : null,
             CurrentLineup: CurrentLineup ? JSON.stringify(CurrentLineup) : null,
         };
+        
 
         const response = await DataStore.save(
             Team.copyOf(original[0], (updated) => {
@@ -252,20 +255,18 @@ class TeamAccessor {
         );
         return response[0][attribute];
     }
-    async deleteTeamById(teamId) {
-        try {
-            const teamToDelete = await DataStore.query(Team, teamId);
-            if (teamToDelete) {
-                await DataStore.delete(teamToDelete);
-                //console.log("Team deleted successfully");
-            } else {
-                console.log("Team not found, cannot delete");
-            }
-        } catch (error) {
-            console.error("Error deleting team:", error);
-        }
-    }
 
+    async deleteTeamById(teamId) {
+        const teamToDelete = await DataStore.query(Team, teamId);
+        if (!teamToDelete) {
+            // If no team is found, throw an error instead of logging
+            throw new Error('Team not found, cannot delete');
+        }
+        await DataStore.delete(teamToDelete);
+        // Optionally, return some value or message indicating success
+        return 'Team deleted successfully';
+    }
+    
     async setLineup(teamId, date, lineup) {
         if (!lineup) {
             return;
